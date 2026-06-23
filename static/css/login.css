@@ -1,0 +1,131 @@
+/* PAGE */
+
+body{
+background:#EEF3FA;
+}
+
+/* CENTER */
+
+.login-wrapper{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+min-height:80vh;
+
+}
+
+/* CARD */
+
+.login-card{
+
+width:520px;
+
+background:white;
+
+padding:60px;
+
+border-radius:24px;
+
+box-shadow:0 8px 40px rgba(0,0,0,.08);
+
+}
+
+/* TITLE */
+
+.login-card h1{
+
+text-align:center;
+
+font-size:42px;
+
+color:#1E56D9;
+
+margin-bottom:12px;
+
+}
+
+/* SUBTITLE */
+
+.subtitle{
+
+text-align:center;
+
+color:#66758A;
+
+margin-bottom:35px;
+
+font-size:18px;
+
+}
+
+/* FORM PARAGRAPHS */
+
+form p{
+
+display:block;
+
+margin-bottom:22px;
+
+}
+
+/* LABEL */
+
+label{
+
+display:block;
+
+margin-bottom:10px;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#233044;
+
+}
+
+/* INPUT */
+
+input{
+
+width:100%;
+
+padding:16px;
+
+border:1px solid #D9E3F0;
+
+border-radius:12px;
+
+font-size:18px;
+
+}
+
+/* BUTTON */
+
+input[type="submit"]{
+
+background:#1E56D9;
+
+color:white;
+
+border:none;
+
+margin-top:20px;
+
+font-size:20px;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+input[type="submit"]:hover{
+
+background:#1549BC;
+
+}

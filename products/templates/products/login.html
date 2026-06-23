@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block title %}
+Log-in
+{% endblock %}
+
+{% block content %}
+
+<div class="login-wrapper">
+
+<div class="login-card">
+
+<h1>AssistHub</h1>
+
+<p class="subtitle">
+Please use the following form to log in
+</p>
+
+<form method="post">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<input type="submit" value="Log in">
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

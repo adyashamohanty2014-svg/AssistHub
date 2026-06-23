@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+{% block title %}
+{% endblock %}
+</title>
+
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block extra_css %}
+{% endblock %}
+
+</head>
+
+<body>
+
+<div id="header">
+
+<div class="logo-area">
+
+<span class="logo">
+AssistHub
+</span>
+
+<p class="tagline">
+Assistive Technology for All
+</p>
+
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#">Devices</a>
+
+<a href="#">About Us</a>
+
+<a href="#">Contact</a>
+
+</nav>
+
+</div>
+
+<div id="content">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+</body>
+
+</html>
