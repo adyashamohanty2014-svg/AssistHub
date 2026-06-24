@@ -1,0 +1,70 @@
+/* ======================
+   HERO SECTION
+====================== */
+
+.home-hero{
+    padding:80px 0;
+}
+
+.hero-copy{
+    max-width:700px;
+}
+
+.eyebrow{
+    display:inline-block;
+    color:#1E56D9;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:20px;
+}
+
+.home-hero h1{
+    font-size:60px;
+    line-height:1.1;
+    margin-bottom:25px;
+    color:#102041;
+}
+
+.hero-text{
+    font-size:18px;
+    color:#4B5C75;
+    max-width:600px;
+    margin-bottom:35px;
+}
+
+/* ======================
+   BROWSE BUTTON
+====================== */
+
+.browse-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#1E56D9;
+    color:white;
+    padding:14px 28px;
+    border-radius:10px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.browse-btn:hover{
+    background:#1444B8;
+}
+
+/* ======================
+   SECTION HEADINGS
+====================== */
+
+.categories,
+.best-purchases{
+    margin-top:100px;
+}
+
+.categories h2,
+.best-purchases h2{
+    font-size:38px;
+    color:#102041;
+    margin-bottom:30px;
+}

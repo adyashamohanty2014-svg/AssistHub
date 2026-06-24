@@ -1,73 +1,58 @@
 {% load static %}
-
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-
-<title>
-{% block title %}
-{% endblock %}
-</title>
-
-<link rel="stylesheet" href="{% static 'css/base.css' %}">
-
-{% block extra_css %}
-{% endblock %}
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        AssistHub
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}
+    {% endblock %}
 </head>
-
 <body>
-
-<div id="header">
-
-<div class="logo-area">
-
-<div class="brand">
-
-<img
-src="{% static 'images/assisthublogo.png' %}"
-alt="AssistHub Logo"
-class="header-logo">
-
-<div>
-
-<span class="logo">
-AssistHub
-</span>
-
-<p class="tagline">
-Assistive Technology for All
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<nav>
-
-<a href="#">Home</a>
-
-<a href="#">Devices</a>
-
-<a href="#">About Us</a>
-
-<a href="#">Contact</a>
-
-</nav>
-
-</div>
-
-<div id="content">
-
-{% block content %}
-{% endblock %}
-
-</div>
-
+    <div id="header">
+        <!-- Logo Section -->
+        <div class="logo-area">
+            <div class="brand">
+                <img
+                    src="{% static 'images/assisthublogo.png' %}"
+                    alt="AssistHub Logo"
+                    class="header-logo">
+                <div>
+                    <span class="logo">
+                        AssistHub
+                    </span>
+                    <p class="tagline">
+                        Assistive Technology for All
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Devices</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            {% if request.user.is_authenticated %}
+                <a href="#" class="profile-icon">
+                    👤
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="login-btn">
+                    Login
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+    <!-- Main Content -->
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
-
 </html>

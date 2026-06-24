@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Home | AssistHub
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="home-hero">
+    <div class="hero-copy">
+        <span class="eyebrow">
+            Assistive Technology for All
+        </span>
+        <h1>
+            Find the right assistive device for every need
+        </h1>
+        <p class="hero-text">
+            Discover, compare, and review accessible products designed
+            to support mobility, hearing, vision, communication,
+            and daily living.
+        </p>
+        <a href="#" class="browse-btn">
+            Browse Devices
+        </a>
+    </div>
+</section>
+
+<section class="categories">
+    <h2>Browse By Category</h2>
+    <!-- Cards will be added later -->
+</section>
+
+<section class="best-purchases">
+    <h2>Best Purchases</h2>
+    <!-- Product cards later -->
+</section>
+{% endblock %}
