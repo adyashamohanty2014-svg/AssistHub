@@ -3,7 +3,7 @@
 ====================== */
 
 .home-hero{
-    padding:80px 0;
+    padding:80px 35px;
 }
 
 .hero-copy{
@@ -60,6 +60,7 @@
 .categories,
 .best-purchases{
     margin-top:100px;
+    padding:80px 35px;
 }
 
 .categories h2,
@@ -67,4 +68,41 @@
     font-size:38px;
     color:#102041;
     margin-bottom:30px;
+}
+.hero-container {
+    display: flex;
+    align-items: center;   /* vertically center */
+    justify-content: space-between;
+    gap: 0px;
+}
+
+.hero-copy {
+    flex: 1;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    max-width:100%;
+    height: auto;
+}
+.home-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+.hero-copy {
+    flex: 1;
+}
+
+.home-icon {
+    flex: 1;
+    max-width: 400px;
+    height: auto;
+    display: block;
 }

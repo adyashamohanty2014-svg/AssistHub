@@ -57,3 +57,8 @@ def device_list(request):
         'products/device_list.html',
         {'devices': devices}
     )
+from .models import Device
+
+def device_detail(request, id):
+    device = Device.objects.get(id=id)
+    return render(request, 'device_detail.html', {'device': device})

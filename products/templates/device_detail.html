@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ device.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/device_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="detail-container">
+
+    <div class="image-section">
+        {% if device.image %}
+            <img src="{{ device.image.url }}" alt="{{ device.name }}">
+        {% endif %}
+    </div>
+
+    <div class="info-section">
+        <h1>{{ device.name }}</h1>
+
+        <span class="category">{{ device.category }}</span>
+
+        <p class="description">{{ device.description }}</p>
+
+        <div class="price">₹{{ device.price }}</div>
+
+        <a href="{% url 'device_list' %}" class="back-btn">
+            ← Back to Devices
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

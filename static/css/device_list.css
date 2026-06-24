@@ -15,23 +15,13 @@ body{
 /* NAVBAR */
 
 .navbar{
-    background:white;
-    height:80px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:0 60px;
-
-    box-shadow:0 2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: white;   /* important so it doesn’t overflow visually */
 }
 
-.logo{
-    font-size:28px;
-    font-weight:700;
-    color:#2D6CDF;
-}
 
 .nav-links{
     display:flex;
@@ -169,4 +159,28 @@ body{
 
 .view-btn:hover{
     background:#1F55B5;
+}
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.brand-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #233044;
+}
+.nav-logo {
+    max-width: 40px;
+    max-height: 40px;
+    object-fit: contain;
+    display: block;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: white;
+    height: 70px;
 }

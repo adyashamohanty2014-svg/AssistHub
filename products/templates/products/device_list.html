@@ -1,24 +1,13 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Assistive Devices</title>
-    <link rel="stylesheet" href="{% static 'css/device_list.css' %}">
-</head>
-<body>
 
-<nav class="navbar">
-    <div class="logo">
-        AssistHub
-    </div>
+{% block title %}Assistive Devices{% endblock %}
 
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'device_list' %}">Devices</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
-</nav>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/device_list.css' %}">
+{% endblock %}
+
+{% block content %}
 
 <section class="hero">
     <h1>Assistive Devices</h1>
@@ -27,37 +16,36 @@
 
 <div class="device-container">
 
-{% for device in devices %}
+    {% for device in devices %}
 
-<div class="device-card">
+    <div class="device-card">
 
-    {% if device.image %}
-        <img src="{{ device.image.url }}" alt="{{ device.name }}">
-    {% endif %}
+        {% if device.image %}
+            <img src="{{ device.image.url }}" alt="{{ device.name }}">
+        {% endif %}
 
-    <div class="card-content">
-        <h2>{{ device.name }}</h2>
+        <div class="card-content">
+            <h2>{{ device.name }}</h2>
 
-        <span class="category">
-            {{ device.category }}
-        </span>
+            <span class="category">
+                {{ device.category }}
+            </span>
 
-        <p>{{ device.description }}</p>
+            <p>{{ device.description }}</p>
 
-        <div class="price">
-            {{ device.price }}
+            <div class="price">
+                {{ device.price }}
+            </div>
+
+            <a href="{% url 'device_detail' device.id %}" class="view-btn">
+                View Details
+            </a>
         </div>
 
-        <button class="view-btn">
-            View Details
-        </button>
     </div>
 
-</div>
-
-{% endfor %}
+    {% endfor %}
 
 </div>
 
-</body>
-</html>
+{% endblock %}
