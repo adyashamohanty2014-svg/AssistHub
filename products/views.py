@@ -25,7 +25,7 @@ def user_login(request):
            return HttpResponse('Invalid login')
    else:
      form = LoginForm()
-     return render(request,'products/login.html', {'form': form}) 
+   return render(request,'products/login.html', {'form': form}) 
 
 def register(request):
   if request.method == 'POST':
@@ -48,4 +48,12 @@ def register(request):
     'products/register.html',
     {'user_form': user_form}
     )
+from .models import Device
 
+def device_list(request):
+    devices = Device.objects.all()
+    return render(
+        request,
+        'products/device_list.html',
+        {'devices': devices}
+    )
