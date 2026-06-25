@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Category, Device
+from .models import Category, Device, Review
 
 admin.site.register(Category)
 admin.site.register(Device)
-# Register your models here.
+admin.site.register(Review)

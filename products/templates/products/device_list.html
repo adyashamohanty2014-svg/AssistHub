@@ -34,9 +34,9 @@
             <p>{{ device.description }}</p>
 
             <div class="price">
-                {{ device.price }}
+                ₹{{ device.price }}
             </div>
-
+            <p>⭐ {{ device.average_rating }}</p>
             <a href="{% url 'device_detail' device.id %}" class="view-btn">
                 View Details
             </a>

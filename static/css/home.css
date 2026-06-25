@@ -3,49 +3,96 @@
 ====================== */
 
 .home-hero{
-    padding:80px 35px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:70px 0 20px;
+}
+
+.home-hero,
+.categories,
+.best-purchases{
+    max-width:1080px;
+    margin:0 auto;
 }
 
 .hero-copy{
-    max-width:700px;
+    flex:1;
+    max-width:650px;
 }
 
 .eyebrow{
     display:inline-block;
+
     color:#1E56D9;
+
     font-size:14px;
+
     font-weight:700;
+
     text-transform:uppercase;
+
     letter-spacing:2px;
-    margin-bottom:20px;
+
+    margin-bottom:18px;
 }
 
 .home-hero h1{
-    font-size:60px;
-    line-height:1.1;
-    margin-bottom:25px;
+    font-size:52px;
+
+    line-height:1.15;
+
     color:#102041;
+
+    margin-bottom:22px;
 }
 
 .hero-text{
     font-size:18px;
+
     color:#4B5C75;
-    max-width:600px;
-    margin-bottom:35px;
+
+    line-height:1.8;
+
+    margin-bottom:32px;
+
+    max-width:580px;
 }
 
 /* ======================
-   BROWSE BUTTON
+   HERO IMAGE
+====================== */
+
+.home-icon{
+    width:380px;
+
+    height:auto;
+
+    display:block;
+}
+
+/* ======================
+   BUTTON
 ====================== */
 
 .browse-btn{
     display:inline-block;
+
     text-decoration:none;
+
     background:#1E56D9;
+
     color:white;
+
     padding:14px 28px;
+
     border-radius:10px;
+
+    font-size:16px;
+
     font-weight:600;
+
     transition:0.3s;
 }
 
@@ -54,55 +101,120 @@
 }
 
 /* ======================
-   SECTION HEADINGS
+   CATEGORY SECTION
 ====================== */
 
-.categories,
-.best-purchases{
-    margin-top:100px;
-    padding:80px 35px;
+.categories{
+    padding:70px 35px;
 }
 
-.categories h2,
-.best-purchases h2{
-    font-size:38px;
+.categories h2{
+    font-size:36px;
+
     color:#102041;
+
     margin-bottom:30px;
 }
-.hero-container {
-    display: flex;
-    align-items: center;   /* vertically center */
-    justify-content: space-between;
-    gap: 0px;
+
+.category-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3, 1fr);
+
+    gap:25px;
 }
 
-.hero-copy {
-    flex: 1;
+.category-card{
+    background:white;
+
+    padding:35px 20px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#233044;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    box-shadow:0 2px 12px rgba(0,0,0,0.06);
+
+    transition:0.3s;
 }
 
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+.category-card:hover{
+    transform:translateY(-3px);
+
+    color:#1E56D9;
 }
 
-.hero-image img {
-    max-width:100%;
-    height: auto;
-}
-.home-hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-}
-.hero-copy {
-    flex: 1;
+/* ======================
+   BEST PURCHASES
+====================== */
+
+.best-purchases{
+    padding:70px 35px;
 }
 
-.home-icon {
-    flex: 1;
-    max-width: 400px;
-    height: auto;
-    display: block;
+.best-purchases h2{
+    font-size:36px;
+
+    color:#102041;
+
+    margin-bottom:30px;
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:900px){
+
+    .home-hero{
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .hero-copy{
+        max-width:100%;
+    }
+
+    .home-hero h1{
+        font-size:42px;
+    }
+
+    .hero-text{
+        max-width:100%;
+    }
+
+    .home-icon{
+        width:280px;
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .home-hero h1{
+        font-size:34px;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .categories,
+    .best-purchases,
+    .home-hero{
+        padding-left:20px;
+        padding-right:20px;
+    }
 }

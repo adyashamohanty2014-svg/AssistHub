@@ -33,11 +33,22 @@ Home | AssistHub
 
 <section class="categories">
     <h2>Browse By Category</h2>
-    <!-- Cards will be added later -->
+    <div class="category-grid">
+
+        {% for category in categories %}
+        <a href="{% url 'category_devices' category.id %}" class="category-card">
+            {{ category.name }}
+        </a>
+        {% endfor %}
+
+    </div>
 </section>
 
 <section class="best-purchases">
     <h2>Best Purchases</h2>
-    <!-- Product cards later -->
+    <p>
+        Top-rated assistive devices recommended by our users will appear here.
+    </p>
 </section>
+
 {% endblock %}

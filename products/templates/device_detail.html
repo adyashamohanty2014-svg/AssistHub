@@ -26,6 +26,40 @@
 
         <div class="price">₹{{ device.price }}</div>
 
+        <!-- REVIEWS SECTION START -->
+        <h3>Reviews</h3>
+        {% for review in reviews %}
+            <div class="review-card">
+                <strong>
+                    {{ review.user.username }}
+                </strong>
+                <p>
+                    Rating: {{ review.rating }}/5
+                </p>
+                <p>
+                    {{ review.comment }}
+                </p>
+            </div>
+        {% empty %}
+            <p>No reviews yet.</p>
+        {% endfor %}
+        <!-- REVIEWS SECTION END -->
+        <!-- REVIEW FORM -->
+        {% if user.is_authenticated %}
+        <h3>Write a Review</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ review_form.as_p }}
+            <button type="submit">
+                Submit Review
+            </button>
+        </form>
+        {% else %}
+        <p>
+            Please <a href="{% url 'login' %}">login</a> to write a review.
+        </p>
+        {% endif %}<br>
+
         <a href="{% url 'device_list' %}" class="back-btn">
             ← Back to Devices
         </a>

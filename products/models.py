@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -17,7 +18,24 @@ class Device(models.Model):
         blank=True,
         null=True
     )
+    buy_link = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
-# Create your models here.
+    
+    def average_rating(self):
+        reviews = self.review_set.all()
+        if reviews.exists():
+            return round(
+                sum(r.rating for r in reviews) / reviews.count(),1)
+        return 0
+
+#Review Section
+class Review(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField()
+    comment = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.user.username} - {self.device.name}"

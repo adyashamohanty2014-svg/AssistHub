@@ -7,19 +7,47 @@ body {
 .detail-container {
     display: flex;
     gap: 40px;
-    padding: 60px;
-    align-items: center;
+    padding: 40px 20px;
+    align-items: flex-start;
+    max-width: 1080px;
+    width: min(100%, 1080px);
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.image-section {
+    flex: 1 1 400px;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
 }
 
 .image-section img {
-    width: 400px;
+    width: 100%;
+    max-width: 420px;
     border-radius: 20px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.1);
 }
 
 .info-section {
+    flex: 1 1 380px;
     max-width: 600px;
 }
+
+@media (max-width: 900px) {
+    .detail-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        padding: 30px 16px;
+    }
+
+    .info-section {
+        max-width: 100%;
+    }
+}
+
 
 .info-section h1 {
     font-size: 36px;
@@ -55,4 +83,67 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 10px;
+}
+
+.review-card{
+    margin-top:15px;
+    padding:15px;
+    background:#f8f9fc;
+    border-radius:10px;
+    border:1px solid #e0e6ef;
+}
+
+.review-card strong{
+    color:#1E56D9;
+}
+
+.review-card p{
+    margin-top:5px;
+}
+
+/* ======================
+   REVIEW FORM
+====================== */
+
+.review-form{
+    margin-top:30px;
+}
+
+.review-form h3{
+    margin-bottom:15px;
+    color:#102041;
+}
+
+.review-form p{
+    margin-bottom:15px;
+}
+
+.review-form input,
+.review-form textarea,
+.review-form select{
+    width:100%;
+    padding:12px;
+    border:1px solid #D9E3F0;
+    border-radius:8px;
+    font-size:16px;
+    margin-top:5px;
+}
+
+.review-form textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.review-form button{
+    background:#2D6CDF;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.review-form button:hover{
+    background:#1F55B5;
 }

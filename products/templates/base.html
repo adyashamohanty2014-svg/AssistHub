@@ -1,34 +1,67 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>{% block title %}AssistHub{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/device_list.css' %}">
-    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
 </head>
 
 <body>
 
-<!-- NAVBAR (ONLY ONCE HERE) -->
 <nav class="navbar">
 
     <div class="logo-area">
-        <img src="{% static 'images/assisthublogo.png' %}" class="nav-logo">
-        <span class="brand-name">AssistHub</span>
+        <a href="{% url 'home' %}" class="logo-link">
+            <img src="{% static 'images/assisthublogo.png' %}"
+                 alt="AssistHub Logo"
+                 class="nav-logo">
+            <div>
+                <div class="brand-name">AssistHub</div>
+                <div class="tagline">
+                    Assistive Technology For All
+                </div>
+            </div>
+        </a>
     </div>
-
     <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'device_list' %}">Devices</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+        <li>
+            <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url 'device_list' %}">Devices</a>
+        </li>
+        <li>
+            <a href="#">About Us</a>
+        </li>
+        <li>
+            <a href="#"> Contact</a>
+        </li>
 
+        {% if user.is_authenticated %}
+        <li>
+            <a href="#" class="profile-icon">
+                👤
+            </a>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'login' %}" class="login-btn">
+                Login
+            </a>
+        </li>
+        {% endif %}
+    </ul>
 </nav>
 
-<!-- PAGE CONTENT -->
-{% block content %}
-{% endblock %}
+<div class="page-container">
+    {% block content %}
+    {% endblock %}
+</div>
 
 </body>
 </html>

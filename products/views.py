@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LoginForm, UserRegistrationForm
-def home(request):
-  return render(request, 'products/home.html')
+from .forms import LoginForm, UserRegistrationForm, ReviewForm
+from .models import Device, Category, Review
 
+#Home page
+def home(request):
+    categories = Category.objects.all()
+    return render(request,'products/home.html',{'categories': categories})
+
+#Login
 def user_login(request):
    if request.method == 'POST':
      form = LoginForm(request.POST)
@@ -27,6 +32,7 @@ def user_login(request):
      form = LoginForm()
    return render(request,'products/login.html', {'form': form}) 
 
+#Registration
 def register(request):
   if request.method == 'POST':
     user_form = UserRegistrationForm(request.POST)
@@ -48,8 +54,8 @@ def register(request):
     'products/register.html',
     {'user_form': user_form}
     )
-from .models import Device
 
+#Device List
 def device_list(request):
     devices = Device.objects.all()
     return render(
@@ -57,8 +63,37 @@ def device_list(request):
         'products/device_list.html',
         {'devices': devices}
     )
-from .models import Device
 
+#Device Details
 def device_detail(request, id):
     device = Device.objects.get(id=id)
-    return render(request, 'device_detail.html', {'device': device})
+    reviews = Review.objects.filter(device=device)
+
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.device = device
+            new_review.user = request.user
+            new_review.save()
+            return redirect('device_detail', id=device.id)
+    else:
+        review_form = ReviewForm()
+    return render(request, 'device_detail.html', {'device': device, 'reviews': reviews, 'review_form': review_form})
+
+#Category wise Device listing
+def category_devices(request, category_id):
+    category = Category.objects.get(id=category_id)
+
+    devices = Device.objects.filter(
+        category=category
+    )
+
+    return render(
+        request,
+        'products/device_list.html',
+        {
+            'devices': devices,
+            'category': category
+        }
+    )
