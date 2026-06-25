@@ -49,8 +49,8 @@ body{
 }
 
 .nav-logo{
-    width:50px;
-    height:50px;
+    width:80px;
+    height:80px;
     object-fit:contain;
 }
 
@@ -135,4 +135,63 @@ input[type="submit"]{
     border-radius:8px;
 
     cursor:pointer;
+}
+/* Profile dropdown */
+
+.profile-menu{
+    position:relative;
+}
+
+.profile-icon{
+    text-decoration:none;
+    font-size:22px;
+}
+
+.dropdown-menu{
+    position:absolute;
+    top:100%;
+    right:0;
+    margin-top: 0;
+
+    background:white;
+    min-width:160px;
+
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+
+    display:none;
+    overflow:hidden;
+}
+
+.profile-menu:hover .dropdown-menu{
+    display:block;
+}
+.dropdown-menu form {
+    margin: 0;
+}
+.dropdown-menu a,
+.dropdown-menu button{
+
+    display:block;
+    width:100%;
+
+    padding:12px 18px;
+
+    text-align:left;
+
+    background:none;
+    border:none;
+
+    font-size:15px;
+    font-family:inherit;
+
+    cursor:pointer;
+    color:#233044;
+
+    text-decoration:none;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover{
+    background:#F5F8FC;
 }

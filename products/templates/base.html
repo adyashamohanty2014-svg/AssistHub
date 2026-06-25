@@ -43,11 +43,27 @@
         </li>
 
         {% if user.is_authenticated %}
-        <li>
+        <li class="profile-menu">
             <a href="#" class="profile-icon">
                 👤
             </a>
-        </li>
+        <div class="dropdown-menu">
+
+        <a href="#">
+            My Profile
+        </a>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+</li>
+
         {% else %}
         <li>
             <a href="{% url 'login' %}" class="login-btn">

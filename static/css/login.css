@@ -125,3 +125,19 @@ input[type="submit"]:hover{
 background:#1549BC;
 
 }
+.register-text{
+    text-align:center;
+    margin-top:20px;
+    color:#666;
+    font-size:14px;
+}
+
+.register-text a{
+    color:#4A90E2;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.register-text a:hover{
+    text-decoration:underline;
+}

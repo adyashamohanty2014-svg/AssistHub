@@ -34,12 +34,17 @@ Home | AssistHub
 <section class="categories">
     <h2>Browse By Category</h2>
     <div class="category-grid">
-
-        {% for category in categories %}
+        {% for category in categories %} 
         <a href="{% url 'category_devices' category.id %}" class="category-card">
-            {{ category.name }}
-        </a>
-        {% endfor %}
+            {% if category.image %}
+<img
+    src="{{ category.image.url }}"
+    alt="{{ category.name }}"
+    class="category-image">
+{% endif %}
+<span>{{ category.name }}</span>
+</a>
+{% endfor %}
 
     </div>
 </section>
