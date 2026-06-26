@@ -62,19 +62,23 @@ def register(request):
 
 #Device List
 
+
+
+
 def device_list(request):
-    query = request.GET.get('q','')
+
+    query = request.GET.get('q', '')
     if query:
-       devices = Device.objects.filter(
-          Q(name__icontains=query) |
-          Q(description__icontains=query)
-    )
+        devices = Device.objects.filter(
+            Q(name__icontains=query) |
+            Q(description__icontains=query)
+        )
     else:
         devices = Device.objects.all()
 
     return render(request, 'products/device_list.html', {
         'devices': devices,
-        'query': query
+        'query': query,
     })
 
 #Device Details
