@@ -72,6 +72,9 @@ My Profile
             <a href="{% url 'my_reviews' %}" class="profile-btn">
                 My Reviews
             </a>
+            <a href="{% url 'my_wishlist' %}" class="profile-btn">
+    My Wishlist ❤️
+</a>
 
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}

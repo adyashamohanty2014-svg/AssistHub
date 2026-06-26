@@ -14,6 +14,25 @@
     <p>Explore technology designed to improve accessibility and independence.</p>
 </section>
 
+<!-- SEARCH BAR -->
+<div class="search-container">
+    <form method="GET">
+        <input
+            type="text"
+            name="q"
+            placeholder="Search devices..."
+            value="{{ query }}"
+        >
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{% if query %}
+    <p class="search-result">
+        Showing results for "<strong>{{ query }}</strong>"
+    </p>
+{% endif %}
+
 <div class="device-container">
 
     {% for device in devices %}
@@ -36,13 +55,21 @@
             <div class="price">
                 ₹{{ device.price }}
             </div>
+
             <p>⭐ {{ device.average_rating }}</p>
+
             <a href="{% url 'device_detail' device.id %}" class="view-btn">
                 View Details
             </a>
         </div>
 
     </div>
+
+    {% empty %}
+
+    <p class="no-results">
+        No devices found.
+    </p>
 
     {% endfor %}
 

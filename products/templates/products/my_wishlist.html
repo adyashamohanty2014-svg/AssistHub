@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my_wishlist.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="wishlist-page">
+
+    <h1>❤️ My Wishlist</h1>
+
+    <div class="wishlist-container">
+
+        {% for item in wishlist_items %}
+
+        <div class="wishlist-card">
+
+            {% if item.device.image %}
+                <img src="{{ item.device.image.url }}"
+                     alt="{{ item.device.name }}">
+            {% endif %}
+
+            <h3>{{ item.device.name }}</h3>
+
+            <p>{{ item.device.category }}</p>
+
+            <a href="{% url 'device_detail' item.device.id %}"
+               class="view-btn">
+                View Details
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>Your wishlist is empty.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

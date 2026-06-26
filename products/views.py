@@ -4,8 +4,11 @@ from django.http import HttpResponse
 from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm
 from .models import Device, Category, Review
 from django.contrib.auth.decorators import login_required
-
-
+from .models import Device
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect
+from .models import Device, Wishlist
 #Home page
 def home(request):
     categories = Category.objects.all()
@@ -58,30 +61,61 @@ def register(request):
     )
 
 #Device List
+
 def device_list(request):
-    devices = Device.objects.all()
-    return render(
-        request,
-        'products/device_list.html',
-        {'devices': devices}
+    query = request.GET.get('q','')
+    if query:
+       devices = Device.objects.filter(
+          Q(name__icontains=query) |
+          Q(description__icontains=query)
     )
+    else:
+        devices = Device.objects.all()
+
+    return render(request, 'products/device_list.html', {
+        'devices': devices,
+        'query': query
+    })
 
 #Device Details
 def device_detail(request, id):
-    device = Device.objects.get(id=id)
+
+    device = get_object_or_404(Device, id=id)
     reviews = Review.objects.filter(device=device)
 
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
+
         if review_form.is_valid():
             new_review = review_form.save(commit=False)
             new_review.device = device
             new_review.user = request.user
             new_review.save()
+
             return redirect('device_detail', id=device.id)
+
     else:
         review_form = ReviewForm()
-    return render(request, 'device_detail.html', {'device': device, 'reviews': reviews, 'review_form': review_form})
+
+    # Wishlist check
+    is_wishlisted = False
+
+    if request.user.is_authenticated:
+        is_wishlisted = Wishlist.objects.filter(
+            user=request.user,
+            device=device
+        ).exists()
+
+    return render(
+        request,
+        'device_detail.html',   # or 'products/device_detail.html'
+        {
+            'device': device,
+            'reviews': reviews,
+            'review_form': review_form,
+            'is_wishlisted': is_wishlisted,
+        }
+    )
 
 #Category wise Device listing
 def category_devices(request, category_id):
@@ -103,9 +137,17 @@ def category_devices(request, category_id):
 #Profile 
 @login_required
 def profile(request):
+
+    wishlist_items = Wishlist.objects.filter(
+        user=request.user
+    ).select_related('device')
+
     return render(
         request,
-        "products/profile.html"
+        "products/profile.html",
+        {
+            "wishlist_items": wishlist_items
+        }
     )
 
 #Profile Edit
@@ -143,4 +185,34 @@ def my_reviews(request):
         request,
         "products/my_reviews.html",
         {"reviews": reviews}
+    )
+
+
+@login_required
+def toggle_wishlist(request, id):
+
+    device = get_object_or_404(Device, id=id)
+
+    item, created = Wishlist.objects.get_or_create(
+        user=request.user,
+        device=device
+    )
+
+    if not created:
+        item.delete()
+
+    return redirect('device_detail', id=device.id)
+@login_required
+def my_wishlist(request):
+
+    wishlist_items = Wishlist.objects.filter(
+        user=request.user
+    ).select_related('device')
+
+    return render(
+        request,
+        "products/my_wishlist.html",
+        {
+            "wishlist_items": wishlist_items
+        }
     )

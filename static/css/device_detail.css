@@ -147,3 +147,19 @@ body {
 .review-form button:hover{
     background:#1F55B5;
 }
+.title-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.wishlist-btn{
+    text-decoration:none;
+    font-size:32px;
+    transition:0.3s ease;
+}
+
+.wishlist-btn:hover{
+    transform:scale(1.15);
+}

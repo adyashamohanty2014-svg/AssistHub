@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.conf import settings
 class Category(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(
@@ -42,5 +42,21 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField()
     comment = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"{self.user.username} - {self.device.name}"
+class Wishlist(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+
+    device = models.ForeignKey(
+        'Device',
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        unique_together = ('user', 'device')
+
     def __str__(self):
         return f"{self.user.username} - {self.device.name}"
