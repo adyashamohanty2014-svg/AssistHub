@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LoginForm, UserRegistrationForm, ReviewForm
+from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm
 from .models import Device, Category, Review
+from django.contrib.auth.decorators import login_required
+
 
 #Home page
 def home(request):
@@ -96,4 +98,49 @@ def category_devices(request, category_id):
             'devices': devices,
             'category': category
         }
+    )
+
+#Profile 
+@login_required
+def profile(request):
+    return render(
+        request,
+        "products/profile.html"
+    )
+
+#Profile Edit
+from django.contrib import messages
+
+@login_required
+def edit_profile(request):
+    if request.method == "POST":
+        form = UserEditForm(
+            request.POST,
+            instance=request.user
+        )
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Profile updated successfully."
+            )
+            return redirect("profile")
+    else:
+        form = UserEditForm(
+            instance=request.user
+        )
+    return render(
+        request,
+        "products/edit_profile.html",
+        {"form": form}
+    )
+
+#MY Reviews Section
+def my_reviews(request):
+    reviews = Review.objects.filter(user=request.user)
+
+    return render(
+        request,
+        "products/my_reviews.html",
+        {"reviews": reviews}
     )

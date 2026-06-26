@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+
+            <div class="avatar">
+                👤
+            </div>
+
+            <div>
+                <h1>{{ user.username }}</h1>
+                <p>{{ user.email }}</p>
+                <small>
+                    Member since {{ user.date_joined|date:"d M Y" }}
+                </small>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2>Account Information</h2>
+
+        <div class="info-table">
+
+            <div class="info-row">
+                <span>Username</span>
+                <strong>{{ user.username }}</strong>
+            </div>
+
+            <div class="info-row">
+                <span>First Name</span>
+                <strong>{{ user.first_name }}</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Last Name</span>
+                <strong>{{ user.last_name }}</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Email</span>
+                <strong>{{ user.email }}</strong>
+            </div>
+
+        </div>
+
+        <div class="button-grid">
+
+            <a href="{% url 'edit_profile' %}" class="profile-btn">
+                Edit Profile
+            </a>
+
+            <a href="{% url 'password_change' %}" class="profile-btn">
+                Change Password
+            </a>
+
+            <a href="{% url 'my_reviews' %}" class="profile-btn">
+                My Reviews
+            </a>
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button class="logout-btn">
+                    Logout
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

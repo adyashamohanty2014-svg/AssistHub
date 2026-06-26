@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Reviews
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my_reviews.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="reviews-container">
+    <h1>My Reviews</h1>
+    {% if reviews %}
+        {% for review in reviews %}
+        <div class="review-card">
+            <h2>{{ review.device.name }}</h2>
+            <p>
+                ⭐ {{ review.rating }}/5
+            </p>
+            <p>
+                {{ review.comment }}
+            </p>
+            <small>
+                {{ review.created|date:"d M Y" }}
+            </small>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>You haven't written any reviews yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

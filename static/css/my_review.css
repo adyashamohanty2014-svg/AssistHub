@@ -1,0 +1,26 @@
+.reviews-container{
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.reviews-container h1{
+    margin-bottom:30px;
+    color:#1E56D9;
+}
+
+.review-card{
+    background:#fff;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.review-card h2{
+    margin-bottom:10px;
+}
+
+.review-card p{
+    margin:8px 0;
+}

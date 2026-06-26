@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from .models import Review
+from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
@@ -29,3 +30,10 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ['rating','comment']
+
+#Profile Edit Form
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
