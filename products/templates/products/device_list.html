@@ -17,21 +17,54 @@
 <!-- SEARCH BAR -->
 <div class="search-container">
     <form method="GET">
-        <input
-            type="text"
-            name="q"
-            placeholder="Search devices..."
-            value="{{ query }}"
-        >
-        <button type="submit">Search</button>
+
+        <div class="search-box">
+
+            <span class="search-icon">🔍</span>
+
+            <input
+                type="text"
+                name="q"
+                placeholder="Search devices..."
+                value="{{ query }}"
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </div>
+
+        <!-- Keep your sorting here -->
+        <div class="sort-container">
+            <select name="sort" onchange="this.form.submit()">
+                <option value="">Sort By</option>
+
+                <option value="az"
+                    {% if sort == "az" %}selected{% endif %}>
+                    Name (A–Z)
+                </option>
+
+                <option value="za"
+                    {% if sort == "za" %}selected{% endif %}>
+                    Name (Z–A)
+                </option>
+
+                <option value="price_low"
+                    {% if sort == "price_low" %}selected{% endif %}>
+                    Price: Low to High
+                </option>
+
+                <option value="price_high"
+                    {% if sort == "price_high" %}selected{% endif %}>
+                    Price: High to Low
+                </option>
+
+            </select>
+        </div>
+
     </form>
 </div>
-
-{% if query %}
-    <p class="search-result">
-        Showing results for "<strong>{{ query }}</strong>"
-    </p>
-{% endif %}
 
 <div class="device-container">
 

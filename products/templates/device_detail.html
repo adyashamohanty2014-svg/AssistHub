@@ -40,6 +40,13 @@
         <p class="description">{{ device.description }}</p>
 
         <div class="price">₹{{ device.price }}</div>
+        {% if device.buy_link %}
+            <a href="{{ device.buy_link }}"
+            target="_blank"
+            class="buy-btn">
+                🛒 Buy Now
+            </a>
+        {% endif %}
 
         <!-- REVIEWS SECTION START -->
         <h3>Reviews</h3>
@@ -54,6 +61,11 @@
                 <p>
                     {{ review.comment }}
                 </p>
+                {% if review.user == user %}
+                    <a href="{% url 'edit_review' review.id %}" class="edit-review-btn">
+                        Edit Review
+                    </a>
+                {% endif %}
             </div>
         {% empty %}
             <p>No reviews yet.</p>

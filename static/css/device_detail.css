@@ -163,3 +163,36 @@ body {
 .wishlist-btn:hover{
     transform:scale(1.15);
 }
+
+.edit-review-btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:8px 18px;
+    background:#1E56D9;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+}
+
+.edit-review-btn:hover{
+    background:#1548b6;
+}
+
+.buy-btn{
+    display:inline-block;
+    margin:20px 0;
+    padding:12px 28px;
+    background:#28a745;
+    color:white;
+    text-decoration:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.buy-btn:hover{
+    background:#218838;
+}

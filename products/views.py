@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from .models import Device, Wishlist
+from django.contrib import messages
+
 #Home page
 def home(request):
     categories = Category.objects.all()
@@ -61,13 +63,11 @@ def register(request):
     )
 
 #Device List
-
-
-
-
 def device_list(request):
 
     query = request.GET.get('q', '')
+    sort = request.GET.get('sort', '')
+
     if query:
         devices = Device.objects.filter(
             Q(name__icontains=query) |
@@ -76,9 +76,23 @@ def device_list(request):
     else:
         devices = Device.objects.all()
 
+    # Sorting
+    if sort == "az":
+        devices = devices.order_by("name")
+
+    elif sort == "za":
+        devices = devices.order_by("-name")
+
+    elif sort == "low":
+        devices = devices.order_by("price")
+
+    elif sort == "high":
+        devices = devices.order_by("-price")
+
     return render(request, 'products/device_list.html', {
         'devices': devices,
         'query': query,
+        'sort': sort,
     })
 
 #Device Details
@@ -155,8 +169,6 @@ def profile(request):
     )
 
 #Profile Edit
-from django.contrib import messages
-
 @login_required
 def edit_profile(request):
     if request.method == "POST":
@@ -191,32 +203,58 @@ def my_reviews(request):
         {"reviews": reviews}
     )
 
-
+#Adding product in wishlist
 @login_required
 def toggle_wishlist(request, id):
-
     device = get_object_or_404(Device, id=id)
-
     item, created = Wishlist.objects.get_or_create(
         user=request.user,
         device=device
     )
-
     if not created:
         item.delete()
-
     return redirect('device_detail', id=device.id)
+
+#My Wishlist
 @login_required
 def my_wishlist(request):
-
     wishlist_items = Wishlist.objects.filter(
         user=request.user
     ).select_related('device')
-
     return render(
         request,
         "products/my_wishlist.html",
         {
             "wishlist_items": wishlist_items
+        }
+    )
+
+#Edit Review
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(
+        Review,
+        id=review_id,
+        user=request.user
+    )
+    if request.method == "POST":
+        form = ReviewForm(
+            request.POST,
+            instance=review
+        )
+        if form.is_valid():
+            form.save()
+            return redirect(
+                "device_detail",
+                id=review.device.id
+            )
+    else:
+        form = ReviewForm(instance=review)
+    return render(
+        request,
+        "products/edit_review.html",
+        {
+            "form": form,
+            "review": review
         }
     )
