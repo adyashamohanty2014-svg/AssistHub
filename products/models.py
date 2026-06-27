@@ -59,3 +59,38 @@ class Wishlist(models.Model):
         unique_together = ('user', 'device')
     def __str__(self):
         return f"{self.user.username} - {self.device.name}"
+class StoreLink(models.Model):
+    STORE_CHOICES = [
+        ('Amazon', 'Amazon'),
+        ('Flipkart', 'Flipkart'),
+        ('Meesho', 'Meesho'),
+        ('Other', 'Other'),
+    ]
+
+    device = models.ForeignKey(
+        Device,
+        on_delete=models.CASCADE,
+        related_name='store_links'
+    )
+
+    store_name = models.CharField(
+        max_length=20,
+        choices=STORE_CHOICES
+    )
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    link = models.URLField()
+
+    def __str__(self):
+        return f"{self.store_name} - {self.device.name}"
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cheapest = self.device.store_links.order_by('price').first()
+        if cheapest:
+            self.device.price = cheapest.price
+            self.device.buy_link = cheapest.link
+            self.device.save()

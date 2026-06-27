@@ -11,85 +11,185 @@
 
 <div class="detail-container">
 
+    <!-- LEFT: PRODUCT IMAGE -->
     <div class="image-section">
         {% if device.image %}
             <img src="{{ device.image.url }}" alt="{{ device.name }}">
         {% endif %}
     </div>
 
+    <!-- RIGHT: PRODUCT INFO -->
     <div class="info-section">
+
         <div class="title-row">
-    <h1>{{ device.name }}</h1>
+            <h1>{{ device.name }}</h1>
 
-    {% if user.is_authenticated %}
-        <a href="{% url 'toggle_wishlist' device.id %}"
-           class="wishlist-btn">
+            {% if user.is_authenticated %}
+                <a href="{% url 'toggle_wishlist' device.id %}"
+                   class="wishlist-btn">
 
-            {% if is_wishlisted %}
-                ❤️
-            {% else %}
-                🤍
+                    {% if is_wishlisted %}
+                        ❤️
+                    {% else %}
+                        🤍
+                    {% endif %}
+
+                </a>
             {% endif %}
-
-        </a>
-    {% endif %}
-</div>
+        </div>
 
         <span class="category">{{ device.category }}</span>
 
         <p class="description">{{ device.description }}</p>
 
         <div class="price">₹{{ device.price }}</div>
+
         {% if device.buy_link %}
             <a href="{{ device.buy_link }}"
-            target="_blank"
-            class="buy-btn">
+               target="_blank"
+               class="buy-btn">
                 🛒 Buy Now
             </a>
         {% endif %}
 
-        <!-- REVIEWS SECTION START -->
+        <!-- STORE COMPARISON -->
+        <h3>Compare Prices</h3>
+
+        <div class="store-links">
+
+            {% for store in store_links %}
+
+                <div class="store-card">
+
+                    <div>
+                        <strong>{{ store.store_name }}</strong><br>
+                        ₹{{ store.price }}
+                    </div>
+
+                    <a href="{{ store.link }}"
+                       target="_blank"
+                       class="store-btn">
+                        Visit
+                    </a>
+
+                </div>
+
+            {% empty %}
+
+                <p>No additional stores available.</p>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- REVIEWS -->
         <h3>Reviews</h3>
+
         {% for review in reviews %}
+
             <div class="review-card">
+
                 <strong>
                     {{ review.user.username }}
                 </strong>
+
                 <p>
                     Rating: {{ review.rating }}/5
                 </p>
+
                 <p>
                     {{ review.comment }}
                 </p>
+
                 {% if review.user == user %}
-                    <a href="{% url 'edit_review' review.id %}" class="edit-review-btn">
+                    <a href="{% url 'edit_review' review.id %}"
+                       class="edit-review-btn">
                         Edit Review
                     </a>
                 {% endif %}
+
             </div>
+
         {% empty %}
+
             <p>No reviews yet.</p>
+
         {% endfor %}
-        <!-- REVIEWS SECTION END -->
+
         <!-- REVIEW FORM -->
         {% if user.is_authenticated %}
-        <h3>Write a Review</h3>
-        <form method="post">
-            {% csrf_token %}
-            {{ review_form.as_p }}
-            <button type="submit">
-                Submit Review
-            </button>
-        </form>
+
+            <h3>Write a Review</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ review_form.as_p }}
+
+                <button type="submit">
+                    Submit Review
+                </button>
+            </form>
+
         {% else %}
-        <p>
-            Please <a href="{% url 'login' %}">login</a> to write a review.
-        </p>
-        {% endif %}<br>
+
+            <p>
+                Please <a href="{% url 'login' %}">login</a>
+                to write a review.
+            </p>
+
+        {% endif %}
+
+        <br>
 
         <a href="{% url 'device_list' %}" class="back-btn">
             ← Back to Devices
         </a>
+
+    </div>
+
+</div>
+
+
+<!-- SIMILAR PRODUCTS -->
+<div class="similar-products-container">
+
+    <div class="similar-header">
+
+        <h2>✨ Similar Products</h2>
+
+        {% if similar_count > 3 %}
+            <a href="{% url 'category_devices' device.category.id %}"
+               class="view-all-btn">
+                View All →
+            </a>
+        {% endif %}
+
+    </div>
+
+    <div class="similar-row">
+
+        {% for item in preview_devices %}
+
+            <a href="{% url 'device_detail' item.id %}"
+               class="similar-card">
+
+                {% if item.image %}
+                    <img src="{{ item.image.url }}"
+                         alt="{{ item.name }}">
+                {% endif %}
+
+                <h4>{{ item.name }}</h4>
+
+                <p>₹{{ item.price }}</p>
+
+            </a>
+
+        {% empty %}
+
+            <p>No similar products found.</p>
+
+        {% endfor %}
+
     </div>
 
 </div>

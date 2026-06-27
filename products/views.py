@@ -8,7 +8,7 @@ from .models import Device
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
-from .models import Device, Wishlist
+from .models import Device, Wishlist, StoreLink
 from django.contrib import messages
 
 #Home page
@@ -100,7 +100,10 @@ def device_detail(request, id):
 
     device = get_object_or_404(Device, id=id)
     reviews = Review.objects.filter(device=device)
-
+    store_links = device.store_links.all().order_by('price')
+    similar_devices = Device.objects.filter(
+    category=device.category).exclude(id=device.id)
+    preview_devices = similar_devices[:3]
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
 
@@ -132,6 +135,9 @@ def device_detail(request, id):
             'reviews': reviews,
             'review_form': review_form,
             'is_wishlisted': is_wishlisted,
+            'store_links': store_links,
+            'preview_devices': preview_devices,
+            'similar_count': similar_devices.count(),
         }
     )
 
