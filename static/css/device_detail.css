@@ -621,3 +621,19 @@ body {
     font-weight: 600;
     margin: 0;
 }
+.action-icons{
+    display:flex;
+    gap:15px;
+}
+
+.wishlist-btn,
+.cart-btn{
+    text-decoration:none;
+    font-size:32px;
+    transition:0.3s;
+}
+
+.wishlist-btn:hover,
+.cart-btn:hover{
+    transform:scale(1.15);
+}

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from .models import Device, Wishlist, StoreLink
 from django.contrib import messages
-
+from .models import Cart
 #Home page
 def home(request):
     categories = Category.objects.all()
@@ -142,6 +142,12 @@ def device_detail(request, id):
             user=request.user,
             device=device
         ).exists()
+    is_in_cart = False
+    if request.user.is_authenticated:
+        is_in_cart = Cart.objects.filter(
+        user=request.user,
+        device=device
+    ).exists()
 
     return render(
         request,
@@ -154,6 +160,7 @@ def device_detail(request, id):
             'store_links': store_links,
             'preview_devices': preview_devices,
             'similar_count': similar_devices.count(),
+            'is_in_cart': is_in_cart,
         }
     )
 
@@ -181,12 +188,17 @@ def profile(request):
     wishlist_items = Wishlist.objects.filter(
         user=request.user
     ).select_related('device')
+    cart_items = Cart.objects.filter(
+    user=request.user
+)
 
     return render(
         request,
         "products/profile.html",
         {
-            "wishlist_items": wishlist_items
+            "wishlist_items": wishlist_items,
+            'cart_items': cart_items,
+            
         }
     )
 
@@ -303,5 +315,35 @@ def contact(request):
         "products/contact.html",
         {
             "form": form
+        }
+    )
+@login_required
+def toggle_cart(request, device_id):
+
+    device = get_object_or_404(Device, id=device_id)
+
+    cart_item, created = Cart.objects.get_or_create(
+        user=request.user,
+        device=device
+    )
+
+    if not created:
+        cart_item.delete()
+
+    return redirect('device_detail', device.id)
+from .models import Cart
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
+def my_cart(request):
+
+    cart_items = Cart.objects.filter(user=request.user)
+
+    return render(
+        request,
+        'my_cart.html',
+        {
+            'cart_items': cart_items
         }
     )

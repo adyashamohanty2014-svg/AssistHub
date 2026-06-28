@@ -21,22 +21,42 @@
     <!-- RIGHT: PRODUCT INFO -->
     <div class="info-section">
 
-        <div class="title-row">
-            <h1>{{ device.name }}</h1>
+       <div class="title-row">
 
-            {% if user.is_authenticated %}
-                <a href="{% url 'toggle_wishlist' device.id %}"
-                   class="wishlist-btn">
+    <h1>{{ device.name }}</h1>
 
-                    {% if is_wishlisted %}
-                        ❤️
-                    {% else %}
-                        🤍
-                    {% endif %}
+    {% if user.is_authenticated %}
 
-                </a>
-            {% endif %}
+        <div class="action-icons">
+
+            <a href="{% url 'toggle_wishlist' device.id %}"
+               class="wishlist-btn">
+
+                {% if is_wishlisted %}
+                    ❤️
+                {% else %}
+                    🤍
+                {% endif %}
+
+            </a>
+
+
+            <a href="{% url 'toggle_cart' device.id %}"
+               class="cart-btn">
+
+                {% if is_in_cart %}
+                    🛒
+                {% else %}
+                    🛍️
+                {% endif %}
+
+            </a>
+
         </div>
+
+    {% endif %}
+
+</div>
 
         <span class="category">{{ device.category }}</span>
 

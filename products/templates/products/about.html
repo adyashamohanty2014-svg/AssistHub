@@ -7,64 +7,101 @@ About AssistHub
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 {% endblock %}
 
 {% block content %}
 
 <section class="about-hero">
 
-    <h1>About AssistHub</h1>
+    <div class="hero-content">
+        <span class="tagline">
+            Empowering Accessibility Through Technology
+        </span>
 
-    <p>
-        Empowering independence through assistive technology.
-    </p>
+        <h1>Building a More Inclusive Digital Future</h1>
+
+        <p>
+            AssistHub helps individuals discover, compare, and explore
+            assistive technologies that improve independence,
+            communication, mobility, and daily life.
+        </p>
+    </div>
 
 </section>
 
-<section class="about-container">
+
+<section class="about-grid">
 
     <div class="about-card">
-
+        <i class="fa-solid fa-bullseye"></i>
         <h2>Our Mission</h2>
 
         <p>
-            AssistHub is designed to help people discover assistive
-            technology that improves accessibility, communication,
-            mobility, and daily living.
+            To make assistive technology easy to discover and accessible
+            for everyone by providing a centralized platform for
+            exploration, comparison, and informed decision-making.
         </p>
-
     </div>
 
-    <div class="about-card">
-
-        <h2>What We Offer</h2>
-
-        <ul>
-
-            <li>Browse assistive devices by category</li>
-
-            <li>Search and filter products</li>
-
-            <li>Read and write product reviews</li>
-
-            <li>Create your personal wishlist</li>
-
-            <li>Compare prices from different stores</li>
-
-        </ul>
-
-    </div>
 
     <div class="about-card">
-
-        <h2>Why AssistHub?</h2>
+        <i class="fa-solid fa-eye"></i>
+        <h2>Our Vision</h2>
 
         <p>
-            Choosing assistive technology can be challenging.
-            AssistHub provides one platform where users can
-            explore devices, compare options, and make
-            informed decisions.
+            We envision a world where technology removes barriers and
+            enables people with diverse abilities to live independently
+            and confidently.
         </p>
+    </div>
+
+
+    <div class="about-card">
+        <i class="fa-solid fa-heart"></i>
+        <h2>Our Values</h2>
+
+        <ul>
+            <li>Accessibility First</li>
+            <li>Inclusive Innovation</li>
+            <li>User-Centered Design</li>
+            <li>Community Empowerment</li>
+        </ul>
+    </div>
+
+</section>
+
+
+<section class="why-section">
+
+    <h2>Why Choose AssistHub?</h2>
+
+    <div class="features">
+
+        <div class="feature-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <h3>Smart Discovery</h3>
+            <p>Find assistive devices quickly using search and filters.</p>
+        </div>
+
+        <div class="feature-box">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <h3>Price Comparison</h3>
+            <p>Compare prices across multiple sellers effortlessly.</p>
+        </div>
+
+        <div class="feature-box">
+            <i class="fa-solid fa-star"></i>
+            <h3>Community Reviews</h3>
+            <p>Learn from real user experiences before purchasing.</p>
+        </div>
+
+        <div class="feature-box">
+            <i class="fa-solid fa-bookmark"></i>
+            <h3>Wishlist Support</h3>
+            <p>Save devices and create a personalized collection.</p>
+        </div>
 
     </div>
 

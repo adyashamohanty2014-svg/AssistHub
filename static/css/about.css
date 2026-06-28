@@ -1,50 +1,152 @@
+/* HERO SECTION */
+
 .about-hero{
+    background: linear-gradient(135deg,#f8cd4e,#5B8CFF);
+    color:white;
+    padding:100px 20px;
     text-align:center;
-    padding:70px 20px 40px;
+    border-radius:0 0 40px 40px;
+}
+
+.hero-content{
+    max-width:850px;
+    margin:auto;
+}
+
+.tagline{
+    display:inline-block;
+    background:rgba(255,255,255,0.18);
+    padding:8px 18px;
+    border-radius:50px;
+    margin-bottom:25px;
+    font-size:14px;
+    letter-spacing:1px;
 }
 
 .about-hero h1{
-    font-size:54px;
-    color:#102041;
-    margin-bottom:15px;
+    font-size:58px;
+    line-height:1.2;
+    margin-bottom:25px;
 }
 
 .about-hero p{
     font-size:20px;
-    color:#66758A;
+    line-height:1.8;
+    opacity:0.92;
 }
 
-.about-container{
-    max-width:1100px;
-    margin:40px auto 80px;
+
+
+/* MISSION GRID */
+
+.about-grid{
+    max-width:1200px;
+    margin:80px auto 0;
+    padding:0 20px;
     display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
     gap:30px;
 }
 
 .about-card{
     background:white;
-    padding:35px;
-    border-radius:18px;
-    box-shadow:0 5px 18px rgba(0,0,0,0.08);
+    padding:40px;
+    border-radius:24px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.07);
+    transition:0.3s;
+}
+
+.about-card:hover{
+    transform:translateY(-8px);
+}
+
+.about-card i{
+    font-size:40px;
+    color:#061b4d;
+    margin-bottom:20px;
 }
 
 .about-card h2{
-    color:#1E56D9;
     margin-bottom:18px;
+    color:#7395da;
 }
 
-.about-card p{
-    color:#5F6B7A;
+.about-card p,
+.about-card li{
+    color:#66758A;
     line-height:1.8;
     font-size:17px;
 }
 
 .about-card ul{
-    margin-left:20px;
+    padding-left:20px;
 }
 
-.about-card li{
+
+/* WHY SECTION */
+
+.why-section{
+    max-width:1200px;
+    margin:100px auto;
+    text-align:center;
+    padding:0 20px;
+}
+
+.why-section h2{
+    font-size:42px;
+    color:#102041;
+    margin-bottom:50px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.feature-box{
+    background:#F8FAFF;
+    padding:35px;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.feature-box:hover{
+    background:white;
+    transform:translateY(-6px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+.feature-box i{
+    font-size:32px;
+    color:#779aeb;
+    margin-bottom:20px;
+}
+
+.feature-box h3{
     margin-bottom:12px;
-    color:#5F6B7A;
-    font-size:17px;
+    color:#102041;
+}
+
+.feature-box p{
+    color:#66758A;
+    line-height:1.7;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width:768px){
+
+    .about-hero h1{
+        font-size:40px;
+    }
+
+    .about-hero p{
+        font-size:18px;
+    }
+
+    .why-section h2{
+        font-size:32px;
+    }
 }

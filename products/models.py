@@ -107,3 +107,20 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.subject
+class Cart(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    device = models.ForeignKey(
+        Device,
+        on_delete=models.CASCADE
+    )
+
+    added_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        unique_together = ('user', 'device')
