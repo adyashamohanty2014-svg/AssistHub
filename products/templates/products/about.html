@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+About AssistHub
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="about-hero">
+
+    <h1>About AssistHub</h1>
+
+    <p>
+        Empowering independence through assistive technology.
+    </p>
+
+</section>
+
+<section class="about-container">
+
+    <div class="about-card">
+
+        <h2>Our Mission</h2>
+
+        <p>
+            AssistHub is designed to help people discover assistive
+            technology that improves accessibility, communication,
+            mobility, and daily living.
+        </p>
+
+    </div>
+
+    <div class="about-card">
+
+        <h2>What We Offer</h2>
+
+        <ul>
+
+            <li>Browse assistive devices by category</li>
+
+            <li>Search and filter products</li>
+
+            <li>Read and write product reviews</li>
+
+            <li>Create your personal wishlist</li>
+
+            <li>Compare prices from different stores</li>
+
+        </ul>
+
+    </div>
+
+    <div class="about-card">
+
+        <h2>Why AssistHub?</h2>
+
+        <p>
+            Choosing assistive technology can be challenging.
+            AssistHub provides one platform where users can
+            explore devices, compare options, and make
+            informed decisions.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

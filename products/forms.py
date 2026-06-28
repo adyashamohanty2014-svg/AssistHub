@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import Review
+from .models import Review, Contact
 from django.contrib.auth.models import User
 
 
@@ -37,3 +37,14 @@ class UserEditForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
+
+#Contact Form
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = [
+            "name",
+            "email",
+            "subject",
+            "message"
+        ]

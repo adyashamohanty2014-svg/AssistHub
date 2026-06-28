@@ -1,83 +1,228 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AssistHub{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     {% block extra_css %}
     {% endblock %}
-</head>
 
+</head>
 <body>
 
+<!-- ===========================
+        NAVBAR
+=========================== -->
 <nav class="navbar">
 
     <div class="logo-area">
+
         <a href="{% url 'home' %}" class="logo-link">
+
             <img src="{% static 'images/assisthublogo.png' %}"
                  alt="AssistHub Logo"
                  class="nav-logo">
+
             <div>
-                <div class="brand-name">AssistHub</div>
+
+                <div class="brand-name">
+                    AssistHub
+                </div>
+
                 <div class="tagline">
                     Assistive Technology For All
                 </div>
+
             </div>
+
         </a>
+
     </div>
+
     <ul class="nav-links">
+
         <li>
-            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}">
+                Home
+            </a>
         </li>
+
         <li>
-            <a href="{% url 'device_list' %}">Devices</a>
+            <a href="{% url 'device_list' %}">
+                Devices
+            </a>
         </li>
+
         <li>
-            <a href="#">About Us</a>
+            <a href="{% url 'about' %}">
+                About Us
+            </a>
         </li>
+
         <li>
-            <a href="#"> Contact</a>
+            <a href="{% url 'contact' %}">
+                Contact
+            </a>
         </li>
 
         {% if user.is_authenticated %}
+
         <li class="profile-menu">
+
             <a href="#" class="profile-icon">
-                👤
+                <i class="fa-solid fa-user"></i>
             </a>
-        <div class="dropdown-menu">
 
-        <a href="{% url 'profile' %}">
-            My Profile
-        </a>
+            <div class="dropdown-menu">
 
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit">
-                Logout
-            </button>
-        </form>
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
 
-    </div>
+                <form method="post"
+                      action="{% url 'logout' %}">
 
-</li>
+                    {% csrf_token %}
 
+                    <button type="submit">
+                        Logout
+                    </button>
+
+                </form>
+
+            </div>
+
+        </li>
         {% else %}
         <li>
-            <a href="{% url 'login' %}" class="login-btn">
+            <a href="{% url 'login' %}"
+               class="login-btn">
                 Login
             </a>
         </li>
         {% endif %}
     </ul>
+
 </nav>
+
+<!-- ===========================
+        PAGE CONTENT
+=========================== -->
 
 <div class="page-container">
     {% block content %}
     {% endblock %}
 </div>
+
+<!-- ===========================
+          FOOTER
+=========================== -->
+
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Left -->
+        <div class="footer-col">
+            <h2 class="footer-logo">
+                Assist<span>Hub</span>
+            </h2>
+            <p>
+                Empowering accessibility through
+                assistive technology for everyone.
+            </p>
+            <div class="social-icons">
+                <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h3>
+                Quick Links
+            </h3>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'device_list' %}">
+                        Devices
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}">
+                        About Us
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Contact -->
+        <div class="footer-col">
+            <h3>
+                Contact
+            </h3>
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                support@assisthub.com
+            </p>
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                +91 98765 43210
+            </p>
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Bhubaneswar, Odisha
+            </p>
+        </div>
+        <!-- Newsletter -->
+        <div class="footer-col">
+            <h3>
+                Stay Updated
+            </h3>
+            <p>
+                Subscribe to receive updates
+                about new assistive devices.
+            </p>
+            <form class="newsletter">
+                <input
+                    type="email"
+                    placeholder="Enter your email">
+                <button type="button">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 AssistHub. All Rights Reserved.
+    </div>
+</footer>
 
 </body>
 </html>

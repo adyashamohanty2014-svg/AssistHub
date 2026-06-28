@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Contact Us
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-hero">
+    <h1>Contact Us</h1>
+    <p>
+        We'd love to hear from you. Feel free to reach out with any questions or feedback.
+    </p>
+</section>
+
+<div class="contact-container">
+
+    <div class="contact-info">
+
+        <h2>Get in Touch</h2>
+
+        <p><strong>📍 Address:</strong> Bhubaneswar, Odisha, India</p>
+
+        <p><strong>📧 Email:</strong> support@assisthub.com</p>
+
+        <p><strong>📞 Phone:</strong> +91 98765 43210</p>
+
+        <p>
+            Our team is always ready to help you choose the right assistive technology.
+        </p>
+
+    </div>
+
+    <div class="contact-form">
+
+        <h2>Send a Message</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="success-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">
+                Send Message
+            </button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

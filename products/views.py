@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm
+from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm, ContactForm
 from .models import Device, Category, Review
 from django.contrib.auth.decorators import login_required
 from .models import Device
@@ -14,7 +14,23 @@ from django.contrib import messages
 #Home page
 def home(request):
     categories = Category.objects.all()
-    return render(request,'products/home.html',{'categories': categories})
+    devices = list(Device.objects.all())
+
+    # Sort devices by average rating (highest first)
+    devices.sort(
+        key=lambda x: x.average_rating(),
+        reverse=True
+    )
+    # Take only the top 3
+    best_devices = devices[:3]
+    return render(
+        request,
+        "products/home.html",
+        {
+            "categories": categories,
+            "best_devices": best_devices,
+        },
+    )
 
 #Login
 def user_login(request):
@@ -262,5 +278,30 @@ def edit_review(request, review_id):
         {
             "form": form,
             "review": review
+        }
+    )
+
+#About us
+def about(request):
+    return render(request, "products/about.html")
+
+#Contact us
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Your message has been sent successfully!"
+            )
+            return redirect("contact")
+    else:
+        form = ContactForm()
+    return render(
+        request,
+        "products/contact.html",
+        {
+            "form": form
         }
     )

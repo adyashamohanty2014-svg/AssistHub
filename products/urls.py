@@ -20,4 +20,6 @@ urlpatterns = [
  path("review/<int:review_id>/edit/",views.edit_review,name="edit_review"),
  path('wishlist/<int:id>/',views.toggle_wishlist,name='toggle_wishlist'),
  path('my-wishlist/',views.my_wishlist,name='my_wishlist'),
+ path("about/", views.about, name="about"),
+ path("contact/", views.contact, name="contact"),
 ]

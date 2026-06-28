@@ -59,6 +59,8 @@ class Wishlist(models.Model):
         unique_together = ('user', 'device')
     def __str__(self):
         return f"{self.user.username} - {self.device.name}"
+    
+#TO Compare Prices
 class StoreLink(models.Model):
     STORE_CHOICES = [
         ('Amazon', 'Amazon'),
@@ -94,3 +96,14 @@ class StoreLink(models.Model):
             self.device.price = cheapest.price
             self.device.buy_link = cheapest.link
             self.device.save()
+
+#Contact
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.subject

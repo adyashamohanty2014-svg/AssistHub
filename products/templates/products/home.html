@@ -50,10 +50,34 @@ Home | AssistHub
 </section>
 
 <section class="best-purchases">
-    <h2>Best Purchases</h2>
+    <h2>⭐ Best Purchases</h2>
     <p>
-        Top-rated assistive devices recommended by our users will appear here.
+        Top-rated assistive devices recommended by our users.
     </p>
+    <div class="best-device-grid">
+        {% for device in best_devices %}
+        <div class="best-card">
+            {% if device.image %}
+            <img src="{{ device.image.url }}" alt="{{ device.name }}">
+            {% endif %}
+            <h3>{{ device.name }}</h3>
+            <span class="category">
+                {{ device.category }}
+            </span>
+            <p class="rating">
+                ⭐ {{ device.average_rating }}
+            </p>
+            <p class="price">
+                ₹{{ device.price }}
+            </p>
+            <a href="{% url 'device_detail' device.id %}" class="view-btn">
+                View Details
+            </a>
+        </div>
+        {% empty %}
+        <p>No rated devices yet.</p>
+        {% endfor %}
+    </div>
 </section>
 
 {% endblock %}
