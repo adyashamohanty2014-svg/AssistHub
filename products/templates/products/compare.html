@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Compare Devices
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+      href="{% static 'css/compare.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="error-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<section class="compare-page">
+
+    <h1>Compare Devices</h1>
+
+    <form method="GET" class="compare-form">
+
+        <select name="device1">
+
+            <option value="">
+                Select First Device
+            </option>
+
+            {% for device in devices %}
+                <option value="{{ device.id }}"
+                    {% if device1.id == device.id %}
+                        selected
+                    {% endif %}
+                >
+                    {{ device.name }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+
+        <select name="device2">
+
+            <option value="">
+                Select Second Device
+            </option>
+
+            {% for device in devices %}
+                <option value="{{ device.id }}"
+                    {% if device2.id == device.id %}
+                        selected
+                    {% endif %}
+                >
+                    {{ device.name }}
+                </option>
+            {% endfor %}
+
+        </select>
+
+        <button type="submit">
+            Compare
+        </button>
+
+    </form>
+
+
+    <div class="comparison-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="compare-card">
+
+            {% if device1 %}
+
+                {% if device1.image %}
+                    <img src="{{ device1.image.url }}">
+                {% endif %}
+
+                <h2>{{ device1.name }}</h2>
+
+                <p class="price">
+                    ₹{{ device1.price }}
+                </p>
+
+                <p>
+                    {{ device1.description }}
+                </p>
+
+                <a href="{{ device1.seller_link }}"
+                   target="_blank">
+                    Buy Now
+                </a>
+
+            {% else %}
+
+                <h3>Select a device</h3>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="compare-card">
+
+            {% if device2 %}
+
+                {% if device2.image %}
+                    <img src="{{ device2.image.url }}">
+                {% endif %}
+
+                <h2>{{ device2.name }}</h2>
+
+                <p class="price">
+                    ₹{{ device2.price }}
+                </p>
+
+                <p>
+                    {{ device2.description }}
+                </p>
+
+                <a href="{{ device2.seller_link }}"
+                   target="_blank">
+                    Buy Now
+                </a>
+
+            {% else %}
+
+                <h3>Select a device</h3>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -24,5 +24,10 @@ urlpatterns = [
  path("contact/", views.contact, name="contact"),
  path('cart/<int:device_id>/',views.toggle_cart,name='toggle_cart'),
  path('my-cart/',views.my_cart,name='my_cart'),
- 
+ path('compare/', views.compare_view, name='compare'),
+ path(
+    'review/<int:review_id>/delete/',
+    views.delete_review,
+    name='delete_review'
+),
 ]
