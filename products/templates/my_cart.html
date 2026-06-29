@@ -6,44 +6,63 @@ My Cart
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'css/my_cart.css' %}">
 {% endblock %}
 
 {% block content %}
 
-<div class="wishlist-container">
+<div class="cart-container">
 
     <h1>🛒 My Cart</h1>
 
-    <div class="wishlist-grid">
+    {% for item in cart_items %}
 
-        {% for item in cart_items %}
+    <div class="cart-item">
 
-        <div class="wishlist-card">
+        <div class="cart-image">
 
             {% if item.device.image %}
-                <img src="{{ item.device.image.url }}"
-                     alt="{{ item.device.name }}">
+            <img src="{{ item.device.image.url }}"
+                 alt="{{ item.device.name }}">
             {% endif %}
-
-            <h3>{{ item.device.name }}</h3>
-
-            <p>₹{{ item.device.price }}</p>
-
-            <a href="{% url 'device_detail' item.device.id %}"
-               class="view-btn">
-                View Details
-            </a>
 
         </div>
 
-        {% empty %}
+        <div class="cart-details">
 
-        <p>Your cart is empty.</p>
+            <h2>{{ item.device.name }}</h2>
 
-        {% endfor %}
+            <p class="category">
+                {{ item.device.category }}
+            </p>
+
+            <h3>₹{{ item.device.price }}</h3>
+
+            <div class="cart-buttons">
+
+                <a href="{% url 'device_detail' item.device.id %}"
+                   class="details-btn">
+                    View Details
+                </a>
+
+                <a href="{% url 'toggle_cart' item.device.id %}"
+                   class="remove-btn">
+                    Remove
+                </a>
+
+            </div>
+
+        </div>
 
     </div>
+
+    {% empty %}
+
+    <div class="empty-cart">
+        <h2>Your cart is empty 🛒</h2>
+    </div>
+
+    {% endfor %}
 
 </div>
 

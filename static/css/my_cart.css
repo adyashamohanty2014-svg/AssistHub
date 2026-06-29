@@ -1,0 +1,204 @@
+/* ==========================
+        MY CART
+========================== */
+
+.cart-container{
+    max-width:1100px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.cart-container h1{
+    font-size:48px;
+    color:#102041;
+    margin-bottom:40px;
+}
+
+/* ==========================
+        CART ITEM
+========================== */
+
+.cart-item{
+
+    display:flex;
+    align-items:center;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.cart-item:hover{
+    transform:translateY(-4px);
+}
+
+/* ==========================
+        IMAGE
+========================== */
+
+.cart-image{
+    width:220px;
+    text-align:center;
+}
+
+.cart-image img{
+
+    width:170px;
+    height:170px;
+
+    object-fit:contain;
+}
+
+/* ==========================
+        DETAILS
+========================== */
+
+.cart-details{
+
+    flex:1;
+
+    padding-left:30px;
+}
+
+.cart-details h2{
+
+    font-size:30px;
+
+    color:#102041;
+
+    margin-bottom:12px;
+}
+
+.category{
+
+    display:inline-block;
+
+    background:#EAF2FF;
+
+    color:#1E56D9;
+
+    padding:7px 15px;
+
+    border-radius:20px;
+
+    font-size:15px;
+
+    margin-bottom:18px;
+}
+
+.cart-details h3{
+
+    color:#1E56D9;
+
+    font-size:34px;
+
+    margin-bottom:25px;
+}
+
+/* ==========================
+        BUTTONS
+========================== */
+
+.cart-buttons{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.details-btn{
+
+    background:#1E56D9;
+
+    color:white;
+
+    padding:12px 26px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.details-btn:hover{
+
+    background:#1444B8;
+}
+
+.remove-btn{
+
+    background:#E74C3C;
+
+    color:white;
+
+    padding:12px 26px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.remove-btn:hover{
+
+    background:#C0392B;
+}
+
+/* ==========================
+        EMPTY
+========================== */
+
+.empty-cart{
+
+    text-align:center;
+
+    background:white;
+
+    padding:80px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+/* ==========================
+        MOBILE
+========================== */
+
+@media(max-width:768px){
+
+.cart-item{
+
+    flex-direction:column;
+
+    text-align:center;
+}
+
+.cart-details{
+
+    padding-left:0;
+
+    margin-top:20px;
+}
+
+.cart-buttons{
+
+    justify-content:center;
+}
+
+}
+

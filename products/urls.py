@@ -22,14 +22,7 @@ urlpatterns = [
  path('my-wishlist/',views.my_wishlist,name='my_wishlist'),
  path("about/", views.about, name="about"),
  path("contact/", views.contact, name="contact"),
- path(
-    'cart/<int:device_id>/',
-    views.toggle_cart,
-    name='toggle_cart'
-),
- path(
-    'my-cart/',
-    views.my_cart,
-    name='my_cart'
-),
+ path('cart/<int:device_id>/',views.toggle_cart,name='toggle_cart'),
+ path('my-cart/',views.my_cart,name='my_cart'),
+ 
 ]

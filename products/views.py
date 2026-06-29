@@ -1,16 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm, ContactForm
-from .models import Device, Category, Review
+from .models import Device, Category, Review, Cart, Wishlist
 from django.contrib.auth.decorators import login_required
-from .models import Device
 from django.db.models import Q
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
-from .models import Device, Wishlist, StoreLink
 from django.contrib import messages
-from .models import Cart
+
 #Home page
 def home(request):
     categories = Category.objects.all()
@@ -317,29 +313,22 @@ def contact(request):
             "form": form
         }
     )
+
+#CART
 @login_required
 def toggle_cart(request, device_id):
-
     device = get_object_or_404(Device, id=device_id)
-
     cart_item, created = Cart.objects.get_or_create(
         user=request.user,
         device=device
     )
-
     if not created:
         cart_item.delete()
-
     return redirect('device_detail', device.id)
-from .models import Cart
-from django.contrib.auth.decorators import login_required
-
 
 @login_required
 def my_cart(request):
-
     cart_items = Cart.objects.filter(user=request.user)
-
     return render(
         request,
         'my_cart.html',
@@ -347,3 +336,4 @@ def my_cart(request):
             'cart_items': cart_items
         }
     )
+
