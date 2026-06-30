@@ -336,19 +336,16 @@ def my_cart(request):
             'cart_items': cart_items
         }
     )
+
+#Compare devices
 def compare_view(request):
-
     devices = Device.objects.all()
-
     device1 = None
     device2 = None
-
     id1 = request.GET.get('device1')
     id2 = request.GET.get('device2')
-
     if id1:
         device1 = Device.objects.get(id=id1)
-
     if id2:
         device2 = Device.objects.get(id=id2)
     if device1 and device2:
@@ -358,36 +355,28 @@ def compare_view(request):
                 "Please compare devices from the same category."
             )
             device2 = None
-
-
     context = {
         'devices': devices,
         'device1': device1,
         'device2': device2,
     }
-
     return render(request, 'products/compare.html', context)
+
+#Delete Review
 @login_required
 def delete_review(request, review_id):
-
     review = get_object_or_404(
         Review,
         id=review_id,
         user=request.user
     )
-
     if request.method == "POST":
-
         device_id = review.device.id
-
         review.delete()
-
         messages.success(
             request,
             "Review deleted successfully."
         )
-
         return redirect('device_detail', device_id)
-
     return redirect('device_detail', review.device.id)
 
