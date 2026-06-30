@@ -7,24 +7,38 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib import messages
 from .models import Device
+from django.contrib.auth.decorators import login_required
+from .models import Device, Wishlist
 #Home page
 def home(request):
     categories = Category.objects.all()
-    devices = list(Device.objects.all())
 
-    # Sort devices by average rating (highest first)
-    devices.sort(
+    # Only devices that have at least one review
+    reviewed_devices = [
+        device
+        for device in Device.objects.all()
+        if device.review_set.exists()
+    ]
+
+    # Sort by average rating
+    reviewed_devices.sort(
         key=lambda x: x.average_rating(),
         reverse=True
     )
-    # Take only the top 3
-    best_devices = devices[:3]
+
+    # Top 3 rated devices
+    best_devices = reviewed_devices[:3]
+
+    # Next 4 devices as recommendations
+    recommended_devices = reviewed_devices[3:7]
+
     return render(
         request,
         "products/home.html",
         {
             "categories": categories,
             "best_devices": best_devices,
+            "recommended_devices": recommended_devices,
         },
     )
 
@@ -379,4 +393,5 @@ def delete_review(request, review_id):
         )
         return redirect('device_detail', device_id)
     return redirect('device_detail', review.device.id)
+
 

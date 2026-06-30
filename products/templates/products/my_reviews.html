@@ -12,25 +12,58 @@ My Reviews
 {% block content %}
 
 <div class="reviews-container">
-    <h1>My Reviews</h1>
+
+    <div class="reviews-header">
+        <h1>My Reviews</h1>
+        <p>Your feedback helps others choose the right assistive technology.</p>
+    </div>
+
     {% if reviews %}
-        {% for review in reviews %}
-        <div class="review-card">
-            <h2>{{ review.device.name }}</h2>
-            <p>
-                ⭐ {{ review.rating }}/5
-            </p>
-            <p>
-                {{ review.comment }}
-            </p>
-            <small>
-                {{ review.created|date:"d M Y" }}
-            </small>
+
+        <div class="reviews-list">
+
+            {% for review in reviews %}
+
+            <div class="review-card">
+
+                <div class="review-top">
+
+                    <div>
+                        <h2>{{ review.device.name }}</h2>
+                        <span class="review-date">
+                            {{ review.created|date:"d M Y" }}
+                        </span>
+                    </div>
+
+                    <div class="rating-badge">
+                        ⭐ {{ review.rating }}/5
+                    </div>
+
+                </div>
+
+                <div class="review-text">
+                    {{ review.comment }}
+                </div>
+
+            </div>
+
+            {% endfor %}
+
         </div>
-        {% endfor %}
+
     {% else %}
-        <p>You haven't written any reviews yet.</p>
+
+        <div class="empty-state">
+            <h2>No Reviews Yet</h2>
+            <p>You haven't written any reviews yet.</p>
+
+            <a href="{% url 'device_list' %}" class="browse-btn">
+                Browse Devices
+            </a>
+        </div>
+
     {% endif %}
+
 </div>
 
 {% endblock %}
