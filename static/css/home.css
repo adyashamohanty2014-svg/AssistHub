@@ -757,3 +757,150 @@ grid-template-columns:1fr;
     height: 100%;
     object-fit: contain;    /* Preserve aspect ratio */
 }
+
+/* ===================================================
+                WHY CHOOSE ASSISTHUB
+=================================================== */
+
+.features-section{
+
+    width:min(1200px,92%);
+    margin:100px auto;
+
+}
+
+.features-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:28px;
+
+}
+
+/* ===================================================
+                FEATURE CARD
+=================================================== */
+
+.feature-card{
+
+    background:#fff;
+
+    border:1px solid #E8EDF5;
+
+    border-radius:20px;
+
+    padding:35px 28px;
+
+    text-align:left;
+
+    transition:.35s;
+
+    box-shadow:0 8px 22px rgba(0,0,0,.05);
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#2D6CDF;
+
+    box-shadow:0 18px 35px rgba(0,0,0,.10);
+
+}
+
+/* ===================================================
+                ICON
+=================================================== */
+
+.feature-icon{
+
+    width:65px;
+
+    height:65px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#EAF2FF;
+
+    border-radius:16px;
+
+    font-size:30px;
+
+    margin-bottom:24px;
+
+    transition:.3s;
+
+}
+
+.feature-card:hover .feature-icon{
+
+    background:#2D6CDF;
+
+    color:white;
+
+    transform:rotate(-8deg);
+
+}
+
+/* ===================================================
+                TITLE
+=================================================== */
+
+.feature-card h3{
+
+    font-size:22px;
+
+    color:#102041;
+
+    margin-bottom:14px;
+
+    font-weight:700;
+
+}
+
+/* ===================================================
+                DESCRIPTION
+=================================================== */
+
+.feature-card p{
+
+    color:#66758A;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+/* ===================================================
+                RESPONSIVE
+=================================================== */
+
+@media(max-width:768px){
+
+.features-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.feature-card{
+
+text-align:center;
+
+}
+
+.feature-icon{
+
+margin:0 auto 20px;
+
+}
+
+}
