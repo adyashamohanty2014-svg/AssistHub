@@ -1,26 +1,159 @@
-.reviews-container{
-    max-width:900px;
-    margin:50px auto;
-    padding:20px;
+.reviews-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 0 20px;
 }
 
-.reviews-container h1{
-    margin-bottom:30px;
-    color:#1E56D9;
+.reviews-header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-.review-card{
-    background:#fff;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+.reviews-header h1 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 10px;
 }
 
-.review-card h2{
-    margin-bottom:10px;
+.reviews-header p {
+    color: #64748b;
+    font-size: 1rem;
 }
 
-.review-card p{
-    margin:8px 0;
+
+/* REVIEW LIST */
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+
+/* REVIEW CARD */
+
+.review-card {
+    background: #ffffff;
+    border-left: 6px solid #2563eb;
+
+    padding: 25px;
+    border-radius: 16px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+
+/* TOP SECTION */
+
+.review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.review-top h2 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.6rem;
+}
+
+.review-date {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+
+/* RATING */
+
+.rating-badge {
+    background: #fef3c7;
+    color: #b45309;
+
+    padding: 8px 16px;
+    border-radius: 30px;
+
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+
+/* COMMENT */
+
+.review-text {
+    color: #334155;
+    line-height: 1.8;
+    font-size: 1rem;
+
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+
+
+/* EMPTY STATE */
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-state h2 {
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.browse-btn {
+    display: inline-block;
+
+    background: #2563eb;
+    color: white;
+
+    padding: 12px 24px;
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: background 0.3s ease;
+}
+
+.browse-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .review-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .rating-badge {
+        align-self: flex-start;
+    }
+
+    .reviews-header h1 {
+        font-size: 2rem;
+    }
+
+    .review-top h2 {
+        font-size: 1.3rem;
+    }
 }
