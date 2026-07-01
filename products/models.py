@@ -45,6 +45,22 @@ class Review(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.device.name}"
     
+
+#Search History
+class SearchHistory(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    keyword = models.CharField(
+        max_length=100
+    )
+    searched_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    def __str__(self):
+        return f"{self.user.username} searched '{self.keyword}'"
+    
 #My Wishlist
 class Wishlist(models.Model):
     user = models.ForeignKey(

@@ -2,31 +2,128 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm, ContactForm
-from .models import Device, Category, Review, Cart, Wishlist
+from .models import Device, Category, Review, Cart, Wishlist, SearchHistory
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Avg, Count
 from django.contrib import messages
-from .models import Device
+from django.contrib.auth.models import User
+
 #Home page
 def home(request):
-    categories = Category.objects.all()
-    devices = list(Device.objects.all())
+    categories = Category.objects.annotate(
+    device_count=Count("device")
+)
+    total_devices = Device.objects.count()
+    total_categories = Category.objects.count()
+    total_reviews = Review.objects.count()
+    total_users = User.objects.count()
+    # ----------------------------
+    # Best Purchases
+    # ----------------------------
 
-    # Sort devices by average rating (highest first)
+    devices = list(Device.objects.all())
     devices.sort(
         key=lambda x: x.average_rating(),
         reverse=True
     )
-    # Take only the top 3
     best_devices = devices[:3]
-    return render(
-        request,
-        "products/home.html",
-        {
-            "categories": categories,
-            "best_devices": best_devices,
-        },
-    )
+
+    # ----------------------------
+    # Recommendation System
+    # ----------------------------
+    recommendation_title = "Recommended For You"
+    recommended_devices = Device.objects.none()
+    search_keyword = None
+    if request.user.is_authenticated:
+
+        # ==========================
+        # 1. Latest Search
+        # ==========================
+
+        latest_search = SearchHistory.objects.filter(
+            user=request.user
+        ).order_by("-searched_at").first()
+        if latest_search:
+            search_keyword = latest_search.keyword
+            recommended_devices = Device.objects.filter(
+                Q(name__icontains=search_keyword) |
+                Q(description__icontains=search_keyword) |
+                Q(category__name__icontains=search_keyword)
+            )
+            recommendation_title = f'Because you searched "{search_keyword}"'
+        # ==========================
+        # 2. Review History
+        # ==========================
+        if not recommended_devices.exists():
+            latest_review = Review.objects.filter(
+                user=request.user
+            ).order_by("-created").first()
+            if latest_review:
+
+                recommended_devices = Device.objects.filter(
+                    category=latest_review.device.category
+                ).exclude(
+                    id=latest_review.device.id
+                )
+                recommendation_title = "Based on your reviews"
+
+        # ==========================
+        # 3. Wishlist
+        # ==========================
+
+        if not recommended_devices.exists():
+
+            latest_wishlist = Wishlist.objects.filter(
+                user=request.user
+            ).first()
+            if latest_wishlist:
+                recommended_devices = Device.objects.filter(
+                    category=latest_wishlist.device.category
+                ).exclude(
+                    id=latest_wishlist.device.id
+                )
+                recommendation_title = "Based on your wishlist"
+
+    # ==========================
+    # 4. Top Rated Devices
+    # ==========================
+
+    if not recommended_devices.exists():
+
+        recommended_devices = sorted(
+            Device.objects.all(),
+            key=lambda d: d.average_rating(),
+            reverse=True
+        )
+        recommendation_title = "Top Rated Devices"
+    # Remove duplicates
+    recommended_devices = list(recommended_devices)
+
+    if len(recommended_devices) < 4:
+
+        existing_ids = [d.id for d in recommended_devices]
+
+        extra_devices = sorted(
+            Device.objects.exclude(id__in=existing_ids),
+            key=lambda d: d.average_rating(),
+            reverse=True
+        )
+
+        recommended_devices.extend(extra_devices)
+
+    recommended_devices = recommended_devices[:4]
+    
+    return render(request, "products/home.html", {
+    "categories": categories,
+    "best_devices": best_devices,
+    "recommended_devices": recommended_devices,
+    "recommendation_title": recommendation_title,
+
+    "total_devices": total_devices,
+    "total_categories": total_categories,
+    "total_reviews": total_reviews,
+    "total_users": total_users,
+})
 
 #Login
 def user_login(request):
@@ -76,19 +173,38 @@ def register(request):
 
 #Device List
 def device_list(request):
-
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
-
     if query:
         devices = Device.objects.filter(
             Q(name__icontains=query) |
             Q(description__icontains=query)
         )
+        # ----------------------------
+        # Save Search History
+        # ----------------------------
+        if request.user.is_authenticated:
+            keyword = query.strip()
+            latest_search = SearchHistory.objects.filter(
+                user=request.user
+            ).order_by("-searched_at").first()
+            # Save only if the latest search is different
+            if not latest_search or latest_search.keyword.lower() != keyword.lower():
+                SearchHistory.objects.create(
+                    user=request.user,
+                    keyword=keyword
+                )
+                # Keep only the latest 10 searches
+                searches = SearchHistory.objects.filter(
+                    user=request.user
+                ).order_by("-searched_at")
+                if searches.count() > 10:
+                    searches[10:].delete()
     else:
         devices = Device.objects.all()
-
+    # ----------------------------
     # Sorting
+    # ----------------------------
     if sort == "az":
         devices = devices.order_by("name")
 
@@ -101,11 +217,15 @@ def device_list(request):
     elif sort == "high":
         devices = devices.order_by("-price")
 
-    return render(request, 'products/device_list.html', {
-        'devices': devices,
-        'query': query,
-        'sort': sort,
-    })
+    return render(
+        request,
+        'products/device_list.html',
+        {
+            'devices': devices,
+            'query': query,
+            'sort': sort,
+        }
+    )
 
 #Device Details
 def device_detail(request, id):

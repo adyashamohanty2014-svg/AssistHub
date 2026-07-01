@@ -11,80 +11,340 @@ Home | AssistHub
 
 {% block content %}
 
-<section class="home-hero">
-    <div class="hero-copy">
-        <span class="eyebrow">
-            Assistive Technology for All
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-left">
+
+        <span class="hero-badge">
+            🚀 Assistive Technology For Everyone
         </span>
+
         <h1>
-            Find the right assistive device for every need
+            Find the Perfect
+            <span>Assistive Device</span>
+            For Every Need
         </h1>
-        <p class="hero-text">
-            Discover, compare, and review accessible products designed
-            to support mobility, hearing, vision, communication,
-            and daily living.
+
+        <p>
+            Discover trusted assistive devices for hearing,
+            vision, mobility and communication. Compare,
+            review and choose the best products with confidence.
         </p>
-       <a href="{% url 'device_list' %}" class="browse-btn">
-    Browse Devices
-</a>
-    </div>
-    <img src="{% static 'images/Untitled design (1).png' %}" alt="AssistHub Icon" class="home-icon">
-</section>
 
-<section class="categories">
-    <h2>Browse By Category</h2>
-    <div class="category-grid">
-        {% for category in categories %} 
-        <a href="{% url 'category_devices' category.id %}" class="category-card">
-            {% if category.image %}
-<img
-    src="{{ category.image.url }}"
-    alt="{{ category.name }}"
-    class="category-image">
-{% endif %}
-<span>{{ category.name }}</span>
-</a>
-{% endfor %}
+        <div class="hero-buttons">
+
+            <a href="{% url 'device_list' %}" class="primary-btn">
+                Browse Devices →
+            </a>
+
+            <a href="#categories" class="secondary-btn">
+                Explore Categories
+            </a>
+
+        </div>
 
     </div>
-</section>
 
-<section class="best-purchases">
-    <h2>⭐ Best Purchases</h2>
-    <p>
-        Top-rated assistive devices recommended by our users.
-    </p>
+    <div class="hero-right">
+
+        <img src="{% static 'images/Untitled design (1).png' %}" alt="Assistive Technology">
+
+    </div>
+
+</section>
+<!-- ==========================
+        STATISTICS
+========================== -->
+
+<section class="stats-section">
+
+    <div class="stats-card">
+
+        <div class="stats-icon">📦</div>
+
+        <h3>{{ total_devices }}+</h3>
+
+        <p>Assistive Devices</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">📂</div>
+
+        <h3>{{ total_categories }}</h3>
+
+        <p>Device Categories</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">⭐</div>
+
+        <h3>{{ total_reviews }}+</h3>
+
+        <p>User Reviews</p>
+
+    </div>
+
+    <div class="stats-card">
+
+        <div class="stats-icon">👥</div>
+
+        <h3>{{ total_users }}+</h3>
+
+        <p>Registered Users</p>
+
+    </div>
+
+</section>
+<!-- RECOMMENDED FOR YOU -->
+
+{% if recommended_devices %}
+
+<section class="recommended-products">
+
+    <div class="section-title">
+
+        <h2>
+            ⭐ {{ recommendation_title }}
+        </h2>
+
+        <p>
+            {{ recommendation_subtitle }}
+        </p>
+
+    </div>
+
     <div class="best-device-grid">
-       {% for device in best_devices %}
-<div class="best-card">
 
-    <div class="image-wrapper">
-        {% if device.image %}
-            <img src="{{ device.image.url }}" alt="{{ device.name }}">
-        {% endif %}
+        {% for device in recommended_devices %}
+
+        <div class="best-card">
+
+            <div class="image-wrapper">
+
+                {% if device.image %}
+                    <img src="{{ device.image.url }}"
+                         alt="{{ device.name }}">
+                {% endif %}
+
+            </div>
+
+            <h3>{{ device.name }}</h3>
+
+            <span class="category">
+
+                {{ device.category }}
+
+            </span>
+
+            <p class="rating">
+
+                ⭐ {{ device.average_rating }}
+
+            </p>
+
+            <p class="price">
+
+                ₹{{ device.price }}
+
+            </p>
+
+            <a href="{% url 'device_detail' device.id %}"
+               class="view-btn">
+
+                View Details
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
     </div>
 
-    <h3>{{ device.name }}</h3>
-
-    <span class="category">
-        {{ device.category }}
-    </span>
-
-    <p class="rating">
-        ⭐ {{ device.average_rating }}
-    </p>
-
-    <p class="price">
-        ₹{{ device.price }}
-    </p>
-
-    <a href="{% url 'device_detail' device.id %}" class="view-btn">
-        View Details
-    </a>
-
-</div>
-{% endfor %}
-    </div>
 </section>
 
+{% endif %}
+<!-- BROWSE BY CATEGORY -->
+<section class="categories" id="categories">
+
+    <div class="section-title">
+
+        <h2>Browse Categories</h2>
+
+        <p>
+            Explore assistive devices by category.
+        </p>
+
+    </div>
+
+    <div class="category-grid">
+
+        {% for category in categories %}
+
+        <a href="{% url 'category_devices' category.id %}"
+           class="category-card">
+
+            <div class="category-image">
+
+                {% if category.image %}
+                <img src="{{ category.image.url }}"
+                     alt="{{ category.name }}">
+                {% endif %}
+
+            </div>
+
+            <h3>{{ category.name }}</h3>
+
+            <p>
+
+                {{ category.device_count }} Devices
+
+            </p>
+
+            <span>
+
+                Explore →
+
+            </span>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<!-- BEST PURCHASES -->
+<section class="best-purchases">
+
+    <div class="section-title">
+
+        <h2>🔥 Best Purchases</h2>
+
+        <p>
+            Our highest-rated assistive devices loved by users.
+        </p>
+
+    </div>
+
+    <div class="product-grid">
+
+        {% for device in best_devices %}
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                {% if device.image %}
+                    <img src="{{ device.image.url }}" alt="{{ device.name }}">
+                {% endif %}
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="product-badge">
+                    Best Seller
+                </span>
+
+                <h3>{{ device.name }}</h3>
+
+                <p class="product-rating">
+
+                    ⭐ {{ device.average_rating }}
+
+                </p>
+
+                <div class="product-price">
+
+                    ₹{{ device.price }}
+
+                </div>
+
+                <a href="{% url 'device_detail' device.id %}"
+                   class="product-btn">
+
+                    View Details
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+<section class="features-section">
+
+    <div class="section-title">
+
+        <h2>Why Choose AssistHub?</h2>
+
+        <p>
+            Everything you need to find the perfect assistive device.
+        </p>
+
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🔍</div>
+
+            <h3>Smart Search</h3>
+
+            <p>
+                Quickly search devices by name, description or category.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⚖️</div>
+
+            <h3>Compare Devices</h3>
+
+            <p>
+                Compare features and prices before making a decision.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⭐</div>
+
+            <h3>User Reviews</h3>
+
+            <p>
+                Read authentic reviews and ratings from other users.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🎯</div>
+
+            <h3>Personalized Recommendations</h3>
+
+            <p>
+                Get recommendations based on your searches and activity.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 {% endblock %}
