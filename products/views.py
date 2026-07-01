@@ -6,7 +6,6 @@ from .models import Device, Category, Review, Cart, Wishlist, SearchHistory
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg, Count
 from django.contrib import messages
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 #Home page
@@ -125,43 +124,6 @@ def home(request):
     "total_reviews": total_reviews,
     "total_users": total_users,
 })
-=======
-from .models import Device
-from django.contrib.auth.decorators import login_required
-from .models import Device, Wishlist
-#Home page
-def home(request):
-    categories = Category.objects.all()
-
-    # Only devices that have at least one review
-    reviewed_devices = [
-        device
-        for device in Device.objects.all()
-        if device.review_set.exists()
-    ]
-
-    # Sort by average rating
-    reviewed_devices.sort(
-        key=lambda x: x.average_rating(),
-        reverse=True
-    )
-
-    # Top 3 rated devices
-    best_devices = reviewed_devices[:3]
-
-    # Next 4 devices as recommendations
-    recommended_devices = reviewed_devices[3:7]
-
-    return render(
-        request,
-        "products/home.html",
-        {
-            "categories": categories,
-            "best_devices": best_devices,
-            "recommended_devices": recommended_devices,
-        },
-    )
->>>>>>> f59f4c7ce0c521e10bbe681ad0d6328c116b694c
 
 #Login
 def user_login(request):
