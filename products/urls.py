@@ -30,4 +30,9 @@ urlpatterns = [
     views.delete_review,
     name='delete_review'
 ),
+path(
+    "recommendations/",
+    views.all_recommendations,
+    name="all_recommendations"
+),
 ]

@@ -100,122 +100,6 @@ Home | AssistHub
     </div>
 
 </section>
-<!-- RECOMMENDED FOR YOU -->
-
-{% if recommended_devices %}
-
-<section class="recommended-products">
-
-    <div class="section-title">
-
-        <h2>
-            ⭐ {{ recommendation_title }}
-        </h2>
-
-        <p>
-            {{ recommendation_subtitle }}
-        </p>
-
-    </div>
-
-    <div class="best-device-grid">
-
-        {% for device in recommended_devices %}
-
-        <div class="best-card">
-
-            <div class="image-wrapper">
-
-                {% if device.image %}
-                    <img src="{{ device.image.url }}"
-                         alt="{{ device.name }}">
-                {% endif %}
-
-            </div>
-
-            <h3>{{ device.name }}</h3>
-
-            <span class="category">
-
-                {{ device.category }}
-
-            </span>
-
-            <p class="rating">
-
-                ⭐ {{ device.average_rating }}
-
-            </p>
-
-            <p class="price">
-
-                ₹{{ device.price }}
-
-            </p>
-
-            <a href="{% url 'device_detail' device.id %}"
-               class="view-btn">
-
-                View Details
-
-            </a>
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-<section class="recommended-section">
-
-    <h2>✨ Recommended For You</h2>
-
-    <p>
-        Devices you might be interested in exploring.
-    </p>
-
-    <div class="best-device-grid">
-
-        {% for device in recommended_devices %}
-
-        <div class="best-card">
-
-            <div class="image-wrapper">
-                {% if device.image %}
-                    <img src="{{ device.image.url }}"
-                         alt="{{ device.name }}">
-                {% endif %}
-            </div>
-
-            <h3>{{ device.name }}</h3>
-
-            <span class="category">
-                {{ device.category }}
-            </span>
-
-            <p class="rating">
-                ⭐ {{ device.average_rating }}
-            </p>
-
-            <p class="price">
-                ₹{{ device.price }}
-            </p>
-
-            <a href="{% url 'device_detail' device.id %}"
-               class="view-btn">
-                View Details
-            </a>
-
-        </div>
-
-        {% endfor %}
-
-    </div>
-
-</section>
-
-{% endif %}
 <!-- BROWSE BY CATEGORY -->
 <section class="categories" id="categories">
 
@@ -266,6 +150,76 @@ Home | AssistHub
     </div>
 
 </section>
+<!-- RECOMMENDED FOR YOU -->
+
+{% if recommended_devices %}
+
+
+<section class="recommended-section">
+<div class="section-title">
+
+    <div class="recommended-header">
+
+        <h2>✨ Recommended For You</h2>
+
+        <a href="{% url 'all_recommendations' %}"
+           class="view-all-link">
+
+            View All →
+
+        </a>
+
+    </div>
+
+
+</div>
+
+    <p>
+        Devices you might be interested in exploring.
+    </p>
+
+    <div class="best-device-grid">
+
+        {% for device in recommended_devices %}
+
+        <div class="best-card">
+
+            <div class="image-wrapper">
+                {% if device.image %}
+                    <img src="{{ device.image.url }}"
+                         alt="{{ device.name }}">
+                {% endif %}
+            </div>
+
+            <h3>{{ device.name }}</h3>
+
+            <span class="category">
+                {{ device.category }}
+            </span>
+
+            <p class="rating">
+                ⭐ {{ device.average_rating }}
+            </p>
+
+            <p class="price">
+                ₹{{ device.price }}
+            </p>
+
+            <a href="{% url 'device_detail' device.id %}"
+               class="view-btn">
+                View Details
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
 <!-- BEST PURCHASES -->
 <section class="best-purchases">
 

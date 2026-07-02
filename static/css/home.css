@@ -268,13 +268,13 @@
 
 .stats-card{
 
-    background:#fff;
+    background:#f8f7f7;
 
     padding:28px;
 
     border-radius:18px;
 
-    border:1px solid #EEF2F8;
+    border:2px solid #020d1e;
 
     transition:.35s;
 
@@ -570,9 +570,9 @@ grid-template-columns:1fr;
 
 .category-card{
 
-    background:#ffffff;
+    background:#fafafc;
 
-    border:1px solid #E8EDF5;
+    border:4px solid #072556;
 
     border-radius:18px;
 
@@ -606,9 +606,9 @@ grid-template-columns:1fr;
 
 .category-image{
 
-    width:90px;
+    width:120px;
 
-    height:90px;
+    height:120px;
 
     margin:0 auto 22px;
 
@@ -636,9 +636,9 @@ grid-template-columns:1fr;
 
 .category-image img{
 
-    width:60px;
+    width:85px;
 
-    height:60px;
+    height:85px;
 
     object-fit:contain;
 
@@ -726,6 +726,9 @@ grid-template-columns:1fr;
 /* ==========================
       BEST PURCHASES
 ========================== */
+.best-purchases {
+    margin-top: 80px;
+}
 .best-device-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -903,4 +906,30 @@ margin:0 auto 20px;
 
 }
 
+}
+.recommended-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.view-all-link {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.view-all-link:hover {
+    color: #1d4ed8;
+    transform: translateX(3px);
+}
+.categories,
+.best-purchases,
+.recommended-section,
+.features-section {
+    width: min(1200px, 92%);
+    margin-left: auto;
+    margin-right: auto;
 }

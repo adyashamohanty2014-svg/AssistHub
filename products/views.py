@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Avg, Count
 from django.contrib import messages
 from django.contrib.auth.models import User
-
+import random
 #Home page
 def home(request):
     categories = Category.objects.annotate(
@@ -20,18 +20,19 @@ def home(request):
     # ----------------------------
     # Best Purchases
     # ----------------------------
-
-    devices = list(Device.objects.all())
+    devices = [
+    d for d in Device.objects.all()
+    if d.review_set.exists()
+]
     devices.sort(
-        key=lambda x: x.average_rating(),
-        reverse=True
-    )
+    key=lambda x: x.average_rating(),
+    reverse=True
+)
     best_devices = devices[:3]
 
     # ----------------------------
     # Recommendation System
     # ----------------------------
-    recommendation_title = "Recommended For You"
     recommended_devices = Device.objects.none()
     search_keyword = None
     if request.user.is_authenticated:
@@ -50,7 +51,7 @@ def home(request):
                 Q(description__icontains=search_keyword) |
                 Q(category__name__icontains=search_keyword)
             )
-            recommendation_title = f'Because you searched "{search_keyword}"'
+
         # ==========================
         # 2. Review History
         # ==========================
@@ -65,7 +66,6 @@ def home(request):
                 ).exclude(
                     id=latest_review.device.id
                 )
-                recommendation_title = "Based on your reviews"
 
         # ==========================
         # 3. Wishlist
@@ -82,7 +82,6 @@ def home(request):
                 ).exclude(
                     id=latest_wishlist.device.id
                 )
-                recommendation_title = "Based on your wishlist"
 
     # ==========================
     # 4. Top Rated Devices
@@ -99,7 +98,7 @@ def home(request):
     # Remove duplicates
     recommended_devices = list(recommended_devices)
 
-    if len(recommended_devices) < 4:
+    if len(recommended_devices) < 3:
 
         existing_ids = [d.id for d in recommended_devices]
 
@@ -111,13 +110,13 @@ def home(request):
 
         recommended_devices.extend(extra_devices)
 
-    recommended_devices = recommended_devices[:4]
+    recommended_devices = recommended_devices[:3]
     
     return render(request, "products/home.html", {
     "categories": categories,
     "best_devices": best_devices,
     "recommended_devices": recommended_devices,
-    "recommendation_title": recommendation_title,
+
 
     "total_devices": total_devices,
     "total_categories": total_categories,
@@ -456,7 +455,19 @@ def my_cart(request):
             'cart_items': cart_items
         }
     )
+def all_recommendations(request):
 
+    devices = list(Device.objects.all())
+
+    random.shuffle(devices)
+
+    return render(
+        request,
+        "products/recommendations.html",
+        {
+            "devices": devices
+        }
+    )
 #Compare devices
 def compare_view(request):
     devices = Device.objects.all()
