@@ -144,6 +144,12 @@
     color:white;
 
 }
+.product-btn:hover,
+.view-btn:hover{
+
+    background:var(--primary-hover);
+
+}
 
 /* ===================================================
                     HERO IMAGE
@@ -281,21 +287,25 @@
 
     border:1px solid var(--border);
 
-    border-radius:20px;
+    border-radius:18px;
 
-    padding:30px;
+    padding:26px;
 
-    transition:.35s;
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 
     box-shadow:var(--shadow);
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+    transition:.3s;
 
 }
 
 .stats-card:hover{
+
+    transform:translateY(-2px);
 
     border-color:var(--primary);
 
@@ -303,20 +313,23 @@
 
 .stats-icon{
 
-    width:58px;
-    height:58px;
+    width:56px;
+
+    height:56px;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     background:var(--surface-alt);
 
     color:var(--primary);
 
-    border-radius:16px;
+    border-radius:14px;
 
-    font-size:28px;
+    font-size:26px;
 
     margin-bottom:18px;
 
@@ -324,19 +337,19 @@
 
 .stats-card h3{
 
-    font-size:36px;
+    font-size:34px;
 
     color:var(--primary);
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 
 }
 
 .stats-card p{
 
-    color:var(--secondary-text);
-
     font-size:16px;
+
+    color:var(--secondary-text);
 
 }
 
@@ -408,7 +421,6 @@
 /* ===================================================
                 PRODUCT CARD
 =================================================== */
-
 .product-card,
 .best-card{
 
@@ -416,28 +428,28 @@
 
     border:1px solid var(--border);
 
-    border-radius:20px;
+    border-radius:16px;
 
     overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-    transition:.35s;
 
     display:flex;
 
     flex-direction:column;
 
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
 }
+
 .product-card:hover,
 .best-card:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-2px);
 
     border-color:var(--primary);
 
 }
-
 /* ===================================================
                 PRODUCT IMAGE
 =================================================== */
@@ -445,9 +457,7 @@
 .product-image,
 .image-wrapper{
 
-    height:230px;
-
-    background:var(--surface-alt);
+    height:210px;
 
     display:flex;
 
@@ -456,6 +466,8 @@
     align-items:center;
 
     padding:20px;
+
+    background:var(--surface-alt);
 
     border-bottom:1px solid var(--border);
 
@@ -470,7 +482,7 @@
 
     object-fit:contain;
 
-    transition:.35s;
+    transition:.3s;
 
 }
 
@@ -480,7 +492,6 @@
     transform:scale(1.02);
 
 }
-
 /* ===================================================
                 CONTENT
 =================================================== */
@@ -508,19 +519,18 @@
 /* ===================================================
                 PRODUCT NAME
 =================================================== */
-
 .product-content h3,
 .best-card h3{
 
-    font-size:22px;
+    font-size:20px;
 
     color:var(--heading-color);
 
-    margin:22px 20px 12px;
+    margin:20px 18px 10px;
 
-    line-height:1.35;
+    line-height:1.4;
 
-    min-height:58px;
+    min-height:56px;
 
 }
 
@@ -645,9 +655,9 @@
 
     border:1px solid var(--border);
 
-    border-radius:20px;
+    border-radius:18px;
 
-    padding:28px;
+    padding:24px;
 
     text-decoration:none;
 
@@ -661,7 +671,7 @@
 
     text-align:center;
 
-    transition:.35s;
+    transition:.3s;
 
     box-shadow:var(--shadow);
 
@@ -669,7 +679,7 @@
 
 .category-card:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-2px);
 
     border-color:var(--primary);
 
@@ -681,9 +691,9 @@
 
 .category-image{
 
-    width:100px;
+    width:90px;
 
-    height:100px;
+    height:90px;
 
     display:flex;
 
@@ -695,9 +705,17 @@
 
     border-radius:50%;
 
-    margin-bottom:22px;
+    margin-bottom:20px;
 
-    transition:.35s;
+}
+
+.category-image img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
 
 }
 
@@ -705,20 +723,7 @@
 
     background:rgba(45,108,223,.12);
 
-    transform:scale(1.03);
-
 }
-
-.category-image img{
-
-    width:70px;
-
-    height:70px;
-
-    object-fit:contain;
-
-}
-
 /* ===================================================
                     TEXT
 =================================================== */
@@ -802,21 +807,21 @@
 
     border:1px solid var(--border);
 
-    border-radius:22px;
+    border-radius:18px;
 
-    padding:35px 30px;
+    padding:30px 26px;
 
     text-align:left;
 
     box-shadow:var(--shadow);
 
-    transition:.35s;
+    transition:.3s;
 
 }
 
 .feature-card:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-2px);
 
     border-color:var(--primary);
 
@@ -828,9 +833,9 @@
 
 .feature-icon{
 
-    width:70px;
+    width:60px;
 
-    height:70px;
+    height:60px;
 
     display:flex;
 
@@ -842,13 +847,11 @@
 
     color:var(--primary);
 
-    border-radius:18px;
+    border-radius:16px;
 
-    font-size:32px;
+    font-size:28px;
 
-    margin-bottom:24px;
-
-    transition:.35s;
+    margin-bottom:20px;
 
 }
 
@@ -857,8 +860,6 @@
     background:var(--primary);
 
     color:white;
-
-    transform:scale(1.05);
 
 }
 
