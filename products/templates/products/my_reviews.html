@@ -20,47 +20,61 @@ My Reviews
 
     {% if reviews %}
 
-        <div class="reviews-list">
+    <div class="reviews-list">
 
-            {% for review in reviews %}
+        {% for review in reviews %}
 
-            <div class="review-card">
+        <div class="review-card">
 
-                <div class="review-top">
+            <div class="review-top">
 
-                    <div>
-                        <h2>{{ review.device.name }}</h2>
-                        <span class="review-date">
-                            {{ review.created|date:"d M Y" }}
-                        </span>
-                    </div>
+                <div class="review-info">
 
-                    <div class="rating-badge">
-                        ⭐ {{ review.rating }}/5
-                    </div>
+                    <h2>{{ review.device.name }}</h2>
+
+                    <span class="review-date">
+                        {{ review.created|date:"d M Y" }}
+                    </span>
 
                 </div>
 
-                <div class="review-text">
-                    {{ review.comment }}
+                <div class="rating-badge">
+                    ⭐ {{ review.rating }}/5
                 </div>
 
             </div>
 
-            {% endfor %}
+            <div class="review-text">
+                "{{ review.comment }}"
+            </div>
+
+            <div class="review-footer">
+
+                <a href="{% url 'device_detail' review.device.id %}" class="device-link">
+                    View Device →
+                </a>
+
+            </div>
 
         </div>
+
+        {% endfor %}
+
+    </div>
 
     {% else %}
 
-        <div class="empty-state">
-            <h2>No Reviews Yet</h2>
-            <p>You haven't written any reviews yet.</p>
+    <div class="empty-state">
 
-            <a href="{% url 'device_list' %}" class="browse-btn">
-                Browse Devices
-            </a>
-        </div>
+        <h2>No Reviews Yet</h2>
+
+        <p>You haven't reviewed any devices yet.</p>
+
+        <a href="{% url 'device_list' %}" class="browse-btn">
+            Browse Devices
+        </a>
+
+    </div>
 
     {% endif %}
 

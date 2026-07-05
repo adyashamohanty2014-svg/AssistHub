@@ -11,58 +11,90 @@ My Cart
 
 {% block content %}
 
-<div class="cart-container">
+<div class="cart-page">
 
-    <h1>🛒 My Cart</h1>
+    <div class="cart-header">
 
-    {% for item in cart_items %}
+        <h1>
+            <i class="fa-solid fa-cart-shopping"></i>
+            My Cart
+        </h1>
 
-    <div class="cart-item">
+        <p>
+            Devices you've saved for quick access.
+        </p>
 
-        <div class="cart-image">
+    </div>
 
-            {% if item.device.image %}
-            <img src="{{ item.device.image.url }}"
-                 alt="{{ item.device.name }}">
-            {% endif %}
+    {% if cart_items %}
 
-        </div>
+        <div class="cart-list">
 
-        <div class="cart-details">
+            {% for item in cart_items %}
 
-            <h2>{{ item.device.name }}</h2>
+            <div class="cart-item">
 
-            <p class="category">
-                {{ item.device.category }}
-            </p>
+                <div class="cart-image">
 
-            <h3>₹{{ item.device.price }}</h3>
+                    {% if item.device.image %}
+                        <img src="{{ item.device.image.url }}"
+                             alt="{{ item.device.name }}">
+                    {% endif %}
 
-            <div class="cart-buttons">
+                </div>
 
-                <a href="{% url 'device_detail' item.device.id %}"
-                   class="details-btn">
-                    View Details
-                </a>
+                <div class="cart-details">
 
-                <a href="{% url 'toggle_cart' item.device.id %}"
-                   class="remove-btn">
-                    Remove
-                </a>
+                    <span class="category">
+                        {{ item.device.category }}
+                    </span>
+
+                    <h2>{{ item.device.name }}</h2>
+
+                    <h3>₹{{ item.device.price }}</h3>
+
+                    <div class="cart-buttons">
+
+                        <a href="{% url 'device_detail' item.device.id %}"
+                           class="details-btn">
+                            View Details
+                        </a>
+
+                        <a href="{% url 'toggle_cart' item.device.id %}"
+                           class="remove-btn">
+                            Remove
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
+            {% endfor %}
+
         </div>
 
-    </div>
+    {% else %}
 
-    {% empty %}
+        <div class="empty-cart">
 
-    <div class="empty-cart">
-        <h2>Your cart is empty 🛒</h2>
-    </div>
+            <h2>Your Cart is Empty</h2>
 
-    {% endfor %}
+            <p>
+                Browse devices and add them to your cart.
+            </p>
+
+            <a href="{% url 'device_list' %}"
+               class="browse-btn">
+
+                Browse Devices
+
+            </a>
+
+        </div>
+
+    {% endif %}
 
 </div>
 

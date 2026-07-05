@@ -6,48 +6,54 @@
 {% endblock %}
 
 {% block title %}
-Log-in
+Log In
 {% endblock %}
 
 {% block content %}
 
 <div class="login-wrapper">
 
-<div class="login-card">
+    <div class="login-card">
 
-<div class="logo-header">
+        <div class="logo-header">
 
-<img
-src="{% static 'images/assisthublogo.png' %}"
-alt="AssistHub Logo"
-class="logo">
+            <img src="{% static 'images/assisthublogo.png' %}"
+                 alt="AssistHub Logo"
+                 class="logo">
 
-<h1>AssistHub</h1>
+            <div>
 
-</div>
+                <h1>AssistHub</h1>
 
-<p class="subtitle">
-Please use the following form to log in
-</p>
+                <p class="subtitle">
+                    Sign in to continue
+                </p>
 
-<form method="post">
+            </div>
 
-{% csrf_token %}
+        </div>
 
-{{ form.as_p }}
+        <form method="post">
 
-<input type="submit" value="Log in">
+            {% csrf_token %}
 
-</form>
+            {{ form.as_p }}
 
-<p class="register-text">
-    Don't have an account?
-    <a href="{% url 'register' %}">
-        Register here
-    </a>
-</p>
+            <input type="submit" value="Log In">
 
-</div>
+        </form>
+
+        <p class="register-text">
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Create one
+            </a>
+
+        </p>
+
+    </div>
 
 </div>
 

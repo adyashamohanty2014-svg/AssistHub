@@ -6,11 +6,13 @@ Compare Devices
 {% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/compare.css' %}">
 <link rel="stylesheet"
-      href="{% static 'css/compare.css' %}">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 {% endblock %}
 
 {% block content %}
+
 {% if messages %}
     {% for message in messages %}
         <div class="error-message">
@@ -21,125 +23,229 @@ Compare Devices
 
 <section class="compare-page">
 
-    <h1>Compare Devices</h1>
+    <div class="compare-header">
+
+        <span class="compare-tag">
+            Device Comparison
+        </span>
+
+        <h1>Compare Assistive Devices</h1>
+
+        <p>
+            Compare features, pricing and specifications side by side to
+            choose the device that best suits your needs.
+        </p>
+
+    </div>
 
     <form method="GET" class="compare-form">
 
-        <select name="device1">
+        <div class="device-select">
+            <label>First Device</label>
 
-            <option value="">
-                Select First Device
-            </option>
+            <select name="device1">
 
-            {% for device in devices %}
-                <option value="{{ device.id }}"
-                    {% if device1.id == device.id %}
-                        selected
-                    {% endif %}
-                >
-                    {{ device.name }}
-                </option>
-            {% endfor %}
+                <option value="">Choose a device</option>
 
-        </select>
+                {% for device in devices %}
+                    <option value="{{ device.id }}"
+                    {% if device1.id == device.id %}selected{% endif %}>
+                        {{ device.name }}
+                    </option>
+                {% endfor %}
 
+            </select>
 
-        <select name="device2">
+        </div>
 
-            <option value="">
-                Select Second Device
-            </option>
+        <div class="vs-text">
+            VS
+        </div>
 
-            {% for device in devices %}
-                <option value="{{ device.id }}"
-                    {% if device2.id == device.id %}
-                        selected
-                    {% endif %}
-                >
-                    {{ device.name }}
-                </option>
-            {% endfor %}
+        <div class="device-select">
 
-        </select>
+            <label>Second Device</label>
 
-        <button type="submit">
+            <select name="device2">
+
+                <option value="">Choose a device</option>
+
+                {% for device in devices %}
+                    <option value="{{ device.id }}"
+                    {% if device2.id == device.id %}selected{% endif %}>
+                        {{ device.name }}
+                    </option>
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <button class="compare-btn">
             Compare
         </button>
 
     </form>
 
+    {% if device1 and device2 %}
 
-    <div class="comparison-container">
+    <div class="comparison-table">
 
-        <!-- LEFT SIDE -->
+        <table>
 
-        <div class="compare-card">
+            <tr>
 
-            {% if device1 %}
+                <th>Feature</th>
 
-                {% if device1.image %}
-                    <img src="{{ device1.image.url }}">
-                {% endif %}
+                <th>{{ device1.name }}</th>
 
-                <h2>{{ device1.name }}</h2>
+                <th>{{ device2.name }}</th>
 
-                <p class="price">
-                    ₹{{ device1.price }}
-                </p>
+            </tr>
 
-                <p>
-                    {{ device1.description }}
-                </p>
+            <tr>
 
-                <a href="{{ device1.seller_link }}"
-                   target="_blank">
-                    Buy Now
-                </a>
+                <td>Image</td>
 
-            {% else %}
+                <td>
 
-                <h3>Select a device</h3>
+                    {% if device1.image %}
+                        <img src="{{ device1.image.url }}" class="table-image">
+                    {% endif %}
 
-            {% endif %}
+                </td>
 
-        </div>
+                <td>
 
+                    {% if device2.image %}
+                        <img src="{{ device2.image.url }}" class="table-image">
+                    {% endif %}
 
-        <!-- RIGHT SIDE -->
+                </td>
 
-        <div class="compare-card">
+            </tr>
 
-            {% if device2 %}
+            <tr>
 
-                {% if device2.image %}
-                    <img src="{{ device2.image.url }}">
-                {% endif %}
+                <td>Brand</td>
 
-                <h2>{{ device2.name }}</h2>
+                <td>{{ device1.brand }}</td>
 
-                <p class="price">
-                    ₹{{ device2.price }}
-                </p>
+                <td>{{ device2.brand }}</td>
 
-                <p>
-                    {{ device2.description }}
-                </p>
+            </tr>
 
-                <a href="{{ device2.seller_link }}"
-                   target="_blank">
-                    Buy Now
-                </a>
+            <tr>
 
-            {% else %}
+                <td>Category</td>
 
-                <h3>Select a device</h3>
+                <td>{{ device1.category.name }}</td>
 
-            {% endif %}
+                <td>{{ device2.category.name }}</td>
 
-        </div>
+            </tr>
+
+            <tr>
+
+                <td>Rating</td>
+
+                <td>⭐ {{ device1.average_rating }}</td>
+
+                <td>⭐ {{ device2.average_rating }}</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Price</td>
+
+                <td>₹{{ device1.price }}</td>
+
+                <td>₹{{ device2.price }}</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Availability</td>
+
+                <td>{{ device1.availability }}</td>
+
+                <td>{{ device2.availability }}</td>
+
+            </tr>
+
+            <tr>
+
+    <td>Quick Overview</td>
+
+    <td class="overview">
+
+        {{ device1.description|truncatechars:140 }}
+
+        <br><br>
+
+        <a href="{% url 'device_detail' device1.id %}"
+           class="details-btn">
+
+            View Details →
+
+        </a>
+
+    </td>
+
+    <td class="overview">
+
+        {{ device2.description|truncatechars:140 }}
+
+        <br><br>
+
+        <a href="{% url 'device_detail' device2.id %}"
+           class="details-btn">
+
+            View Details →
+
+        </a>
+
+    </td>
+
+</tr>
+
+            <tr>
+
+                <td>Purchase</td>
+
+                <td>
+
+                    <a href="{{ device1.buy_link }}"
+                       target="_blank"
+                       class="buy-btn">
+
+                        Buy Now
+
+                    </a>
+
+                </td>
+
+                <td>
+
+                    <a href="{{ device2.buy_link }}"
+                       target="_blank"
+                       class="buy-btn">
+
+                        Buy Now
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+        </table>
 
     </div>
 
-</section>
+    {% endif %}
 
+</section>
 {% endblock %}

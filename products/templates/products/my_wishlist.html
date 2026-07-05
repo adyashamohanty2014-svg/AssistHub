@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}My Wishlist{% endblock %}
+{% block title %}
+My Wishlist
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/my_wishlist.css' %}">
@@ -11,9 +13,22 @@
 
 <div class="wishlist-page">
 
-    <h1>❤️ My Wishlist</h1>
+    <div class="wishlist-header">
 
-    <div class="wishlist-container">
+        <h1>
+    <i class="fa-solid fa-heart"></i>
+    My Wishlist
+</h1>
+
+        <p>
+            Save your favourite assistive devices and access them anytime.
+        </p>
+
+    </div>
+
+    {% if wishlist_items %}
+
+    <div class="wishlist-grid">
 
         {% for item in wishlist_items %}
 
@@ -24,9 +39,19 @@
                      alt="{{ item.device.name }}">
             {% endif %}
 
-            <h3>{{ item.device.name }}</h3>
+            <div class="wishlist-info">
 
-            <p>{{ item.device.category }}</p>
+                <span class="device-category">
+                    {{ item.device.category }}
+                </span>
+
+                <h3>{{ item.device.name }}</h3>
+
+                <p class="device-price">
+                    ₹{{ item.device.price }}
+                </p>
+
+            </div>
 
             <a href="{% url 'device_detail' item.device.id %}"
                class="view-btn">
@@ -35,13 +60,27 @@
 
         </div>
 
-        {% empty %}
-
-        <p>Your wishlist is empty.</p>
-
         {% endfor %}
 
     </div>
+
+    {% else %}
+
+    <div class="empty-state">
+
+        <h2>Your Wishlist is Empty</h2>
+
+        <p>
+            Start exploring devices and save your favourites here.
+        </p>
+
+        <a href="{% url 'device_list' %}" class="browse-btn">
+            Browse Devices
+        </a>
+
+    </div>
+
+    {% endif %}
 
 </div>
 

@@ -13,28 +13,46 @@ class Category(models.Model):
         return self.name
 
 
+from django.db import models
+
 class Device(models.Model):
     name = models.CharField(max_length=200)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.CharField(
+        max_length=100,
+        blank=True
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE
+    )
     description = models.TextField()
-    price = models.DecimalField(max_digits=10,decimal_places=2)
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
     image = models.ImageField(
-        upload_to='devices/',
+        upload_to="devices/",
         blank=True,
         null=True
     )
     buy_link = models.URLField(blank=True)
+    availability = models.CharField(
+        max_length=30,
+        default="In Stock"
+    )
 
     def __str__(self):
         return self.name
-    
+
     def average_rating(self):
         reviews = self.review_set.all()
         if reviews.exists():
             return round(
-                sum(r.rating for r in reviews) / reviews.count(),1)
+                sum(review.rating for review in reviews) / reviews.count(),
+                1
+            )
         return 0
-
+    
 #Review Section
 class Review(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)

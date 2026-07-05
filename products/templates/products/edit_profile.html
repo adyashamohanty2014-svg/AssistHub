@@ -10,10 +10,13 @@ Edit Profile
 {% endblock %}
 
 {% block content %}
-<div class="profile-container">
+<div class="profile-container edit-profile-page">
     <div class="profile-card">
         <h1>Edit Profile</h1>
-        <form method="post">
+        <p class="profile-subtitle">
+            Update your account information below.
+        </p>
+        <form method="post" class="edit-profile-form">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">

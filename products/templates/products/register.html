@@ -1,21 +1,60 @@
 {% extends "base.html" %}
-{% block title %}Create Account{% endblock %}
+{% load static %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="register-container">
-    <h1>Create Account</h1>
-    <p class="subtitle">
-        Join AssistHub and discover assistive devices that meet your needs.
-    </p>
-    <form method="post" class="register-form">
-        {% csrf_token %}       
-        {{ user_form.as_p }}
-        <button type="submit">
-            Create Account
-        </button>
-    </form>
-    <p class="login-link">
-        Already have an account?
-        <a href="{% url 'login' %}">Login</a>
-    </p>
-</section>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <div class="logo-header">
+
+            <img src="{% static 'images/assisthublogo.png' %}"
+                 class="logo"
+                 alt="AssistHub Logo">
+
+            <div>
+
+                <h1>Create Account</h1>
+
+                <p class="subtitle">
+                    Join AssistHub and discover assistive devices.
+                </p>
+
+            </div>
+
+        </div>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ user_form.as_p }}
+
+            <input type="submit" value="Create Account">
+
+        </form>
+
+        <p class="register-text">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Log In
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
 {% endblock %}
