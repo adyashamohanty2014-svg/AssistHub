@@ -338,3 +338,35 @@ input[type="submit"]:hover{
     line-height:1.8;
 
 }
+/* ==========================
+        LOGIN ERROR
+========================== */
+
+.login-error{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    border:1px solid #fecaca;
+
+    padding:14px 16px;
+
+    margin-bottom:22px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+.dark-mode .login-error{
+
+    background:#3b1111;
+
+    color:#fecaca;
+
+    border-color:#7f1d1d;
+
+}

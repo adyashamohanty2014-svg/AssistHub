@@ -2,105 +2,264 @@
 {% load static %}
 
 {% block title %}
-About AssistHub
+About Us
 {% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/about.css' %}">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 {% endblock %}
 
 {% block content %}
 
+<!-- =========================
+        HERO SECTION
+========================= -->
+
 <section class="about-hero">
 
     <div class="hero-content">
-        <span class="tagline">
-            Empowering Accessibility Through Technology
-        </span>
 
-        <h1>Building a More Inclusive Digital Future</h1>
+        <div class="hero-text">
 
-        <p>
-            AssistHub helps individuals discover, compare, and explore
-            assistive technologies that improve independence,
-            communication, mobility, and daily life.
-        </p>
+            <span class="hero-tag">
+                🚀 Empowering Accessibility Through Technology
+            </span>
+
+            <h1>
+                Building a More Inclusive
+                <br>
+                Digital Future
+            </h1>
+
+            <p>
+                AssistHub helps individuals discover, compare and explore
+                assistive technologies that improve independence,
+                communication, mobility and daily life.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'device_list' %}" class="primary-btn">
+                    Explore Devices
+                </a>
+
+                <a href="#mission" class="secondary-btn">
+                    Learn More
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <div class="image-box">
+                <img src="{% static 'images/about-hero.png' %}" alt="Accessibility Illustration">
+            </div>
+        </div>
     </div>
 
 </section>
 
 
-<section class="about-grid">
+<!-- =========================
+      MISSION SECTION
+========================= -->
 
-    <div class="about-card">
-        <i class="fa-solid fa-bullseye"></i>
-        <h2>Our Mission</h2>
+<section id="mission" class="mission-section">
 
-        <p>
-            To make assistive technology easy to discover and accessible
-            for everyone by providing a centralized platform for
-            exploration, comparison, and informed decision-making.
-        </p>
-    </div>
+    <div class="mission-grid">
 
+        <div class="mission-card">
 
-    <div class="about-card">
-        <i class="fa-solid fa-eye"></i>
-        <h2>Our Vision</h2>
+            <div class="card-icon">
+                <i class="fa-solid fa-bullseye"></i>
+            </div>
 
-        <p>
-            We envision a world where technology removes barriers and
-            enables people with diverse abilities to live independently
-            and confidently.
-        </p>
-    </div>
+            <h2>Our Mission</h2>
+
+            <p>
+                To empower individuals with disabilities by providing
+                accurate information about assistive technologies that
+                improve everyday life.
+            </p>
+
+        </div>
 
 
-    <div class="about-card">
-        <i class="fa-solid fa-heart"></i>
-        <h2>Our Values</h2>
+        <div class="mission-card">
 
-        <ul>
-            <li>Accessibility First</li>
-            <li>Inclusive Innovation</li>
-            <li>User-Centered Design</li>
-            <li>Community Empowerment</li>
-        </ul>
+            <div class="card-icon">
+                <i class="fa-solid fa-eye"></i>
+            </div>
+
+            <h2>Our Vision</h2>
+
+            <p>
+                A world where everyone can confidently access technology
+                that removes barriers and creates equal opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="card-icon">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+
+            <h2>Our Values</h2>
+
+            <ul>
+
+                <li>Inclusivity</li>
+
+                <li>Innovation</li>
+
+                <li>Integrity</li>
+
+                <li>Empathy</li>
+
+            </ul>
+
+        </div>
+
     </div>
 
 </section>
 
+
+<!-- =========================
+    WHY CHOOSE US
+========================= -->
 
 <section class="why-section">
 
-    <h2>Why Choose AssistHub?</h2>
+    <div class="section-heading">
 
-    <div class="features">
+        <h2>Why Choose AssistHub?</h2>
 
-        <div class="feature-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <h3>Smart Discovery</h3>
-            <p>Find assistive devices quickly using search and filters.</p>
+        <p>
+            Everything you need to discover, compare and choose
+            assistive technology with confidence.
+        </p>
+
+    </div>
+
+    <div class="features-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>Trusted Information</h3>
+
+            <p>
+                Get reliable and accurate information about a wide
+                range of assistive devices.
+            </p>
+
         </div>
 
-        <div class="feature-box">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <h3>Price Comparison</h3>
-            <p>Compare prices across multiple sellers effortlessly.</p>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+
+            <h3>Compare Easily</h3>
+
+            <p>
+                Compare specifications, prices and reviews
+                to make informed decisions.
+            </p>
+
         </div>
 
-        <div class="feature-box">
-            <i class="fa-solid fa-star"></i>
-            <h3>Community Reviews</h3>
-            <p>Learn from real user experiences before purchasing.</p>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <h3>Wide Selection</h3>
+
+            <p>
+                Browse hearing aids, wheelchairs, mobility products,
+                communication devices and more.
+            </p>
+
         </div>
 
-        <div class="feature-box">
-            <i class="fa-solid fa-bookmark"></i>
-            <h3>Wishlist Support</h3>
-            <p>Save devices and create a personalized collection.</p>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+
+            <h3>Support & Guidance</h3>
+
+            <p>
+                Helping users choose assistive devices that best
+                match their individual needs.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+      OUR IMPACT
+========================= -->
+
+<section class="impact-section">
+
+    <div class="impact-box">
+
+        <h2>Making Accessibility Easier</h2>
+
+        <p>
+            At AssistHub, we believe technology should be accessible
+            to everyone. Our platform connects users with trusted
+            assistive devices, making it easier to compare products,
+            read reviews and make informed decisions.
+        </p>
+
+        <div class="impact-stats">
+
+            <div class="stat">
+
+                <h3>100+</h3>
+
+                <p>Devices Listed</p>
+
+            </div>
+
+            <div class="stat">
+
+                <h3>10+</h3>
+
+                <p>Categories</p>
+
+            </div>
+
+            <div class="stat">
+
+                <h3>1000+</h3>
+
+                <p>Happy Users</p>
+
+            </div>
+
         </div>
 
     </div>

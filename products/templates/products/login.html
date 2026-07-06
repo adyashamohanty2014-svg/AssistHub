@@ -32,10 +32,15 @@ Log In
             </div>
 
         </div>
-
+        
         <form method="post">
 
             {% csrf_token %}
+            {% if error_message %}
+            <div class="login-error">
+                {{ error_message }}
+            </div>
+            {% endif %}
 
             {{ form.as_p }}
 

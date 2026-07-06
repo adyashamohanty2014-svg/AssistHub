@@ -2,187 +2,225 @@
                 ABOUT PAGE
 ========================================== */
 
-/* RESET */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-/* ==========================================
-                PAGE
-========================================== */
-
-body{
-    background:var(--bg-color);
-    color:var(--text-color);
-    font-family:"Segoe UI",sans-serif;
-}
-
-/* ==========================================
-                HERO SECTION
-========================================== */
-
 .about-hero{
-
-    width:min(1200px,92%);
-    margin:50px auto 90px;
-
-    padding:90px 70px;
-
-    position:relative;
-    overflow:hidden;
-
-    text-align:center;
-
-    border-radius:34px;
+    max-width:1200px;
+    margin:60px auto;
+    padding:70px 65px;
+    border-radius:32px;
 
     background:linear-gradient(
         135deg,
-        #F8CA4D 0%,
-        #F2B84A 28%,
-        #9CB7F8 70%,
-        #5B8CFF 100%
+        #FFD45A 0%,
+        #F7C550 28%,
+        #D7DDF7 65%,
+        #8FB0FF 100%
     );
 
-    color:white;
-
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.12),
-        0 8px 22px rgba(91,140,255,.18);
-
+    overflow:hidden;
 }
 
-/* Decorative Circles */
-
-.about-hero::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:520px;
-    height:520px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.10);
-
-    top:-240px;
-    right:-170px;
-
-}
-
-.about-hero::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-    height:300px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.08);
-
-    bottom:-130px;
-    left:-90px;
-
-}
-
-/* Hero Content */
+/* ==========================================
+                HERO CONTENT
+========================================== */
 
 .hero-content{
-
-    position:relative;
-    z-index:2;
-
-    max-width:850px;
-    margin:auto;
-
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:60px;
 }
 
-/* Tag */
+.hero-text{
+    z-index:2;
+}
 
-.tagline{
+.hero-tag{
 
     display:inline-block;
 
-    padding:10px 24px;
+    padding:10px 22px;
 
     margin-bottom:28px;
 
     border-radius:30px;
 
-    background:rgba(255,255,255,.18);
-
-    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.30);
 
     backdrop-filter:blur(10px);
 
+    color:#233044;
+
     font-size:14px;
     font-weight:600;
-
-    letter-spacing:.7px;
-
 }
 
-/* Heading */
-
-.about-hero h1{
+.hero-text h1{
 
     font-size:60px;
 
     line-height:1.15;
 
-    font-weight:800;
+    color:#102041;
 
     margin-bottom:28px;
-
-    text-shadow:0 4px 15px rgba(0,0,0,.18);
-
 }
 
-/* Description */
+.hero-text p{
 
-.about-hero p{
-
-    max-width:760px;
-
-    margin:auto;
+    max-width:500px;
 
     font-size:20px;
 
-    line-height:1.9;
+    line-height:1.8;
 
-    color:rgba(255,255,255,.96);
+    color:#33435B;
 
+    margin-bottom:40px;
 }
 
 /* ==========================================
-                MISSION GRID
+                BUTTONS
 ========================================== */
 
-.about-grid{
+.hero-buttons{
 
-    width:min(1200px,92%);
-    margin:0 auto 100px;
+    display:flex;
+
+    gap:18px;
+
+    margin-top:10px;
+}
+
+.primary-btn,
+.secondary-btn{
+
+    padding:15px 34px;
+
+    border-radius:14px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.primary-btn{
+
+    background:#2D6BFF;
+
+    color:white;
+}
+
+.primary-btn:hover{
+
+    background:#1E56D9;
+}
+
+.secondary-btn{
+
+    border:2px solid #2D6BFF;
+
+    color:#2D6BFF;
+}
+
+.secondary-btn:hover{
+
+    background:#2D6BFF;
+
+    color:white;
+}
+
+/* ==========================================
+                HERO IMAGE
+========================================== */
+
+.hero-image{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.hero-image::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:360px;
+    height:360px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.22);
+
+    filter:blur(70px);
+
+    z-index:0;
+}
+
+.hero-image img{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    max-width:450px;
+
+    height:auto;
+
+    background:#ffffff;
+
+    padding:5px;
+
+    border-radius:30px;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.10);
+
+    transition:.35s ease;
+}
+
+.hero-image img:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.15);
+}
+
+/* ==========================================
+                MISSION
+========================================== */
+
+.mission-section{
+
+    max-width:1200px;
+
+    margin:80px auto;
+}
+
+.mission-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    grid-template-columns:repeat(3,1fr);
 
     gap:30px;
-
 }
 
-/* ==========================================
-                ABOUT CARD
-========================================== */
-
-.about-card{
+.mission-card{
 
     background:var(--surface-color);
 
@@ -190,199 +228,107 @@ body{
 
     border-radius:22px;
 
-    padding:38px 34px;
+    padding:35px;
 
     box-shadow:var(--shadow);
 
     transition:.3s;
-
-    position:relative;
-
-    overflow:hidden;
-
 }
 
-.about-card:hover{
+.mission-card:hover{
 
     transform:translateY(-6px);
-
-    border-color:var(--primary);
-
 }
 
-/* Small top accent */
+.card-icon{
 
-.about-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:5px;
-
-    background:linear-gradient(
-        90deg,
-        #F8C94A,
-        var(--primary)
-    );
-
-}
-
-/* ==========================================
-                ICON
-========================================== */
-
-.about-card i{
-
-    width:68px;
-    height:68px;
+    width:70px;
+    height:70px;
 
     display:flex;
-    align-items:center;
     justify-content:center;
-
-    margin-bottom:24px;
+    align-items:center;
 
     border-radius:18px;
 
-    background:rgba(30,86,217,.12);
+    margin-bottom:24px;
 
-    color:var(--primary);
+    background:#EDF4FF;
+
+    color:#2D6BFF;
 
     font-size:30px;
-
-    transition:.3s;
-
 }
 
-.about-card:hover i{
-
-    transform:scale(1.08);
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-/* ==========================================
-                TITLE
-========================================== */
-
-.about-card h2{
-
-    color:var(--heading-color);
-
-    font-size:26px;
+.mission-card h2{
 
     margin-bottom:18px;
 
+    color:var(--heading-color);
 }
 
-/* ==========================================
-                DESCRIPTION
-========================================== */
-
-.about-card p{
+.mission-card p,
+.mission-card li{
 
     color:var(--secondary-text);
 
     line-height:1.8;
-
-    font-size:16px;
-
 }
 
-/* ==========================================
-                VALUES LIST
-========================================== */
-
-.about-card ul{
-
-    margin-top:12px;
+.mission-card ul{
 
     padding-left:20px;
-
 }
 
-.about-card li{
+.mission-card li{
 
-    color:var(--secondary-text);
-
-    margin-bottom:12px;
-
-    line-height:1.7;
-
-}
-
-.about-card li:last-child{
-
-    margin-bottom:0;
-
+    margin-bottom:10px;
 }
 
 /* ==========================================
-                WHY CHOOSE ASSISTHUB
+                WHY CHOOSE
 ========================================== */
 
 .why-section{
 
-    width:min(1200px,92%);
-    margin:100px auto;
+    max-width:1200px;
 
+    margin:90px auto;
 }
 
-.why-section h2{
+.section-heading{
 
     text-align:center;
+
+    margin-bottom:55px;
+}
+
+.section-heading h2{
 
     font-size:42px;
 
+    margin-bottom:15px;
+
     color:var(--heading-color);
-
-    margin-bottom:16px;
-
 }
 
-.why-section .section-text{
-
-    max-width:700px;
-
-    margin:0 auto 55px;
-
-    text-align:center;
+.section-heading p{
 
     color:var(--secondary-text);
 
     font-size:17px;
-
-    line-height:1.8;
-
 }
 
-/* ==========================================
-                FEATURE GRID
-========================================== */
-
-.features{
+.features-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(4,1fr);
 
-    gap:28px;
-
+    gap:25px;
 }
 
-/* ==========================================
-                FEATURE CARD
-========================================== */
-
-.feature-box{
+.feature-card{
 
     background:var(--surface-color);
 
@@ -390,205 +336,253 @@ body{
 
     border-radius:20px;
 
-    padding:35px 30px;
+    padding:35px 28px;
 
-    text-align:left;
+    text-align:center;
 
     box-shadow:var(--shadow);
 
     transition:.3s;
-
 }
 
-.feature-box:hover{
+.feature-card:hover{
 
     transform:translateY(-6px);
-
-    border-color:var(--primary);
-
 }
 
-/* ==========================================
-                ICON
-========================================== */
+.feature-icon{
 
-.feature-box i{
+    width:70px;
+    height:70px;
 
-    width:62px;
-    height:62px;
+    margin:0 auto 22px;
 
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    background:rgba(30,86,217,.12);
+    background:#EDF4FF;
 
-    color:var(--primary);
+    color:#2D6BFF;
 
-    font-size:28px;
-
-    margin-bottom:22px;
-
-    transition:.3s;
-
+    font-size:30px;
 }
 
-.feature-box:hover i{
+.feature-card h3{
 
-    background:var(--primary);
-
-    color:white;
-
-    transform:scale(1.08);
-
-}
-
-/* ==========================================
-                TITLE
-========================================== */
-
-.feature-box h3{
-
-    font-size:22px;
+    margin-bottom:15px;
 
     color:var(--heading-color);
-
-    margin-bottom:14px;
-
 }
 
-/* ==========================================
-                DESCRIPTION
-========================================== */
-
-.feature-box p{
+.feature-card p{
 
     color:var(--secondary-text);
 
     line-height:1.8;
+}
 
-    font-size:15px;
+/* ==========================================
+                IMPACT
+========================================== */
 
+.impact-section{
+
+    max-width:1200px;
+
+    margin:90px auto;
+}
+
+.impact-box{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:28px;
+
+    padding:60px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+}
+
+.impact-box h2{
+
+    font-size:40px;
+
+    margin-bottom:20px;
+
+    color:var(--heading-color);
+}
+
+.impact-box p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    line-height:1.9;
+
+    color:var(--secondary-text);
+}
+
+.impact-stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:80px;
+
+    margin-top:50px;
+}
+
+.stat h3{
+
+    font-size:46px;
+
+    color:#2D6BFF;
+}
+
+.stat p{
+
+    margin-top:10px;
+}
+
+/* ==========================================
+                DARK MODE
+========================================== */
+
+.dark-mode .hero-tag{
+
+    color:white;
+
+    background:rgba(255,255,255,.10);
+}
+
+.dark-mode .hero-text h1{
+
+    color:white;
+}
+
+.dark-mode .hero-text p{
+
+    color:#E5EAF5;
+}
+
+.dark-mode .card-icon,
+.dark-mode .feature-icon{
+
+    background:#1F335E;
+
+    color:#6EA8FF;
 }
 
 /* ==========================================
                 RESPONSIVE
 ========================================== */
 
-@media(max-width:900px){
+@media(max-width:1000px){
 
-    .about-hero{
+.hero-content{
 
-        padding:70px 40px;
+    grid-template-columns:1fr;
 
-        margin:40px auto 70px;
+    text-align:center;
+}
 
-    }
+.hero-text p{
 
-    .about-hero h1{
+    margin:auto auto 35px;
+}
 
-        font-size:46px;
+.hero-buttons{
 
-    }
+    justify-content:center;
+}
 
-    .about-hero p{
+.hero-image{
 
-        font-size:18px;
+    margin-top:15px;
+}
 
-    }
+.hero-image img{
 
-    .about-grid{
+    max-width:420px;
+}
 
-        grid-template-columns:1fr;
+.mission-grid{
 
-        gap:24px;
+    grid-template-columns:1fr;
+}
 
-    }
+.features-grid{
 
-    .features{
+    grid-template-columns:repeat(2,1fr);
+}
 
-        grid-template-columns:repeat(2,1fr);
+.impact-stats{
 
-    }
+    flex-direction:column;
+
+    gap:35px;
+}
 
 }
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .about-hero{
+.about-hero{
 
-        padding:55px 25px;
+    padding:40px 25px;
 
-        border-radius:24px;
+    border-radius:24px;
+}
 
-    }
+.hero-text h1{
 
-    .tagline{
+    font-size:38px;
+}
 
-        font-size:13px;
+.hero-text p{
 
-        padding:8px 18px;
+    font-size:17px;
+}
 
-    }
+.hero-buttons{
 
-    .about-hero h1{
+    flex-direction:column;
+}
 
-        font-size:34px;
+.hero-image img{
 
-    }
+    max-width:100%;
 
-    .about-hero p{
+    padding:15px;
+}
 
-        font-size:16px;
+.features-grid{
 
-        line-height:1.8;
+    grid-template-columns:1fr;
+}
 
-    }
+.section-heading h2{
 
-    .about-card{
+    font-size:30px;
+}
 
-        padding:30px 25px;
+.impact-box{
 
-    }
+    padding:35px;
+}
 
-    .about-card h2{
+.impact-box h2{
 
-        font-size:22px;
-
-    }
-
-    .feature-box{
-
-        text-align:center;
-
-        padding:30px 24px;
-
-    }
-
-    .feature-box i{
-
-        margin:0 auto 20px;
-
-    }
-
-    .features{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .why-section h2{
-
-        font-size:32px;
-
-    }
-
-    .why-section .section-text{
-
-        font-size:15px;
-
-    }
+    font-size:30px;
+}
 
 }
