@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AssistHub AI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/ask_ai.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="ai-container">
+
+    <!-- Hero -->
+    <div class="ai-header">
+
+        <i class="fa-solid fa-robot robot-icon"></i>
+
+        <h1>AssistHub AI</h1>
+
+        <p>
+            Your AI-powered accessibility assistant.
+            Ask questions about assistive technologies,
+            disabilities, mobility aids, Braille,
+            hearing devices and more.
+        </p>
+
+    </div>
+
+
+    <!-- Question Form -->
+
+    <div class="ai-card">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <textarea
+                name="question"
+                rows="5"
+                placeholder="Example: Which device is suitable for a visually impaired student?"
+            >{{ question }}</textarea>
+
+            <button type="submit">
+                <i class="fa-solid fa-paper-plane"></i>
+                Ask AssistHub AI
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Response -->
+
+    {% if response %}
+
+    <div class="response-card">
+
+        <h2>
+            <i class="fa-solid fa-comments"></i>
+            Conversation
+        </h2>
+
+        <div class="user-question">
+
+            <strong>You asked:</strong>
+
+            <p>{{ question }}</p>
+
+        </div>
+
+        <div class="ai-response">
+
+            <strong>AssistHub AI</strong>
+
+            <p>{{ response }}</p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- Suggested Questions -->
+
+    <div class="suggestions">
+
+        <h3>Suggested Questions</h3>
+
+       <div class="chips">
+
+    <button class="chip">
+        What is a Braille Display?
+    </button>
+
+    <button class="chip">
+        Best wheelchair for elderly users
+    </button>
+
+    <button class="chip">
+        Explain Smart Cane
+    </button>
+
+    <button class="chip">
+        What is a Screen Reader?
+    </button>
+
+</div>
+
+    </div>
+
+</div>
+<script src="{% static 'js/ask_ai.js' %}"></script>
+{% endblock %}
