@@ -8,6 +8,11 @@ from django.db.models import Q, Avg, Count
 from django.contrib import messages
 from django.contrib.auth.models import User
 import random
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import Device
+from .serializers import DeviceSerializer
+from rest_framework import status
 #Home page
 def home(request):
     categories = Category.objects.annotate(
@@ -521,5 +526,24 @@ def delete_review(request, review_id):
         )
         return redirect('device_detail', device_id)
     return redirect('device_detail', review.device.id)
+@api_view(['GET'])
+def device_list(request):
+    devices = Device.objects.all()
+    serializer = DeviceSerializer(devices, many=True)
+    return Response(serializer.data)
+@api_view(['GET', 'POST'])
+def device_list(request):
 
+    if request.method == 'GET':
+        devices = Device.objects.all()
+        serializer = DeviceSerializer(devices, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        serializer = DeviceSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
