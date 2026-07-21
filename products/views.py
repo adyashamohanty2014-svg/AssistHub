@@ -526,13 +526,8 @@ def delete_review(request, review_id):
         )
         return redirect('device_detail', device_id)
     return redirect('device_detail', review.device.id)
-@api_view(['GET'])
-def device_list(request):
-    devices = Device.objects.all()
-    serializer = DeviceSerializer(devices, many=True)
-    return Response(serializer.data)
 @api_view(['GET', 'POST'])
-def device_list(request):
+def api_device_list(request):
 
     if request.method == 'GET':
         devices = Device.objects.all()

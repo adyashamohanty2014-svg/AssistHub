@@ -27,10 +27,5 @@ urlpatterns = [
  path('compare/', views.compare_view, name='compare'),
  path('review/<int:review_id>/delete/',views.delete_review,name='delete_review'),
 path("recommendations/",views.all_recommendations,name="all_recommendations"),
-]
-from django.urls import path
-from . import views
-
-urlpatterns = [
-    path('api/devices/', views.device_list, name='device-list'),
+path('api/devices/', views.api_device_list, name='api-device-list'),
 ]
