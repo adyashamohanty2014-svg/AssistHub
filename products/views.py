@@ -10,9 +10,9 @@ from django.contrib.auth.models import User
 import random
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Device
 from .serializers import DeviceSerializer
 from rest_framework import status
+
 #Home page
 def home(request):
     categories = Category.objects.annotate(
@@ -130,9 +130,6 @@ def home(request):
 })
 
 #Login
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-
 def user_login(request):
     error_message = None
     if request.method == "POST":
@@ -526,6 +523,7 @@ def delete_review(request, review_id):
         )
         return redirect('device_detail', device_id)
     return redirect('device_detail', review.device.id)
+
 @api_view(['GET', 'POST'])
 def api_device_list(request):
 
