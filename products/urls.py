@@ -28,4 +28,5 @@ urlpatterns = [
  path('review/<int:review_id>/delete/',views.delete_review,name='delete_review'),
 path("recommendations/",views.all_recommendations,name="all_recommendations"),
 path('api/devices/', views.api_device_list, name='api-device-list'),
+path('api/devices/<int:id>/',views.api_device_detail,name='api-device-detail'),
 ]

@@ -540,3 +540,20 @@ def api_device_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def api_device_detail(request, id):
+
+    try:
+        device = Device.objects.get(id=id)
+
+    except Device.DoesNotExist:
+        return Response(
+            {"error": "Device not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    serializer = DeviceSerializer(device)
+
+    return Response(serializer.data)
