@@ -542,7 +542,7 @@ def api_device_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def api_device_detail(request, id):
 
     try:
@@ -554,6 +554,41 @@ def api_device_detail(request, id):
             status=status.HTTP_404_NOT_FOUND
         )
 
-    serializer = DeviceSerializer(device)
+    if request.method == 'GET':
+        serializer = DeviceSerializer(device)
+        return Response(serializer.data)
 
-    return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = DeviceSerializer(device, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    elif request.method == 'PATCH':
+        serializer = DeviceSerializer(
+            device,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+    elif request.method == 'DELETE':
+        device.delete()
+
+    return Response(
+        {"message": "Device deleted successfully"},
+        status=status.HTTP_204_NO_CONTENT
+    )
