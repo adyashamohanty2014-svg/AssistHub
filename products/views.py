@@ -528,7 +528,28 @@ def delete_review(request, review_id):
 def api_device_list(request):
 
     if request.method == 'GET':
+
         devices = Device.objects.all()
+
+        category = request.GET.get("category")
+        availability = request.GET.get("availability")
+        search = request.GET.get("search")
+        ordering = request.GET.get('ordering')
+
+        if category:
+            devices = devices.filter(category=category)
+
+        if availability:
+            devices = devices.filter(availability=availability)
+
+        if search:
+            devices = devices.filter(
+                Q(name__icontains=search) |
+                Q(description__icontains=search)
+            )
+        if ordering:
+            devices = devices.order_by(ordering)
+
         serializer = DeviceSerializer(devices, many=True)
         return Response(serializer.data)
 
@@ -588,7 +609,4 @@ def api_device_detail(request, id):
     elif request.method == 'DELETE':
         device.delete()
 
-    return Response(
-        {"message": "Device deleted successfully"},
-        status=status.HTTP_204_NO_CONTENT
-    )
+    return Response(status=status.HTTP_204_NO_CONTENT)
