@@ -2,7 +2,7 @@ from . import views
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from django.urls import path, reverse_lazy
-
+from .views import category_list
 
 urlpatterns = [
  path('',views.home, name='home'),
@@ -29,4 +29,12 @@ urlpatterns = [
 path("recommendations/",views.all_recommendations,name="all_recommendations"),
 path('api/devices/', views.api_device_list, name='api-device-list'),
 path('api/devices/<int:id>/',views.api_device_detail,name='api-device-detail'),
+path('categories/', category_list, name='category-list'),
+path('categories/<int:id>/', views.category_detail, name='category-detail'),
+path('reviews/', views.review_list, name='review-list'),
+path('reviews/<int:id>/', views.review_detail, name='review-detail'),
+path('wishlist/', views.wishlist_list, name='wishlist-list'),
+path('wishlist/<int:id>/', views.wishlist_detail, name='wishlist-detail'),
+path('cart/', views.cart_list, name='cart-list'),
+path('cart/<int:id>/', views.cart_detail, name='cart-detail'),
 ]

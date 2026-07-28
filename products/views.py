@@ -12,7 +12,14 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import DeviceSerializer
 from rest_framework import status
-
+from .models import Category
+from .serializers import CategorySerializer
+from .models import Review
+from .serializers import ReviewSerializer
+from .models import Wishlist
+from .serializers import WishlistSerializer
+from .models import Cart
+from .serializers import CartSerializer
 #Home page
 def home(request):
     categories = Category.objects.annotate(
@@ -590,5 +597,235 @@ def api_device_detail(request, id):
 
     return Response(
         {"message": "Device deleted successfully"},
+        status=status.HTTP_204_NO_CONTENT
+    )
+@api_view(['GET', 'POST'])
+def category_list(request):
+
+    if request.method == 'GET':
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = CategorySerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+def category_detail(request, id):
+
+    try:
+        category = Category.objects.get(id=id)
+    except Category.DoesNotExist:
+        return Response(
+            {"error": "Category not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if request.method == 'GET':
+        serializer = CategorySerializer(category)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = CategorySerializer(
+            category,
+            data=request.data
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    elif request.method == 'PATCH':
+        serializer = CategorySerializer(
+            category,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    elif request.method == 'DELETE':
+        category.delete()
+
+        return Response(
+            {"message": "Category deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT
+        )
+@api_view(['GET', 'POST'])
+def review_list(request):
+
+    if request.method == 'GET':
+        reviews = Review.objects.all()
+        serializer = ReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ReviewSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+def review_detail(request, id):
+
+    try:
+        review = Review.objects.get(id=id)
+
+    except Review.DoesNotExist:
+        return Response(
+            {"error": "Review not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    if request.method == 'GET':
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+
+
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(
+            review,
+            data=request.data
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+    elif request.method == 'PATCH':
+        serializer = ReviewSerializer(
+            review,
+            data=request.data,
+            partial=True
+        )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+    elif request.method == 'DELETE':
+        review.delete()
+
+        return Response(
+            {"message": "Review deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT
+        )
+@api_view(['GET', 'POST'])
+def wishlist_list(request):
+
+    if request.method == 'GET':
+        wishlist = Wishlist.objects.all()
+        serializer = WishlistSerializer(wishlist, many=True)
+        return Response(serializer.data)
+
+
+    elif request.method == 'POST':
+        serializer = WishlistSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+@api_view(['DELETE'])
+def wishlist_detail(request, id):
+
+    try:
+        wishlist_item = Wishlist.objects.get(id=id)
+
+    except Wishlist.DoesNotExist:
+        return Response(
+            {"error": "Wishlist item not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    wishlist_item.delete()
+
+    return Response(
+        {"message": "Removed from wishlist successfully"},
+        status=status.HTTP_204_NO_CONTENT
+    )
+@api_view(['GET', 'POST'])
+def cart_list(request):
+
+    if request.method == 'GET':
+        cart_items = Cart.objects.all()
+        serializer = CartSerializer(cart_items, many=True)
+        return Response(serializer.data)
+
+
+    elif request.method == 'POST':
+        serializer = CartSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
+@api_view(['DELETE'])
+def cart_detail(request, id):
+
+    try:
+        cart_item = Cart.objects.get(id=id)
+
+    except Cart.DoesNotExist:
+        return Response(
+            {"error": "Cart item not found"},
+            status=status.HTTP_404_NOT_FOUND
+        )
+
+    cart_item.delete()
+
+    return Response(
+        {"message": "Removed from cart successfully"},
         status=status.HTTP_204_NO_CONTENT
     )
