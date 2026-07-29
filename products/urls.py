@@ -37,4 +37,6 @@ path('wishlist/', views.wishlist_list, name='wishlist-list'),
 path('wishlist/<int:id>/', views.wishlist_detail, name='wishlist-detail'),
 path('cart/', views.cart_list, name='cart-list'),
 path('cart/<int:id>/', views.cart_detail, name='cart-detail'),
+path('change-password/', views.change_password, name='change_password'),
+path('api/profile/', views.api_profile, name='api_profile')
 ]
