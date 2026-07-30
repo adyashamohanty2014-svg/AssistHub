@@ -12,20 +12,18 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import DeviceSerializer
 from rest_framework import status
-from .models import Category
 from .serializers import CategorySerializer
-from .models import Review
 from .serializers import ReviewSerializer
-from .models import Wishlist
 from .serializers import WishlistSerializer
-from .models import Cart
 from .serializers import CartSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .serializers import RegisterSerializer
 from .serializers import UserProfileSerializer
 from .serializers import ChangePasswordSerializer
-from rest_framework.pagination import PageNumberPagination
+from rest_framework import generics
+from .pagination import DevicePagination
+
 #Home page
 def home(request):
     categories = Category.objects.annotate(
@@ -537,25 +535,20 @@ def delete_review(request, review_id):
         return redirect('device_detail', device_id)
     return redirect('device_detail', review.device.id)
 
-@api_view(['GET', 'POST'])
-def api_device_list(request):
 
-    if request.method == 'GET':
+class DeviceList(generics.ListCreateAPIView):
+
+    serializer_class = DeviceSerializer
+    pagination_class = DevicePagination
+
+    def get_queryset(self):
 
         devices = Device.objects.all()
-        paginator = PageNumberPagination()
-        paginator.page_size = 5
 
-        result = paginator.paginate_queryset(devices, request)
-
-        serializer = DeviceSerializer(result, many=True)
-
-        return paginator.get_paginated_response(serializer.data)
-
-        category = request.GET.get("category")
-        availability = request.GET.get("availability")
-        search = request.GET.get("search")
-        ordering = request.GET.get('ordering')
+        category = self.request.GET.get("category")
+        availability = self.request.GET.get("availability")
+        search = self.request.GET.get("search")
+        ordering = self.request.GET.get("ordering")
 
         if category:
             devices = devices.filter(category=category)
@@ -568,72 +561,19 @@ def api_device_list(request):
                 Q(name__icontains=search) |
                 Q(description__icontains=search)
             )
+
         if ordering:
             devices = devices.order_by(ordering)
 
-        serializer = DeviceSerializer(devices, many=True)
-        return Response(serializer.data)
+        return devices
+    
+class DeviceDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    elif request.method == 'POST':
-        serializer = DeviceSerializer(data=request.data)
+    queryset = Device.objects.all()
+    serializer_class = DeviceSerializer
+    lookup_field = "id"
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
-def api_device_detail(request, id):
-
-    try:
-        device = Device.objects.get(id=id)
-
-    except Device.DoesNotExist:
-        return Response(
-            {"error": "Device not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-
-    if request.method == 'GET':
-        serializer = DeviceSerializer(device)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = DeviceSerializer(device, data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'PATCH':
-        serializer = DeviceSerializer(
-            device,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'DELETE':
-        device.delete()
-
-        return Response(
-            {"message": "Device deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT
-        )
 @api_view(['GET', 'POST'])
 def category_list(request):
 

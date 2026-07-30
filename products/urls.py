@@ -27,8 +27,9 @@ urlpatterns = [
  path('compare/', views.compare_view, name='compare'),
  path('review/<int:review_id>/delete/',views.delete_review,name='delete_review'),
 path("recommendations/",views.all_recommendations,name="all_recommendations"),
-path('api/devices/', views.api_device_list, name='api-device-list'),
-path('api/devices/<int:id>/',views.api_device_detail,name='api-device-detail'),
+
+path('api/devices/',views.DeviceList.as_view(),name='api-device-list'),
+path('api/devices/<int:id>/',views.DeviceDetail.as_view(),name='api-device-detail'),
 path('categories/', category_list, name='category-list'),
 path('categories/<int:id>/', views.category_detail, name='category-detail'),
 path('reviews/', views.review_list, name='review-list'),
