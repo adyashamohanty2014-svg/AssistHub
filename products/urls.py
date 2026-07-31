@@ -2,7 +2,6 @@ from . import views
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from django.urls import path, reverse_lazy
-from .views import category_list
 
 urlpatterns = [
  path('',views.home, name='home'),
@@ -30,14 +29,14 @@ path("recommendations/",views.all_recommendations,name="all_recommendations"),
 
 path('api/devices/',views.DeviceList.as_view(),name='api-device-list'),
 path('api/devices/<int:id>/',views.DeviceDetail.as_view(),name='api-device-detail'),
-path('categories/', category_list, name='category-list'),
-path('categories/<int:id>/', views.category_detail, name='category-detail'),
-path('reviews/', views.review_list, name='review-list'),
-path('reviews/<int:id>/', views.review_detail, name='review-detail'),
-path('wishlist/', views.wishlist_list, name='wishlist-list'),
-path('wishlist/<int:id>/', views.wishlist_detail, name='wishlist-detail'),
-path('cart/', views.cart_list, name='cart-list'),
-path('cart/<int:id>/', views.cart_detail, name='cart-detail'),
-path('change-password/', views.change_password, name='change_password'),
-path('api/profile/', views.api_profile, name='api_profile')
+path('api/categories/', views.CategoryList.as_view(), name='category-list'),
+path('api/categories/<int:id>/', views.CategoryDetail.as_view(), name='category-detail'),
+path("api/reviews/", views.ReviewList.as_view(), name="review-list"),
+path("api/reviews/<int:id>/", views.ReviewDetail.as_view(), name="review-detail"),
+path('api/wishlist/', views.WishlistList.as_view(), name='wishlist-list'),
+path('api/wishlist/<int:id>/', views.WishlistDetail.as_view(), name='wishlist-detail'),
+path('api/cart/', views.CartList.as_view(), name='cart-list'),
+path('api/cart/<int:id>/', views.CartDetail.as_view(), name='cart-detail'),
+path('api/change-password/',views.change_password,name='change-password'),
+path("api/profile/", views.ProfileView.as_view(), name="api-profile"),
 ]

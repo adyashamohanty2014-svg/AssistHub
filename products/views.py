@@ -562,7 +562,9 @@ class DeviceList(generics.ListCreateAPIView):
                 Q(description__icontains=search)
             )
 
-        if ordering:
+        allowed_fields = ["price", "-price", "name", "-name"]
+
+        if ordering in allowed_fields:
             devices = devices.order_by(ordering)
 
         return devices
@@ -574,298 +576,77 @@ class DeviceDetail(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "id"
 
 
-@api_view(['GET', 'POST'])
-def category_list(request):
+class CategoryList(generics.ListCreateAPIView):
 
-    if request.method == 'GET':
-        categories = Category.objects.all()
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    elif request.method == 'POST':
-        serializer = CategorySerializer(data=request.data)
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    lookup_field = "id"
+    
+class ReviewList(generics.ListCreateAPIView):
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
-def category_detail(request, id):
+    def get_queryset(self):
+        return Review.objects.filter(user=self.request.user)
 
-    try:
-        category = Category.objects.get(id=id)
-    except Category.DoesNotExist:
-        return Response(
-            {"error": "Category not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-    if request.method == 'GET':
-        serializer = CategorySerializer(category)
-        return Response(serializer.data)
+class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    elif request.method == 'PUT':
-        serializer = CategorySerializer(
-            category,
-            data=request.data
-        )
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "id"
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+    def get_queryset(self):
+        return Review.objects.filter(user=self.request.user)
 
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+class WishlistList(generics.ListCreateAPIView):
 
-    elif request.method == 'PATCH':
-        serializer = CategorySerializer(
-            category,
-            data=request.data,
-            partial=True
-        )
+    serializer_class = WishlistSerializer
+    permission_classes = [IsAuthenticated]
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+    def get_queryset(self):
+        return Wishlist.objects.filter(user=self.request.user)
 
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    
+class WishlistDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    elif request.method == 'DELETE':
-        category.delete()
+    serializer_class = WishlistSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "id"
 
-        return Response(
-            {"message": "Category deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT
-        )
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def review_list(request):
+    def get_queryset(self):
+        return Wishlist.objects.filter(user=self.request.user)
 
-    if request.method == 'GET':
-        reviews = Review.objects.filter(user=request.user)
-        serializer = ReviewSerializer(reviews, many=True)
-        return Response(serializer.data)
+class CartList(generics.ListCreateAPIView):
 
-    elif request.method == 'POST':
-        serializer = ReviewSerializer(data=request.data)
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
 
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
-            )
+    def get_queryset(self):
+        return Cart.objects.filter(user=self.request.user)
 
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def review_detail(request, id):
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-    try:
-        review = Review.objects.get(id=id)
+class CartDetail(generics.RetrieveUpdateDestroyAPIView):
 
-    except Review.DoesNotExist:
-        return Response(
-            {"error": "Review not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
+    serializer_class = CartSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "id"
 
-    if request.method == 'GET':
-        serializer = ReviewSerializer(review)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return Cart.objects.filter(user=self.request.user)
 
-
-    elif request.method == 'PUT':
-        serializer = ReviewSerializer(
-            review,
-            data=request.data
-        )
-
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-
-    elif request.method == 'PATCH':
-        serializer = ReviewSerializer(
-            review,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-
-    elif request.method == 'DELETE':
-        review.delete()
-
-        return Response(
-            {"message": "Review deleted successfully"},
-            status=status.HTTP_204_NO_CONTENT
-        )
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def wishlist_list(request):
-
-    if request.method == 'GET':
-        wishlist=Wishlist.objects.filter(user=request.user)
-        serializer = WishlistSerializer(wishlist, many=True)
-        return Response(serializer.data)
-
-
-    elif request.method == 'POST':
-        serializer = WishlistSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
-            )
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def wishlist_detail(request, id):
-
-    try:
-        wishlist_item = Wishlist.objects.get(id=id)
-
-    except Wishlist.DoesNotExist:
-        return Response(
-            {"error": "Wishlist item not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-
-    # Allow only the owner to access this wishlist item
-    if wishlist_item.user != request.user:
-        return Response(
-            {"error": "You are not authorized."},
-            status=status.HTTP_403_FORBIDDEN
-        )
-
-    if request.method == 'GET':
-        serializer = WishlistSerializer(wishlist_item)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = WishlistSerializer(
-            wishlist_item,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'DELETE':
-        wishlist_item.delete()
-
-        return Response(
-            {"message": "Removed from wishlist successfully"},
-            status=status.HTTP_204_NO_CONTENT
-        )
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def cart_list(request):
-
-    if request.method == 'GET':
-        cart_items = Cart.objects.filter(user=request.user)
-        serializer = CartSerializer(cart_items, many=True)
-        return Response(serializer.data)
-
-
-    elif request.method == 'POST':
-        serializer = CartSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(
-                serializer.data,
-                status=status.HTTP_201_CREATED
-            )
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-@api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
-def cart_detail(request, id):
-
-    try:
-        cart_item = Cart.objects.get(id=id)
-
-    except Cart.DoesNotExist:
-        return Response(
-            {"error": "Cart item not found"},
-            status=status.HTTP_404_NOT_FOUND
-        )
-
-    # Allow only the owner to access this cart item
-    if cart_item.user != request.user:
-        return Response(
-            {"error": "You are not authorized."},
-            status=status.HTTP_403_FORBIDDEN
-        )
-
-    if request.method == 'GET':
-        serializer = CartSerializer(cart_item)
-        return Response(serializer.data)
-
-    elif request.method == 'PUT':
-        serializer = CartSerializer(
-            cart_item,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'DELETE':
-        cart_item.delete()
-
-        return Response(
-            {"message": "Removed from cart successfully"},
-            status=status.HTTP_204_NO_CONTENT
-        )
 @api_view(['POST'])
 def register(request):
     serializer = RegisterSerializer(data=request.data)
@@ -883,44 +664,14 @@ def register(request):
         serializer.errors,
         status=status.HTTP_400_BAD_REQUEST
     )
-@api_view(['GET', 'PUT', 'PATCH'])
-@permission_classes([IsAuthenticated])
-def api_profile(request):
+class ProfileView(generics.RetrieveUpdateAPIView):
 
-    if request.method == 'GET':
-        serializer = UserProfileSerializer(request.user)
-        return Response(serializer.data)
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
 
-    elif request.method == 'PUT':
-        serializer = UserProfileSerializer(
-            request.user,
-            data=request.data
-        )
+    def get_object(self):
+        return self.request.user
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    elif request.method == 'PATCH':
-        serializer = UserProfileSerializer(
-            request.user,
-            data=request.data,
-            partial=True
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-        return Response(
-            serializer.errors,
-            status=status.HTTP_400_BAD_REQUEST
-        )
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def change_password(request):
