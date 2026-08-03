@@ -79,11 +79,6 @@
                      Compare
             </a>
        </li>
-       <li>
-    <a href="{% url 'ask_ai' %}">
-        <i class="fa-solid fa-robot"></i> AI
-    </a>
-    </li>
 
         {% if user.is_authenticated %}
 
@@ -238,6 +233,10 @@
         © 2026 AssistHub. All Rights Reserved.
     </div>
 </footer>
+<!-- Floating AI Button -->
+<a href="{% url 'ask_ai' %}" class="ai-floating-btn" title="Ask AssistHub AI">
+    <i class="fa-solid fa-robot"></i>
+</a>
 <script src="{% static 'js/theme.js' %}"></script>
 </body>
 </html>
