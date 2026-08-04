@@ -40,6 +40,11 @@ class Device(models.Model):
         max_length=30,
         default="In Stock"
     )
+    tags = models.CharField(
+    max_length=300,
+    blank=True,
+    help_text="Comma-separated keywords like blind, wheelchair, elderly, hearing"
+)
 
     def __str__(self):
         return self.name

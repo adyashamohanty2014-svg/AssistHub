@@ -82,7 +82,41 @@
     </div>
 
     {% endif %}
+{% if devices %}
 
+<div class="recommended-products">
+
+    <h2>Recommended Products</h2>
+
+    <div class="product-grid">
+
+        {% for device in devices %}
+
+        <div class="product-card">
+
+            {% if device.image %}
+                <img src="{{ device.image.url }}" alt="{{ device.name }}">
+            {% endif %}
+
+            <h3>{{ device.name }}</h3>
+
+            <p>{{ device.brand }}</p>
+
+            <p>₹{{ device.price }}</p>
+
+            <a href="{% url 'device_detail' device.id %}">
+                View Product
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endif %}
 
     <!-- Suggested Questions -->
 
