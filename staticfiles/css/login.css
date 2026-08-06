@@ -1,0 +1,372 @@
+/* ==========================================
+            LOGIN PAGE
+========================================== */
+
+.login-wrapper{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:80vh;
+
+    padding:40px 20px;
+
+}
+
+/* ==========================================
+            CARD
+========================================== */
+
+.login-card{
+
+    width:100%;
+
+    max-width:470px;
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:22px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ==========================================
+            HEADER
+========================================== */
+
+.logo-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin-bottom:35px;
+
+}
+
+.logo{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+}
+
+.logo-header h1{
+
+    margin:0;
+
+    color:var(--heading-color);
+
+    font-size:36px;
+
+}
+
+.subtitle{
+
+    margin-top:6px;
+
+    color:var(--secondary-text);
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+            FORM
+========================================== */
+
+form p{
+
+    margin-bottom:22px;
+
+}
+
+form label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--heading-color);
+
+    font-weight:600;
+
+}
+
+form input:not([type="submit"]){
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:var(--surface-alt);
+
+    color:var(--text-color);
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+form input:not([type="submit"]):focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(59,130,246,.15);
+
+}
+
+/* ==========================================
+            BUTTON
+========================================== */
+
+input[type="submit"]{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:10px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+input[type="submit"]:hover{
+
+    background:var(--primary-hover);
+
+}
+
+/* ==========================================
+            REGISTER
+========================================== */
+
+.register-text{
+
+    margin-top:28px;
+
+    text-align:center;
+
+    color:var(--secondary-text);
+
+}
+
+.register-text a{
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.register-text a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================
+            ERRORS
+========================================== */
+
+.errorlist{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:8px 0 0;
+
+    color:#ef4444;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+            MOBILE
+========================================== */
+
+@media(max-width:600px){
+
+    .login-card{
+
+        padding:30px 24px;
+
+    }
+
+    .logo-header{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo-header h1{
+
+        font-size:30px;
+
+    }
+
+}
+/* ==========================================
+            REGISTER BUTTON
+========================================== */
+
+.primary-btn{
+
+    display:block;
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:12px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--primary);
+
+    color:white;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.primary-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+/* ==========================================
+            SUCCESS PAGE
+========================================== */
+
+.success-card{
+
+    text-align:center;
+
+}
+
+.success-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:rgba(34,197,94,.12);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.success-icon i{
+
+    font-size:48px;
+
+    color:#22c55e;
+
+}
+
+.success-text{
+
+    margin:25px 0 35px;
+
+    color:var(--secondary-text);
+
+    line-height:1.8;
+
+}
+/* ==========================
+        LOGIN ERROR
+========================== */
+
+.login-error{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    border:1px solid #fecaca;
+
+    padding:14px 16px;
+
+    margin-bottom:22px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-weight:500;
+
+}
+.dark-mode .login-error{
+
+    background:#3b1111;
+
+    color:#fecaca;
+
+    border-color:#7f1d1d;
+
+}

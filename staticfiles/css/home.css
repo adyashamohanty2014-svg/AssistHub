@@ -1,0 +1,936 @@
+/* ===================================================
+                    HERO SECTION
+=================================================== */
+
+.hero{
+    width:min(1200px,92%);
+    margin:50px auto 80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+
+    padding:40px 20px;
+}
+
+.hero-left{
+    flex:1;
+    max-width:600px;
+}
+
+.hero-badge{
+
+    display:inline-block;
+
+    background:var(--surface-color);
+
+    color:var(--primary);
+
+    border:1px solid var(--border);
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.5px;
+
+    margin-bottom:22px;
+
+}
+
+.hero h1{
+
+    font-size:56px;
+    font-weight:800;
+    line-height:1.15;
+
+    color:var(--heading-color);
+
+    margin:0 0 22px;
+
+}
+
+.hero h1 span{
+
+    color:var(--primary);
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+    color:var(--secondary-text);
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+    max-width:540px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+
+}
+
+
+/* ===================================================
+                    BUTTONS
+=================================================== */
+
+.primary-btn{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 28px;
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.primary-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.secondary-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:14px 28px;
+
+    border:2px solid var(--primary);
+
+    color:var(--primary);
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.secondary-btn:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+.product-btn:hover,
+.view-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+/* ===================================================
+                    HERO IMAGE
+=================================================== */
+
+.hero-right{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.hero-right img{
+
+    width:100%;
+
+    max-width:420px;
+
+    height:auto;
+
+    object-fit:contain;
+
+    padding:25px;
+
+    background:var(--surface-color);
+
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+}
+
+
+/* ===================================================
+                    RESPONSIVE
+=================================================== */
+
+@media(max-width:900px){
+
+.hero{
+
+    flex-direction:column-reverse;
+
+    text-align:center;
+
+    gap:40px;
+
+}
+
+.hero-left{
+
+    max-width:100%;
+
+}
+
+.hero p{
+
+    margin:auto auto 35px;
+
+}
+
+.hero-buttons{
+
+    justify-content:center;
+
+}
+
+.hero h1{
+
+    font-size:42px;
+
+}
+
+.hero-right img{
+
+    max-width:320px;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.hero{
+
+    margin:40px auto 60px;
+
+}
+
+.hero h1{
+
+    font-size:34px;
+
+}
+
+.hero p{
+
+    font-size:16px;
+
+}
+
+.primary-btn,
+.secondary-btn{
+
+    width:100%;
+
+}
+
+}
+/* ===================================================
+                    STATISTICS
+=================================================== */
+
+.stats-section{
+
+    width:min(1200px,92%);
+    margin:70px auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+
+}
+
+.stats-card{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:26px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.stats-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+}
+
+.stats-icon{
+
+    width:56px;
+
+    height:56px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--surface-alt);
+
+    color:var(--primary);
+
+    border-radius:14px;
+
+    font-size:26px;
+
+    margin-bottom:18px;
+
+}
+
+.stats-card h3{
+
+    font-size:34px;
+
+    color:var(--primary);
+
+    margin-bottom:8px;
+
+}
+
+.stats-card p{
+
+    font-size:16px;
+
+    color:var(--secondary-text);
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .stats-section{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .stats-section{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+/* ===================================================
+                RECOMMENDED SECTION
+=================================================== */
+
+.recommended-section{
+    width:min(1200px,92%);
+    margin:90px auto;
+}
+
+.recommended-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.recommended-header h2{
+    margin:0;
+}
+
+.view-all-link{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:600;
+}
+
+.view-all-link:hover{
+    text-decoration:underline;
+}
+/* ===================================================
+                PRODUCT GRID
+=================================================== */
+
+.product-grid,
+.best-device-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===================================================
+                PRODUCT CARD
+=================================================== */
+.product-card,
+.best-card{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.product-card:hover,
+.best-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+}
+/* ===================================================
+                PRODUCT IMAGE
+=================================================== */
+
+.product-image,
+.image-wrapper{
+
+    height:210px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:var(--surface-alt);
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.product-image img,
+.image-wrapper img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    transition:.3s;
+
+}
+
+.product-card:hover img,
+.best-card:hover img{
+
+    transform:scale(1.02);
+
+}
+/* ===================================================
+                CONTENT
+=================================================== */
+
+.product-content{
+
+    padding:22px;
+
+    text-align:center;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.best-card{
+
+    text-align:center;
+
+}
+
+/* ===================================================
+                PRODUCT NAME
+=================================================== */
+.product-content h3,
+.best-card h3{
+
+    font-size:20px;
+
+    color:var(--heading-color);
+
+    margin:20px 18px 10px;
+
+    line-height:1.4;
+
+    min-height:56px;
+
+}
+
+/* ===================================================
+                BADGE
+=================================================== */
+
+.product-badge,
+.best-card .category{
+
+    display:inline-block;
+
+    background:rgba(45,108,223,.12);
+
+    color:var(--primary);
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* ===================================================
+                RATING
+=================================================== */
+
+.product-rating,
+.rating{
+
+    margin:18px 0 8px;
+
+    color:#F4B400;
+
+    font-weight:600;
+
+    font-size:16px;
+
+}
+
+/* ===================================================
+                PRICE
+=================================================== */
+
+.product-price,
+.price{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin-bottom:22px;
+
+}
+
+/* ===================================================
+                BUTTON
+=================================================== */
+
+.product-btn,
+.view-btn{
+
+    display:block;
+
+    margin:0 20px 22px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.product-btn:hover,
+.view-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+/* ===================================================
+                    CATEGORY SECTION
+=================================================== */
+
+.categories{
+
+    width:min(1200px,92%);
+    margin:100px auto;
+
+}
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===================================================
+                    CATEGORY CARD
+=================================================== */
+
+.category-card{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    text-decoration:none;
+
+    color:var(--text-color);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    transition:.3s;
+
+    box-shadow:var(--shadow);
+
+}
+
+.category-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+}
+
+/* ===================================================
+                    CATEGORY IMAGE
+=================================================== */
+
+.category-image{
+
+    width:130px;
+    height:130px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:linear-gradient(
+        135deg,
+        rgba(45,108,223,.08),
+        rgba(45,108,223,.18)
+    );
+
+    transition:.35s;
+}
+
+.category-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    transition:.35s;
+}
+
+.category-card:hover .category-image{
+
+    transform:scale(1.04);
+
+    background:linear-gradient(
+        135deg,
+        rgba(45,108,223,.15),
+        rgba(45,108,223,.28)
+    );
+
+}
+
+.category-card:hover .category-image img{
+
+    transform:scale(1.05);
+
+}
+/* ===================================================
+                    TEXT
+=================================================== */
+
+.category-card h3{
+
+    font-size:22px;
+
+    color:var(--heading-color);
+
+    margin-bottom:10px;
+
+}
+
+.category-card p{
+
+    color:var(--secondary-text);
+
+    margin-bottom:18px;
+
+    line-height:1.6;
+
+}
+
+.category-card span{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+/* ===================================================
+                    RESPONSIVE
+=================================================== */
+
+@media(max-width:768px){
+
+    .category-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+/* ==========================
+      BEST PURCHASES
+========================== */
+.best-purchases {
+    margin-top: 80px;
+}
+
+/* ===================================================
+                WHY CHOOSE ASSISTHUB
+=================================================== */
+
+.features-section{
+
+    width:min(1200px,92%);
+    margin:100px auto;
+
+}
+
+.features-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===================================================
+                FEATURE CARD
+=================================================== */
+
+.feature-card{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:30px 26px;
+
+    text-align:left;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.feature-card:hover{
+
+    transform:translateY(-2px);
+
+    border-color:var(--primary);
+
+}
+
+/* ===================================================
+                ICON
+=================================================== */
+
+.feature-icon{
+
+    width:60px;
+
+    height:60px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(45,108,223,.12);
+
+    color:var(--primary);
+
+    border-radius:16px;
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+}
+
+.feature-card:hover .feature-icon{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ===================================================
+                TITLE
+=================================================== */
+
+.feature-card h3{
+
+    color:var(--heading-color);
+
+    font-size:22px;
+
+    margin-bottom:14px;
+
+}
+
+/* ===================================================
+                DESCRIPTION
+=================================================== */
+
+.feature-card p{
+
+    color:var(--secondary-text);
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+/* ===================================================
+                RESPONSIVE
+=================================================== */
+
+@media(max-width:768px){
+
+    .features-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .feature-card{
+
+        text-align:center;
+
+    }
+
+    .feature-icon{
+
+        margin:0 auto 22px;
+
+    }
+
+}

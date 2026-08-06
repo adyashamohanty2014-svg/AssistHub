@@ -1,0 +1,288 @@
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero{
+    max-width:1200px;
+    margin:40px auto 30px;
+    padding:20px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:48px;
+    color:var(--heading-color);
+    margin-bottom:15px;
+    font-weight:700;
+}
+
+.hero p{
+    font-size:18px;
+    color:var(--secondary-text);
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
+}
+/* =========================
+   DEVICE GRID
+========================= */
+
+.device-container{
+    max-width:1200px;
+    margin:40px auto 80px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:30px;
+}
+
+/* =========================
+   DEVICE CARD
+========================= */
+
+.device-card{
+
+    background:var(--surface-color);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:.3s;
+}
+
+.device-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--primary);
+
+}
+/* =========================
+   IMAGE
+========================= */
+
+.device-card img{
+
+    width:100%;
+
+    height:280px;
+
+    object-fit:contain;
+
+    padding:25px;
+
+    background:var(--surface-alt);
+
+}
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content{
+
+    padding:25px;
+
+}
+
+.card-content h2{
+
+    font-size:26px;
+
+    color:var(--heading-color);
+
+    margin-bottom:15px;
+
+}
+/* =========================
+   CATEGORY
+========================= */
+
+.category{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    background:rgba(45,108,223,.12);
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+/* =========================
+   DESCRIPTION
+========================= */
+
+.card-content p{
+
+    color:var(--secondary-text);
+
+    line-height:1.7;
+
+    margin:18px 0;
+
+}
+/* =========================
+   PRICE
+========================= */
+
+.price{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.view-btn{
+
+    display:block;
+
+    width:100%;
+
+    text-align:center;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.view-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-container{
+    max-width:1000px;
+    margin:45px auto 20px;
+}
+
+.search-box{
+    display:flex;
+    align-items:center;
+    background:var(--surface-color);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.search-icon{
+    padding:0 20px;
+    font-size:22px;
+    color:var(--primary);
+}
+
+.search-box input{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:var(--text-color);
+    padding:18px 10px;
+    font-size:16px;
+}
+
+.search-box input::placeholder{
+    color:var(--secondary-text);
+}
+
+.search-box button{
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:18px 35px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.search-box button:hover{
+    background:var(--primary-hover);
+}
+
+/* =========================
+   SORTING
+========================= */
+
+.sort-container{
+    width:min(1200px,98%);
+    margin:20px auto 35px;
+
+    display:flex;
+    justify-content:flex-end;
+}
+
+.sort-container select{
+
+    width:200px;
+
+    padding:14px 18px;
+
+    background:var(--surface-color);
+
+    color:var(--text-color);
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.sort-container select:hover,
+.sort-container select:focus{
+
+    border-color:var(--primary);
+
+}
+/* =========================
+   SEARCH RESULT
+========================= */
+
+.search-result,
+.no-results{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+    font-size:17px;
+}
