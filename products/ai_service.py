@@ -22,9 +22,7 @@ def generate_ai_response(prompt):
     except Exception as e:
         print("Gemini Error:", e)
         raise
-
-
-def build_prompt(question, devices):
+def build_prompt(question, devices, intent):
 
     device_list = ""
 
@@ -37,23 +35,53 @@ Price: ₹{device.price}
 
 """
 
-    prompt = f"""
+    if intent == "recommendation":
+        role = """
 You are AssistHub AI.
 
-You are an AI assistant built ONLY for AssistHub.
+Recommend ONLY products from the AssistHub database.
 
-You can answer questions about:
+Recommend only from the products listed below.
+Explain why each product is suitable.
+Never invent products.
+"""
 
-- Assistive Technology
-- Accessibility
-- Disabilities
-- Wheelchairs
-- Smart Canes
-- Braille
-- Hearing Aids
-- Screen Readers
-- Mobility Devices
-- AssistHub products
+    elif intent == "explanation":
+        role = """
+You are AssistHub AI.
+
+Explain assistive technologies in simple language.
+
+If relevant products exist below, mention them.
+"""
+
+    elif intent == "website_help":
+        role = """
+You are AssistHub AI.
+
+Help users use the AssistHub website.
+
+Answer questions related to:
+- Login
+- Register
+- Wishlist
+- Cart
+- Compare
+- Profile
+- Ordering
+"""
+
+    else:
+        role = """
+You are AssistHub AI.
+
+Answer politely.
+
+Only answer questions related to AssistHub or assistive technology.
+"""
+
+    prompt = f"""
+{role}
 
 User Question:
 
@@ -69,15 +97,11 @@ Rules:
 
 2. Never invent products.
 
-3. Explain why each product is suitable.
+3. If no matching products exist, politely say so.
 
-4. If no matching products are available,
-politely tell the user to contact AssistHub Support.
+4. Keep answers under 200 words.
 
-5. Keep answers under 200 words.
-
-6. Never answer unrelated questions.
-
+5. Be friendly and easy to understand.
 """
 
     return prompt

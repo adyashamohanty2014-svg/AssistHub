@@ -19,7 +19,7 @@ def ask_ai(request):
         devices = search_devices(question)
 
         # Build AI prompt
-        prompt = build_prompt(question, devices)
+        prompt = build_prompt(question, devices, intent)
 
         # Generate AI response
         response = generate_ai_response(prompt)
