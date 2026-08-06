@@ -1,0 +1,101 @@
+[
+{
+  "model": "products.device",
+  "pk": 1,
+  "fields": {
+    "name": "Foldable Wheelchair",
+    "brand": "",
+    "category": 2,
+    "description": "Frido Foldable Travel Wheelchair | Lightweight, Portable & Compact Wheel Chair for Travel, Seniors & Patients | Comfortable Foldable Wheel Chair for Short-Distance Mobility | 9.5 KG Durable Frame",
+    "price": "45000.00",
+    "image": "devices/71XJ4alI-3L_1AVOL9W._AC_SL1500_.jpg",
+    "buy_link": "https://dl.flipkart.com/dl/vms-careline-airlite-lightweight-foldable-wheelchair-bag-manual/p/itme90179af33323?pid=WLRHHAXZNQJFRGP9&lid=LSTWLRHHAXZNQJFRGP9M3F91A&marketplace=FLIPKART&q=foldable+travel+",
+    "availability": "In Stock",
+    "tags": "wheelchair, mobility, elderly, walking"
+  }
+},
+{
+  "model": "products.device",
+  "pk": 2,
+  "fields": {
+    "name": "Braille Display",
+    "brand": "",
+    "category": 3,
+    "description": "The RBD 20-Cell Refreshable Braille Display is a cutting-edge, affordable solution designed to empower visually impaired individuals with access to digital content through tactile interaction. As a portable Braille display, this compact device offers the perfect balance between advanced functionality and portability, delivering seamless reading, writing, and navigation experiences across various platforms. Whether youÆre reading, writing, or exploring the web, this 20-cell Braille display ensures smooth and accurate Braille output wherever you are.",
+    "price": "56009.00",
+    "image": "devices/OIP_PFOJO3U.jpg",
+    "buy_link": "https://enablemart.in/shop/refreshable-braille-display/",
+    "availability": "In Stock",
+    "tags": "blind, braille, reading, student, education"
+  }
+},
+{
+  "model": "products.device",
+  "pk": 3,
+  "fields": {
+    "name": "Hearing Aids",
+    "brand": "",
+    "category": 1,
+    "description": "Fastwell Hearing Aids, Rechargeable Hearing Amplifier with Noise Cancelling for Adults Hearing Loss, Digital Ear Hearing Assist Devices Volume Control Flesh(Blue)",
+    "price": "1937.00",
+    "image": "devices/resound-key-2-1000x1000_avXHfVY.jpeg",
+    "buy_link": "https://amzn.in/d/0fR85vvY",
+    "availability": "In Stock",
+    "tags": "hearing, deaf, hearing loss, elderly"
+  }
+},
+{
+  "model": "products.device",
+  "pk": 4,
+  "fields": {
+    "name": "Resound key",
+    "brand": "",
+    "category": 1,
+    "description": "Fastwell Hearing Aids, Rechargeable Hearing Amplifier with Noise Cancelling for Adults Hearing Loss, Digital Ear Hearing Assist Devices Volume Control Flesh(Blue",
+    "price": "1940.00",
+    "image": "devices/41XeEFFbI6L_H96ciKr._SX466_.jpg",
+    "buy_link": "https://amzn.in/d/08nRrZLD",
+    "availability": "In Stock",
+    "tags": "hearing, deaf, hearing loss, elderly"
+  }
+},
+{
+  "model": "products.device",
+  "pk": 6,
+  "fields": {
+    "name": "Smart Walking Stick",
+    "brand": "",
+    "category": 2,
+    "description": "Walking stick with obstacle detection",
+    "price": "3500.00",
+    "image": "devices/walkingstick.jpg",
+    "buy_link": "https://amzn.in/d/040EgFiU",
+    "availability": "In Stock",
+    "tags": "walking, mobility, arthritis, elderly"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 1,
+  "fields": {
+    "name": "Hearing aids (single)",
+    "image": "categories/Untitled_design_4_hRrhoYL.png"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 2,
+  "fields": {
+    "name": "Mobility Devices",
+    "image": "categories/Untitled_design_6_QtLNWEN.png"
+  }
+},
+{
+  "model": "products.category",
+  "pk": 3,
+  "fields": {
+    "name": "Vision Assistance",
+    "image": "categories/Untitled_design_5_Y8jF41f.png"
+  }
+}
+]
