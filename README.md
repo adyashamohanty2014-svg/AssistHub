@@ -473,7 +473,7 @@ into a single platform focused on assistive technology.
 
 ## Project Status
 
-**Status: Completed / Functional**
+**Status: Completed**
 
 The current implementation includes the major planned features of the AssistHub platform, including device discovery, search, sorting, comparison, reviews, wishlist functionality, recommendations, user accounts, responsive UI, theme switching, and AI assistance.
 
