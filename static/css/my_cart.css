@@ -2,7 +2,7 @@
             MY CART PAGE
 ========================================== */
 
-.cart-page{
+.cart-container{
 
     width:min(1100px,92%);
     margin:60px auto 80px;
@@ -87,13 +87,6 @@
 
     box-shadow:var(--shadow);
 
-    transition:.25s;
-
-}
-
-.cart-item:hover{
-
-    transform:translateY(-4px);
 
 }
 
@@ -195,7 +188,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 
@@ -279,7 +271,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 

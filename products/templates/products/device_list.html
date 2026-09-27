@@ -27,7 +27,15 @@
                 name="q"
                 placeholder="Search devices..."
                 value="{{ query }}"
+                list="device-search-suggestions"
+                autocomplete="off"
             >
+
+            <datalist id="device-search-suggestions">
+                {% for suggestion in suggestions %}
+                    <option value="{{ suggestion }}"></option>
+                {% endfor %}
+            </datalist>
 
             <button type="submit">
                 Search
@@ -72,9 +80,13 @@
 
     <div class="device-card">
 
-        {% if device.image %}
-            <img src="{{ device.image.url }}" alt="{{ device.name }}">
-        {% endif %}
+        <div class="device-image">
+            {% if device.image %}
+                <img src="{{ device.image.url }}" alt="{{ device.name }}">
+            {% else %}
+                <span class="device-image-placeholder">No image available</span>
+            {% endif %}
+        </div>
 
         <div class="card-content">
             <h2>{{ device.name }}</h2>
@@ -89,7 +101,7 @@
                 ₹{{ device.price }}
             </div>
 
-            <p>⭐ {{ device.average_rating }}</p>
+            <p class="device-rating">⭐ {{ device.average_rating }}</p>
 
             <a href="{% url 'device_detail' device.id %}" class="view-btn">
                 View Details
@@ -101,8 +113,10 @@
     {% empty %}
 
     <p class="no-results">
-        No devices found.
+        No devices found for “{{ query }}”.
     </p>
+    <p class="no-results">Try: wheelchair, mobility aid, hearing aid, or vision aid.</p>
+    <p class="no-results"><a href="{% url 'device_list' %}">Browse All Devices</a></p>
 
     {% endfor %}
 

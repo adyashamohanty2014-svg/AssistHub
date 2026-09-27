@@ -48,7 +48,9 @@
         </a>
 
     </div>
-
+    <button class="menu-toggle" aria-label="Open Menu">
+    <i class="fa-solid fa-bars"></i>
+    </button>
     <ul class="nav-links">
 
         <li>
@@ -117,7 +119,7 @@
         </li>
         {% endif %}
         <li>
-            <button id="theme-toggle" class="theme-toggle">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Use dark theme">
                 🌙
             </button>
         </li>
@@ -234,9 +236,27 @@
     </div>
 </footer>
 <!-- Floating AI Button -->
-<a href="{% url 'ask_ai' %}" class="ai-floating-btn" title="Ask AssistHub AI">
+<a href="{% url 'ask_ai' %}" class="ai-floating-btn" title="Ask AssistHub AI" aria-label="Ask AssistHub AI">
     <i class="fa-solid fa-robot"></i>
 </a>
 <script src="{% static 'js/theme.js' %}"></script>
+<script>
+const menuBtn = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+
+    const icon = menuBtn.querySelector("i");
+
+    if(navLinks.classList.contains("active")){
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-xmark");
+    }else{
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
+    }
+});
+</script>
 </body>
 </html>

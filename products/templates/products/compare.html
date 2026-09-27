@@ -41,9 +41,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     <form method="GET" class="compare-form">
 
         <div class="device-select">
-            <label>First Device</label>
+            <label for="compare-device1">First Device</label>
 
-            <select name="device1">
+            <select id="compare-device1" name="device1">
 
                 <option value="">Choose a device</option>
 
@@ -64,9 +64,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <div class="device-select">
 
-            <label>Second Device</label>
+            <label for="compare-device2">Second Device</label>
 
-            <select name="device2">
+            <select id="compare-device2" name="device2">
 
                 <option value="">Choose a device</option>
 
@@ -86,6 +86,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         </button>
 
     </form>
+
+    {% if not device1 or not device2 %}
+    <div class="compare-empty-state">
+        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+        <h2>Select two devices to compare</h2>
+        <p>Choose a device in each field to see their features, prices and availability side by side.</p>
+    </div>
+    {% endif %}
 
     {% if device1 and device2 %}
 
@@ -110,7 +118,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <td>
 
                     {% if device1.image %}
-                        <img src="{{ device1.image.url }}" class="table-image">
+                        <img src="{{ device1.image.url }}" class="table-image" alt="{{ device1.name }}">
                     {% endif %}
 
                 </td>
@@ -118,7 +126,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <td>
 
                     {% if device2.image %}
-                        <img src="{{ device2.image.url }}" class="table-image">
+                        <img src="{{ device2.image.url }}" class="table-image" alt="{{ device2.name }}">
                     {% endif %}
 
                 </td>

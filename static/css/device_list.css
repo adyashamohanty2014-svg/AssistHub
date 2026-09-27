@@ -34,7 +34,8 @@
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
 
-    gap:30px;
+    gap:24px;
+    align-items:stretch;
 }
 
 /* =========================
@@ -50,13 +51,14 @@
     border-radius:20px;
 
     overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height:570px;
 
-    transition:.3s;
 }
 
 .device-card:hover{
 
-    transform:translateY(-4px);
 
     border-color:var(--primary);
 
@@ -65,18 +67,32 @@
    IMAGE
 ========================= */
 
-.device-card img{
+.device-image{
+
+    height:240px;
+    flex:0 0 240px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:22px;
+    background:var(--surface-alt);
+    border-bottom:1px solid var(--border);
+
+}
+
+.device-image img{
 
     width:100%;
 
-    height:280px;
+    height:100%;
 
     object-fit:contain;
 
-    padding:25px;
+}
 
-    background:var(--surface-alt);
-
+.device-image-placeholder{
+    color:var(--secondary-text);
+    font-size:14px;
 }
 /* =========================
    CARD CONTENT
@@ -85,6 +101,9 @@
 .card-content{
 
     padding:25px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
 
 }
 
@@ -94,7 +113,14 @@
 
     color:var(--heading-color);
 
-    margin-bottom:15px;
+    margin-bottom:12px;
+    line-height:1.3;
+    min-height:68px;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    line-clamp:3;
+    overflow:hidden;
 
 }
 /* =========================
@@ -128,8 +154,17 @@
 
     line-height:1.7;
 
-    margin:18px 0;
+    margin:16px 0;
 
+}
+
+.card-content p:not(.device-rating){
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    line-clamp:3;
+    overflow:hidden;
+    min-height:82px;
 }
 /* =========================
    PRICE
@@ -143,8 +178,15 @@
 
     color:var(--primary);
 
-    margin-bottom:20px;
+    margin-top:auto;
+    margin-bottom:8px;
 
+}
+
+.device-rating{
+    min-height:24px;
+    margin:0 0 18px !important;
+    color:var(--secondary-text);
 }
 
 /* =========================
@@ -170,8 +212,8 @@
     color:white;
 
     font-weight:600;
+    margin-top:auto;
 
-    transition:.3s;
 
 }
 
@@ -226,7 +268,6 @@
     padding:18px 35px;
     font-weight:600;
     cursor:pointer;
-    transition:.3s;
 }
 
 .search-box button:hover{
@@ -265,7 +306,6 @@
 
     outline:none;
 
-    transition:.3s;
 
 }
 
@@ -285,4 +325,11 @@
     color:#666;
     margin-bottom:25px;
     font-size:17px;
+}
+
+@media(max-width:700px){
+    .device-container{
+        grid-template-columns:minmax(0, 1fr) !important;
+        width:min(100%, 520px);
+    }
 }

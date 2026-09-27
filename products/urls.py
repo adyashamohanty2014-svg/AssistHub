@@ -6,7 +6,7 @@ from django.urls import path, reverse_lazy
 urlpatterns = [
  path('',views.home, name='home'),
  path('login/', views.user_login, name='login'),
- path('register/', views.register, name='register'),
+ path('register/', views.register_html, name='register'),
  path('devices/', views.device_list, name='device_list'),
  path('device/<int:id>/', views.device_detail, name='device_detail'),
  path('category/<int:category_id>/',views.category_devices,name='category_devices'),
@@ -38,5 +38,6 @@ path('api/wishlist/<int:id>/', views.WishlistDetail.as_view(), name='wishlist-de
 path('api/cart/', views.CartList.as_view(), name='cart-list'),
 path('api/cart/<int:id>/', views.CartDetail.as_view(), name='cart-detail'),
 path('api/change-password/',views.change_password,name='change-password'),
+path('api/register/', views.register_api, name='api-register'),
 path("api/profile/", views.ProfileView.as_view(), name="api-profile"),
 ]

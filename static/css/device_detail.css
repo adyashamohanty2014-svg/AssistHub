@@ -67,13 +67,6 @@ body{
 
     box-shadow:var(--shadow);
 
-    transition:.3s;
-
-}
-
-.image-section img:hover{
-
-    transform:translateY(-4px);
 
 }
 
@@ -126,7 +119,6 @@ body{
     border:1px solid var(--border);
     border-radius:12px;
 
-    transition:.25s;
 }
 
 .wishlist-btn:hover,
@@ -194,7 +186,6 @@ body{
 
     font-weight:600;
 
-    transition:.25s;
 
     margin-bottom:40px;
 }
@@ -249,7 +240,6 @@ body{
 
     font-weight:600;
 
-    transition:.3s;
 }
 
 .store-btn:hover{
@@ -342,7 +332,6 @@ body{
 
     cursor:pointer;
 
-    transition:.3s;
 
 }
 
@@ -395,7 +384,6 @@ form select{
     color:var(--text-color);
     font-size:15px;
     outline:none;
-    transition:.25s;
 }
 
 form textarea{
@@ -417,7 +405,6 @@ form button{
     border-radius:10px;
     cursor:pointer;
     font-weight:600;
-    transition:.25s;
 }
 
 form button:hover{
@@ -436,7 +423,6 @@ form button:hover{
     color:#fff;
     padding:12px 24px;
     border-radius:10px;
-    transition:.25s;
 }
 
 .back-btn:hover{
@@ -501,11 +487,9 @@ form button:hover{
 
     box-shadow:var(--shadow);
 
-    transition:.25s;
 }
 
 .similar-card:hover{
-    transform:translateY(-4px);
     border-color:var(--primary);
 }
 

@@ -32,17 +32,15 @@
 
     <div class="ai-card">
 
-        <form method="POST">
+        <form method="POST" id="ai-question-form" data-endpoint="{% url 'ask_ai_api' %}">
 
             {% csrf_token %}
 
-            <textarea
-                name="question"
-                rows="5"
+            <textarea id="ai-question" name="question" rows="5"
                 placeholder="Example: Which device is suitable for a visually impaired student?"
-            >{{ question }}</textarea>
+                aria-label="Ask AssistHub AI a question">{{ question }}</textarea>
 
-            <button type="submit">
+            <button type="submit" id="ai-submit-button">
                 <i class="fa-solid fa-paper-plane"></i>
                 Ask AssistHub AI
             </button>
@@ -52,47 +50,40 @@
     </div>
 
 
-    <!-- Response -->
-
-    {% if response %}
-
-    <div class="response-card">
+    <div class="response-card" id="conversation" aria-live="polite">
 
         <h2>
             <i class="fa-solid fa-comments"></i>
             Conversation
         </h2>
 
-        <div class="user-question">
-
-            <strong>You asked:</strong>
-
+        <div class="conversation-list" id="conversation-list">
+        {% if response %}
+        <div class="chat-message user-message">
+            <span class="message-label">You</span>
             <p>{{ question }}</p>
-
         </div>
 
-        <div class="ai-response">
-
-            <strong>AssistHub AI</strong>
-
+        <div class="chat-message ai-message">
+            <span class="message-label">AssistHub AI</span>
             <p>{{ response }}</p>
-
         </div>
-
+        {% else %}
+        <p class="conversation-empty">Ask a question to start a conversation about assistive technology.</p>
+        {% endif %}
+        </div>
     </div>
-
-    {% endif %}
 {% if devices %}
 
-<div class="recommended-products">
+<div class="recommended-products" id="recommended-products">
 
     <h2>Recommended Products</h2>
 
-    <div class="product-grid">
+    <div class="ai-recommended-grid">
 
         {% for device in devices %}
 
-        <div class="product-card">
+        <div class="ai-recommended-card">
 
             {% if device.image %}
                 <img src="{{ device.image.url }}" alt="{{ device.name }}">

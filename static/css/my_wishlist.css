@@ -2,7 +2,7 @@
             WISHLIST PAGE
 ========================================== */
 
-.wishlist-page{
+.wishlist-container{
 
     width:min(1200px,92%);
     margin:60px auto 80px;
@@ -69,17 +69,10 @@
 
     box-shadow:var(--shadow);
 
-    transition:.25s;
 
     display:flex;
 
     flex-direction:column;
-
-}
-
-.wishlist-card:hover{
-
-    transform:translateY(-5px);
 
 }
 
@@ -177,7 +170,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 
@@ -239,7 +231,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 

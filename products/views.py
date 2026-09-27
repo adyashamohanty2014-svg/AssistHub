@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from .forms import LoginForm, UserRegistrationForm, ReviewForm, UserEditForm, ContactForm
 from .models import Device, Category, Review, Cart, Wishlist, SearchHistory
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q, Avg, Count
+from django.db.models import Q, Avg, Count, Case, When, Value
 from django.contrib import messages
 from django.contrib.auth.models import User
 import random
@@ -23,6 +23,7 @@ from .serializers import UserProfileSerializer
 from .serializers import ChangePasswordSerializer
 from rest_framework import generics
 from .pagination import DevicePagination
+import re
 
 #Home page
 def home(request):
@@ -172,7 +173,7 @@ def user_login(request):
     )
 
 #Registration
-def register(request):
+def register_html(request):
   if request.method == 'POST':
     user_form = UserRegistrationForm(request.POST)
     if user_form.is_valid():
@@ -198,11 +199,69 @@ def register(request):
 def device_list(request):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
+
     if query:
-        devices = Device.objects.filter(
-            Q(name__icontains=query) |
-            Q(description__icontains=query)
+        normalized_query = re.sub(
+            r"[^\w\s]",
+            " ",
+            query.lower().strip(),
         )
+        search_words = [
+            word
+            for word in re.sub(r"\s+", " ", normalized_query).split()
+            if word not in {"a", "an", "for", "the", "to", "with"}
+        ]
+
+        phrase = re.sub(r"\s+", " ", normalized_query).strip()
+        phrase_query = (
+            Q(name__icontains=phrase)
+            | Q(brand__icontains=phrase)
+            | Q(category__name__icontains=phrase)
+            | Q(description__icontains=phrase)
+            | Q(tags__icontains=phrase)
+        )
+
+        all_words_query = Q()
+        for word in search_words:
+            word_query = (
+                Q(name__icontains=word)
+                | Q(brand__icontains=word)
+                | Q(category__name__icontains=word)
+                | Q(description__icontains=word)
+                | Q(tags__icontains=word)
+            )
+            all_words_query &= word_query
+
+        compact_query = "".join(search_words)
+        if len(search_words) > 1:
+            all_words_query |= (
+                Q(name__icontains=compact_query)
+                | Q(brand__icontains=compact_query)
+                | Q(category__name__icontains=compact_query)
+                | Q(description__icontains=compact_query)
+                | Q(tags__icontains=compact_query)
+            )
+
+        devices = Device.objects.filter(
+            phrase_query | all_words_query
+        ).distinct()
+        if len(search_words) > 1:
+            phrase_in_name_category_tags = (
+                Q(name__icontains=phrase)
+                | Q(category__name__icontains=phrase)
+                | Q(tags__icontains=phrase)
+            )
+            phrase_in_brand_description = (
+                Q(brand__icontains=phrase)
+                | Q(description__icontains=phrase)
+            )
+            devices = devices.annotate(
+                search_relevance=Case(
+                    When(phrase_in_name_category_tags, then=Value(0)),
+                    When(phrase_in_brand_description, then=Value(1)),
+                    default=Value(2),
+                )
+            ).order_by("search_relevance")
         # ----------------------------
         # Save Search History
         # ----------------------------
@@ -234,11 +293,22 @@ def device_list(request):
     elif sort == "za":
         devices = devices.order_by("-name")
 
-    elif sort == "low":
+    elif sort in ("low", "price_low"):
         devices = devices.order_by("price")
 
-    elif sort == "high":
+    elif sort in ("high", "price_high"):
         devices = devices.order_by("-price")
+
+    suggestions = list(
+        Category.objects.values_list("name", flat=True)
+    )
+    suggestions.extend(
+        tag.strip()
+        for tags in Device.objects.exclude(tags="").values_list("tags", flat=True)
+        for tag in tags.split(",")
+        if tag.strip()
+    )
+    suggestions = list(dict.fromkeys(suggestions))
 
     return render(
         request,
@@ -247,6 +317,7 @@ def device_list(request):
             'devices': devices,
             'query': query,
             'sort': sort,
+            'suggestions': suggestions,
         }
     )
 
@@ -434,7 +505,15 @@ def edit_review(request, review_id):
 
 #About us
 def about(request):
-    return render(request, "products/about.html")
+    return render(
+        request,
+        "products/about.html",
+        {
+            "total_devices": Device.objects.count(),
+            "total_categories": Category.objects.count(),
+            "total_users": User.objects.count(),
+        },
+    )
 
 #Contact us
 def contact(request):
@@ -504,7 +583,13 @@ def compare_view(request):
     if id2:
         device2 = Device.objects.get(id=id2)
     if device1 and device2:
-        if device1.category != device2.category:
+        if device1.id == device2.id:
+            messages.error(
+                request,
+                "Please select two different devices to compare."
+            )
+            device2 = None
+        elif device1.category != device2.category:
             messages.error(
                 request,
                 "Please compare devices from the same category."
@@ -648,7 +733,7 @@ class CartDetail(generics.RetrieveUpdateDestroyAPIView):
         return Cart.objects.filter(user=self.request.user)
 
 @api_view(['POST'])
-def register(request):
+def register_api(request):
     serializer = RegisterSerializer(data=request.data)
 
     if serializer.is_valid():

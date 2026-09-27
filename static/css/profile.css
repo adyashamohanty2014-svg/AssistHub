@@ -205,7 +205,6 @@ hr{
 
     cursor:pointer;
 
-    transition:.25s;
 
 }
 
@@ -221,7 +220,6 @@ hr{
 
     background:var(--primary-hover);
 
-    transform:translateY(-2px);
 
 }
 
@@ -237,7 +235,6 @@ hr{
 
     background:#bb2d3b;
 
-    transform:translateY(-2px);
 
 }
 
@@ -307,7 +304,6 @@ hr{
 
     outline:none;
 
-    transition:.25s;
 
 }
 
@@ -351,7 +347,6 @@ hr{
 
     cursor:pointer;
 
-    transition:.25s;
 
 }
 

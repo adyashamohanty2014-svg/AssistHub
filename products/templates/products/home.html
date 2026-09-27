@@ -35,20 +35,46 @@ Home | AssistHub
         <div class="hero-buttons">
 
             <a href="{% url 'device_list' %}" class="primary-btn">
-                Browse Devices →
+                Browse Devices <i class="fa-solid fa-arrow-right"></i>
             </a>
 
             <a href="#categories" class="secondary-btn">
-                Explore Categories
+                Explore Categories <i class="fa-solid fa-compass"></i>
             </a>
 
+        </div>
+
+        <div class="hero-search-tools">
+            <form class="hero-search" action="{% url 'device_list' %}" method="get">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" name="q" placeholder="Search devices by name..." aria-label="Search devices by name">
+                <button type="submit">Search</button>
+            </form>
+
+            <form class="ai-device-search" action="{% url 'ask_ai' %}" method="post">
+                {% csrf_token %}
+                <div class="ai-search-heading">
+                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                    <span>Describe what you need</span>
+                </div>
+                <label class="sr-only" for="homepage-ai-query">Describe your assistive device needs</label>
+                <div class="ai-search-controls">
+                    <input id="homepage-ai-query" type="text" name="question"
+                           placeholder="I need a hearing device for an elderly person..."
+                           aria-describedby="ai-search-help" required>
+                    <button type="submit">Find devices</button>
+                </div>
+                <p id="ai-search-help">Use your own words and AssistHub AI will look for relevant devices.</p>
+            </form>
         </div>
 
     </div>
 
     <div class="hero-right">
 
-        <img src="{% static 'images/Untitled design (1).png' %}" alt="Assistive Technology">
+        <div class="hero-media">
+            <img src="{% static 'images/Untitled design (1).png' %}" alt="Assistive Technology">
+        </div>
 
     </div>
 
@@ -103,13 +129,15 @@ Home | AssistHub
 <!-- BROWSE BY CATEGORY -->
 <section class="categories" id="categories">
 
-    <div class="section-title">
+    <div class="section-title section-title--split">
 
-        <h2>Browse Categories</h2>
+        <div>
+            <h2>Browse Categories</h2>
 
-        <p>
-            Explore assistive devices by category.
-        </p>
+            <p>
+                Explore assistive devices by category.
+            </p>
+        </div>
 
     </div>
 
@@ -133,14 +161,13 @@ Home | AssistHub
 
             <p>
 
-                {{ category.device_count }} Devices
+                {{ category.device_count }}
+                {% if category.device_count == 1 %}Device{% else %}Devices{% endif %}
 
             </p>
 
-            <span>
-
-                Explore →
-
+            <span class="card-link">
+                <i class="fa-solid fa-arrow-up-right"></i>
             </span>
 
         </a>
@@ -160,11 +187,13 @@ Home | AssistHub
 
     <div class="recommended-header">
 
-        <h2>✨ Recommended For You</h2>
+        <div>
+            <h2>✨ Recommended For You</h2>
+        </div>
 
         <a href="{% url 'all_recommendations' %}"
            class="view-all-link">
-            View All →
+            View All <i class="fa-solid fa-arrow-right"></i>
         </a>
 
     </div>
@@ -175,20 +204,20 @@ Home | AssistHub
 
 </div>
 
-    <div class="best-device-grid">
+    <div class="recommended-grid">
 
         {% for device in recommended_devices %}
 
-        <div class="best-card">
+        <div class="recommended-card">
 
-            <div class="image-wrapper">
+            <div class="recommended-image">
                 {% if device.image %}
                     <img src="{{ device.image.url }}"
                          alt="{{ device.name }}">
                 {% endif %}
             </div>
 
-            <h3>{{ device.name }}</h3>
+            <h3 class="recommended-title">{{ device.name }}</h3>
 
             <span class="category">
                 {{ device.category }}
@@ -231,13 +260,13 @@ Home | AssistHub
 
     </div>
 
-    <div class="product-grid">
+    <div class="best-purchases-grid">
 
         {% for device in best_devices %}
 
-        <div class="product-card">
+        <div class="best-purchase-card">
 
-            <div class="product-image">
+            <div class="best-purchase-image">
 
                 {% if device.image %}
                     <img src="{{ device.image.url }}" alt="{{ device.name }}">
@@ -245,13 +274,13 @@ Home | AssistHub
 
             </div>
 
-            <div class="product-content">
+            <div class="best-purchase-content">
 
-                <span class="product-badge">
+                <span class="best-purchase-badge">
                     Best Seller
                 </span>
 
-                <h3>{{ device.name }}</h3>
+                <h3 class="best-purchase-title">{{ device.name }}</h3>
 
                 <p class="product-rating">
 

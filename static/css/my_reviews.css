@@ -63,13 +63,6 @@
 
     box-shadow:var(--shadow);
 
-    transition:.25s;
-
-}
-
-.review-card:hover{
-
-    transform:translateY(-4px);
 
 }
 
@@ -168,7 +161,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 
@@ -230,7 +222,6 @@
 
     font-weight:600;
 
-    transition:.25s;
 
 }
 
